@@ -1,0 +1,259 @@
+@charset "utf-8";
+/* CSS Document */
+/* Global */
+
+[v-cloak] {
+    display: none;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: auto;
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -khtml-user-select: none;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    color: #555;
+    width: 90%;
+    max-width: 1200px;
+    /* overflow-x: hidden; */
+    padding-bottom: 2em;
+}
+
+@media only screen and (min-width: 801px) {
+    h1 {
+        text-align: center;
+        border: solid 3px #333;
+        background-color: #ddd;
+        height: 2.5em;
+        line-height: 2.5em;
+        border-radius: 5px;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    h1 {
+        font-size: 1.5em;
+        text-align: center;
+        height: 3em;
+        line-height: 3em;
+        border-bottom: solid 1px #666;
+        margin: 0 0 1em 0;
+    }
+
+}
+
+p,
+li {
+    line-height: 1.7em;
+}
+
+a {
+    color: #555555;
+    text-decoration: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    transition: color 0.25s;
+    -moz-transition: color 0.25s;
+    -webkit-transition: color 0.25s;
+    -o-transition: color 0.25s;
+}
+
+a:hover {
+    color: #198d44;
+}
+
+img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+}
+
+.bold {
+    font-weight: bold;
+    font-size: 1.1em;
+    line-height: 2em;
+}
+
+strong {
+    color: #c1272d;
+}
+
+table {
+    width: 100%;
+    overflow: hidden;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+thead {
+    background-color: #999;
+    color: #fff;
+}
+
+th,
+td {
+    border: solid 1px gray;
+    height: 1.7em;
+    line-height: 1.7em;
+    padding: 5px 10px;
+    text-align: center;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #eee;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #ddd;
+}
+
+@media only screen and (max-width: 800px) {
+    table {
+        font-size: 0.9em;
+    }
+}
+
+.link {
+    color: #198d44;
+    list-style-type: square;
+    font-weight: bold;
+}
+
+.key {
+    border: solid 2px #333;
+    background-color: #ddd;
+    padding: 0 20px 0 20px;
+    margin: 20px 0 20px 0;
+    border-radius: 10px;
+}
+
+
+.note {
+    padding: 10px 20px 10px 20px;
+    line-height: 1.7em;
+}
+
+@media only screen and (min-width: 801px) {
+    .note {
+        background-color: #ddd;
+    }
+
+    .resident {
+        float: right;
+        margin-right: 3em;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .note {
+        background-color: #ccc;
+    }
+
+    .resident {
+        float: right;
+        width: 8em;
+    }
+}
+
+.lang_flex {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: #75bb8f;
+    padding: 5px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    -moz-transition: background-color 0.3s;
+    -webkit-transition: background-color 0.3s;
+    -o-transition: background-color 0.3s;
+}
+
+.lang_flex:hover {
+    background-color: #47a469;
+}
+
+.lang_flex:active {
+    background-color: #198d44;
+}
+
+.lang {
+    font-size: 0.8em;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.gamepad {
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.left1em {
+    margin-left: 1em;
+}
+
+.love {
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.like {
+    font-weight: normal;
+    font-size: 0.8em;
+    margin-left: 1em;
+}
+
+.Gray {
+    color: #87868b;
+}
+
+.Violet {
+    color: #9670e5
+}
+
+.Blue {
+    color: #2f81c2;
+}
+
+.Green {
+    color: #09b43a;
+}
+
+.Yellow {
+    color: #d79a0d;
+}
+
+.Orange {
+    color: #d96d0d;
+}
+
+.Red {
+    color: #d63a4a;
+}
