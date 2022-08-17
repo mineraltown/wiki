@@ -90,7 +90,7 @@ h2 {
     z-index: 3;
     width: auto;
     height: 100%;
-    overflow: hidden;
+    overflow: scroll;
     flex-grow: 1;
     -webkit-overflow-scrolling: touch;
 }
