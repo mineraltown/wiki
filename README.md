@@ -13,6 +13,8 @@
   /trio
 - [橄榄镇与希望的大地](https://github.com/mineraltown/olive)  
   /olive
+- [Welcome！美丽人生](https://github.com/mineraltown/welcome)  
+  /welcome
 
 ## 启动
 
