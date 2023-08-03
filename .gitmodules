@@ -1,0 +1,21 @@
+[submodule "mineraltown"]
+	path = mineraltown
+	url = https://github.com/mineraltown/mineraltown
+[submodule "saikai"]
+	path = saikai
+	url = https://github.com/mineraltown/saikai
+[submodule "twotowns"]
+	path = twotowns
+	url = https://github.com/mineraltown/twotowns
+[submodule "trio"]
+	path = trio
+	url = https://github.com/mineraltown/trio
+[submodule "welcome"]
+	path = welcome
+	url = https://github.com/mineraltown/welcome
+[submodule "olive"]
+	path = olive
+	url = https://github.com/mineraltown/olive/
+[submodule "wiki-dev"]
+	path = app
+	url = https://github.com/mineraltown/wiki-dev
