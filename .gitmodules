@@ -19,3 +19,6 @@
 [submodule "wiki-dev"]
 	path = app
 	url = https://github.com/mineraltown/wiki-dev
+[submodule "bazaar"]
+	path = bazaar
+	url = https://github.com/mineraltown/bazaar
