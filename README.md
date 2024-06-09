@@ -7,6 +7,10 @@
   /mineraltown
 - [重聚矿石镇](https://github.com/mineraltown/saikai)  
   /saikai
+- [精灵驿站](https://github.com/mineraltown/corosute)  
+  /corosute
+- [风之集市](https://github.com/mineraltown/bazaar)  
+  /bazaar
 - [双子村](https://github.com/mineraltown/twotowns)  
   /twotowns
 - [三个村庄的珍贵朋友](https://github.com/mineraltown/trio)  
@@ -39,6 +43,21 @@ iframe.css      子项目的攻略页面文件样式
 
 `axios@0.27.2` 和 `vue@3.2.36` 的原版及精简版文件，虽然实际项目中使用的 unpkg.com 的 CDN 版。  
 但是为了纯单机情况下可用，故收录了这两个文件，单机环境下批量替换即可。
+
+## 部署
+
+```sh
+git clone git@github.com:mineraltown/wiki.git
+git clone git@github.com:mineraltown/wiki-dev.git wiki/app
+git clone git@github.com:mineraltown/mineraltown.git wiki/mineraltown
+git clone git@github.com:mineraltown/saikai.git wiki/saikai
+git clone git@github.com:mineraltown/bazaar.git wiki/bazaar
+git clone git@github.com:mineraltown/twotowns.git wiki/twotowns
+git clone git@github.com:mineraltown/trio.git wiki/trio
+git clone git@github.com:mineraltown/olive.git wiki/olive
+git clone git@github.com:mineraltown/welcome.git wiki/welcome
+git clone git@github.com:mineraltown/Mineraltown_Plus.git wiki/saikai/Plus
+```
 
 ## 版权相关
 

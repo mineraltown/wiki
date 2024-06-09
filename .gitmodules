@@ -22,3 +22,6 @@
 [submodule "bazaar"]
 	path = bazaar
 	url = https://github.com/mineraltown/bazaar
+[submodule "corosute"]
+	path = corosute
+	url = https://github.com/mineraltown/corosute
