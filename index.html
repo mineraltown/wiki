@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>矿石镇的攻略百科</title>
     <meta name="description" content="将荒芜的庄园变成繁盛的牧场，是我的梦想！">
     <meta name="keywords" content="矿石镇的攻略百科,牧场物语,矿石镇,牧場物語,攻略">
@@ -15,6 +15,9 @@
     <meta name="apple-mobile-web-app-title" content="矿石镇">
     <link rel="manifest" href="/static/icon/site.webmanifest">
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/vue-router@4.5.0/dist/vue-router.global.js"></script>
+    <script src="https://res.wx.qq.com/t/wx_fed/weui.js/res/1.2.21/weui.min.js"></script>
+    <link rel="stylesheet" href="https://res.wx.qq.com/t/wx_fed/weui-source/res/2.5.16/weui.min.css">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-T9JX4C52TL"></script>
@@ -31,6 +34,55 @@
 </head>
 
 <body>
+    <div id="wiki">
+        <div class="title">
+            <div class="back" v-show="hasMultipleSlashes()" @click="goBack()">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z">
+                    </path>
+                </svg>
+            </div>
+            <div v-text="version.dict[version.index]"></div>
+        </div>
+        <router-view class="main"></router-view>
+        <!-- <div class="main"> -->
+        <!-- </div> -->
+        <div class="tabbar">
+            <router-link class="router-link" to="/wiki">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M20 20C20 20.5523 19.5523 21 19 21H5C4.44772 21 4 20.5523 4 20V11L1 11L11.3273 1.6115C11.7087 1.26475 12.2913 1.26475 12.6727 1.6115L23 11L20 11V20ZM11 13V19H13V13H11Z">
+                    </path>
+                </svg>
+                <div>攻略</div>
+            </router-link>
+            <router-link class="router-link" to="/resident">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill="none" d="M0 0h24v24H0z" />
+                    <path d="M4 22a8 8 0 1 1 16 0H4zm8-9c-3.315 0-6-2.685-6-6s2.685-6 6-6 6 2.685 6 6-2.685 6-6 6z">
+                </svg>
+                <div>居民</div>
+            </router-link>
+            <router-link class="router-link" to="/todo">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M17 2H20C20.5523 2 21 2.44772 21 3V21C21 21.5523 20.5523 22 20 22H4C3.44772 22 3 21.5523 3 21V3C3 2.44772 3.44772 2 4 2H7V0H9V2H15V0H17V2ZM7 8V10H17V8H7ZM7 12V14H17V12H7Z">
+                    </path>
+                </svg>
+                <div>清单</div>
+            </router-link>
+            <router-link class="router-link" to="/setting">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M2 18H9V20H2V18ZM2 11H11V13H2V11ZM2 4H22V6H2V4ZM20.674 13.0251L21.8301 12.634L22.8301 14.366L21.914 15.1711C21.9704 15.4386 22 15.7158 22 16C22 16.2842 21.9704 16.5614 21.914 16.8289L22.8301 17.634L21.8301 19.366L20.674 18.9749C20.2635 19.3441 19.7763 19.6295 19.2391 19.8044L19 21H17L16.7609 19.8044C16.2237 19.6295 15.7365 19.3441 15.326 18.9749L14.1699 19.366L13.1699 17.634L14.086 16.8289C14.0296 16.5614 14 16.2842 14 16C14 15.7158 14.0296 15.4386 14.086 15.1711L13.1699 14.366L14.1699 12.634L15.326 13.0251C15.7365 12.6559 16.2237 12.3705 16.7609 12.1956L17 11H19L19.2391 12.1956C19.7763 12.3705 20.2635 12.6559 20.674 13.0251ZM18 17C18.5523 17 19 16.5523 19 16C19 15.4477 18.5523 15 18 15C17.4477 15 17 15.4477 17 16C17 16.5523 17.4477 17 18 17Z">
+                    </path>
+                </svg>
+                <div>设置</div>
+            </router-link>
+        </div>
+    </div>
 </body>
+<script src="/js/main.js"></script>
 
 </html>
