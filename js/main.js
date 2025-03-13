@@ -23,8 +23,8 @@ const Wiki = {
                 this.cover = url + response.data.cover
             })
     },
-    inject: ["version"],
-    template: '<div class="main"><div class="cover"><img :src="cover" alt="cover"></div><template v-for="item,idx in wiki"><div class="setting_sub" v-text="idx"></div><div class="menu"><router-link class="item-link" v-for="i in item" :to="\'/wiki/content/\' + version.index + \'/\' + i.id "><div class="item"><div class="item-icon"><img :src="i.icon"></div><div class="item-text" v-text="i.title"></div></div></router-link></div></template></div>'
+    inject: ["version", "url"],
+    template: '<div><div class="cover"><img :src="cover" alt="cover"></div><template v-for="item,idx in wiki"><div class="setting_sub" v-text="idx"></div><div class="menu"><template v-for="i,n in item.list"><router-link class="item-link" v-if="\'list\' in i" :to="\'/wiki/list/\' + idx + \'/\' + n"><div class="item"><div class="item-icon"><img :src="url + i.icon"></div><div class="item-text" v-text="n"></div></div></router-link><router-link class="item-link" v-else :to="\'/wiki/content/\' + i.id"><div class="item"><div class="item-icon"><img :src="url + i.icon"></div><div class="item-text" v-text="n"></div></div></router-link></template></div></template></div>'
 }
 
 const Content = {
@@ -42,9 +42,24 @@ const Content = {
             .then((response) => {
                 this.contentData = response.data
             })
-        console.log(this.contentData)
     },
     template: '<div><h1 v-text="contentData.title"></h1><div class="time" v-text="contentData.time"></div><div v-html="contentData.text"></div></div>'
+}
+
+const List = {
+    data() {
+        return {
+            "wiki": {}
+        }
+    },
+    mounted() {
+        axios.get(url + "menu/" + this.version.index)
+            .then((response) => {
+                this.wiki = response.data.wiki[this.$route.params.idx]["list"][this.$route.params.item]["list"]
+            })
+    },
+    inject: ["version", "url"],
+    template: '<div><div class="list" v-for="item,idx in wiki"><router-link v-if="\'id\' in item" :to="\'/wiki/content/\' + item.id"><div class="list-item" v-text="idx"></div></router-link><router-link v-else-if="\'page\' in item" :to="item.page"><div class="list-item" v-text="idx"></div></router-link></div></div>'
 }
 
 const Resident = {
@@ -91,7 +106,8 @@ const routes = [
     { path: '/resident', component: Resident },
     { path: '/todo', component: ToDo },
     { path: '/setting', component: Setting },
-    { path: '/wiki/content/:version/:id', component: Content, props: true }
+    { path: '/wiki/content/:id', component: Content, props: true },
+    { path: '/wiki/list/:idx/:item', component: List, props: true }
 ]
 
 // 创建路由器实例
@@ -104,15 +120,17 @@ const router = createRouter({
 const app = createApp({
     data() {
         return {
+            "url": url,
             "version": {
                 "index": "saikai",
                 "dict": {},
-            }
+            },
         }
     },
     provide() {
         return {
             version: this.version,
+            url: this.url,
         }
     },
     methods: {
