@@ -63,8 +63,41 @@ const List = {
 }
 
 const Resident = {
-    template: '<div>{{ $route }}</div>'
+    data() {
+        return {
+            "resident": {}
+        }
+    },
+    mounted() {
+        axios.get(url + this.version.index + '/resident')
+            .then((response) => {
+                this.resident = response.data
+            })
+    },
+    inject: ["version", "url"],
+    template: '<div><template v-for="item,idx in resident"><div class="setting_sub" v-text="idx"></div><div class="menu-resident"><template v-for="i,n in item"><router-link :to="\'/resident/\' + n"><div class="item"><div class="resident-icon"><img :src="url + i.icon"></div><div class="resident-text" v-text="i.name"></div></div></router-link></template></div></template></div>'
 }
+
+const ResidentTemplate = {
+    "saikai": '<div><h1 v-text="resident.name?.cn"></h1><div v-if="resident.desc" v-html="resident.desc"></div><div class="photo" v-if="resident.photo"><img :src="url + resident.photo" :alt="resident.name?.en"></div><ul><li v-if="resident.first"><b>登场</b>：<span v-text="resident.first"></span></li><li v-if="resident.address"><b>住所</b>：<span v-text="resident.address"></span></li><li v-if="resident.sex"><b>性别</b>：<span v-text="resident.sex"></span></li><li v-if="resident.birth"><b>生日</b>：<span v-text="resident.birth?.month"></span><span v-text="resident.birth?.day"></span>日<template v-if="resident.birth?.another">（<span v-text="resident.birth?.month"></span><span v-text="resident.birth?.another"></span>日）</template></li><li v-if="resident.family"><b>家庭成员</b>：<span v-text="resident.family"></span></li></ul><template v-if="resident.like"><h2>喜欢与讨厌的物品</h2><ul v-for="x,y in resident.like"><li><b v-text="y"></b>：<template v-for="(z, i) in x" :key="i"><span v-text="z"></span><span v-if="i < x.length - 1">、</span></template></li></ul></template><template v-if="resident.trip"><h2>行程</h2><div v-html="resident.trip"></div></template><div v-if="resident.note" v-html="resident.note"></div></div>'
+}
+
+const ResidentContent = {
+    data() {
+        return {
+            "resident": {}
+        }
+    },
+    mounted() {
+        axios.get(url + this.version.index + '/resident/' + this.$route.params.name)
+            .then((response) => {
+                this.resident = response.data
+            })
+    },
+    inject: ["version", "url"],
+    template: ResidentTemplate[localStorage.getItem('version')]
+}
+
 const ToDo = {
     template: '<div>{{ $route }}</div>'
 }
@@ -103,11 +136,12 @@ const Setting = {
 const routes = [
     { path: '/', component: Home },
     { path: '/wiki', component: Wiki },
+    { path: '/wiki/content/:id', component: Content, props: true },
+    { path: '/wiki/list/:idx/:item', component: List, props: true },
     { path: '/resident', component: Resident },
+    { path: '/resident/:name', component: ResidentContent, props: true },
     { path: '/todo', component: ToDo },
     { path: '/setting', component: Setting },
-    { path: '/wiki/content/:id', component: Content, props: true },
-    { path: '/wiki/list/:idx/:item', component: List, props: true }
 ]
 
 // 创建路由器实例
@@ -141,7 +175,6 @@ const app = createApp({
         goBack() {
             this.$router.go(-1)
         },
-
     },
     created() {
         let version = localStorage.getItem('version')

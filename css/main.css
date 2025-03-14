@@ -175,7 +175,7 @@ img {
     height: 3rem;
     background-color: #eee;
     border-radius: 10px;
-    padding:0.5rem;
+    padding: 0.5rem;
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
@@ -183,5 +183,36 @@ img {
 }
 
 .item-text {
+    font-size: 0.8rem;
+}
+
+.menu-resident {
+    padding: 1rem 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 5rem);
+    place-content: start center;
+    gap: 10px;
+}
+
+.resident {
+    color: #666;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.resident-icon {
+    width: 5rem;
+    height: 5rem;
+    background-color: #eee;
+    border-radius: 10px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.resident-text {
     font-size: 0.8rem;
 }
