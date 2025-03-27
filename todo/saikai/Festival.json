@@ -1,0 +1,217 @@
+[{
+        "name": {
+            "cn": "年糕大会",
+            "jp": "もちつき大会"
+        },
+        "month": "春",
+        "day": 1,
+        "start_time": "PM6:00",
+        "end_time": "AM12:00",
+        "address": "广场",
+        "note": null
+    },
+    {
+        "name": {
+            "cn": "春季感恩节",
+            "jp": "春の感謝祭"
+        },
+        "month": "春",
+        "day": 14,
+        "start_time": null,
+        "end_time": null,
+        "address": null,
+        "note": "<ul><li><b>多特</b>&nbsp;&nbsp;AM6:00 ~ AM7:00</li><li><b>克里夫</b>&nbsp;&nbsp;AM8:00 ~ AM9:00</li><li><b>里克</b>&nbsp;&nbsp;AM10:00 ~ AM11:00</li><li><b>格雷</b>&nbsp;&nbsp;PM2:00 ~ PM3:00</li><li><b>布兰登</b>&nbsp;&nbsp;PM4:00 ~PM5:00</li></ul>"
+    },
+    {
+        "name": {
+            "cn": "春季赛马",
+            "jp": "春の草競馬"
+        },
+        "month": "春",
+        "day": 18,
+        "start_time": "AM10:00",
+        "end_time": "PM6:00",
+        "address": "广场",
+        "note": null
+    },
+    {
+        "name": {
+            "cn": "美食节",
+            "jp": "料理祭"
+        },
+        "month": "春",
+        "day": 22,
+        "start_time": "AM10:00",
+        "end_time": "PM6:00",
+        "address": "广场",
+        "note": null
+    },
+    {
+        "name": {
+            "cn": "入海节",
+            "jp": "海開き"
+        },
+        "month": "夏",
+        "day": 1,
+        "start_time": "AM10:00",
+        "end_time": "PM6:00",
+        "address": "海边",
+        "note": null
+    },
+    {
+        "name": {
+            "cn": "斗鸡节",
+            "jp": "鶏祭り"
+        },
+        "month": "夏",
+        "day": 7,
+        "start_time": "AM10:00",
+        "end_time": "PM6:00",
+        "address": "广场",
+        "note": null
+    },
+    {
+        "name": {
+            "cn": "评牛节",
+            "jp": "牛祭り"
+        },
+        "month": "夏",
+        "day": 20,
+        "start_time": "AM10:00",
+        "end_time": "PM6:00",
+        "address": "广场",
+        "note": null
+    },
+    {
+        "name": {
+            "cn": "烟花大会",
+            "jp": "花火大会"
+        },
+        "month": "夏",
+        "day": 24,
+        "start_time": "PM6:00",
+        "end_time": "PM9:00",
+        "address": "海边",
+        "note": null
+    },
+    {
+        "name": {
+            "cn": "音乐节",
+            "jp": "音楽祭"
+        },
+        "month": "秋",
+        "day": 3,
+        "start_time": "PM6:00",
+        "end_time": "AM12:00",
+        "address": "教堂",
+        "note": null
+    },
+    {
+        "name": {
+            "cn": "收获节",
+            "jp": "収穫祭"
+        },
+        "month": "秋",
+        "day": 9,
+        "start_time": "AM10:00",
+        "end_time": "PM6:00",
+        "address": "广场",
+        "note": null
+    },
+    {
+        "name": {
+            "cn": "赏月",
+            "jp": "お月見"
+        },
+        "month": "秋",
+        "day": 13,
+        "start_time": "PM6:00",
+        "end_time": "AM12:00",
+        "address": "山顶",
+        "note": null
+    },
+    {
+        "name": {
+            "cn": "秋季赛马",
+            "jp": "秋の草競馬"
+        },
+        "month": "秋",
+        "day": 18,
+        "start_time": "AM10:00",
+        "end_time": "PM6:00",
+        "address": "广场",
+        "note": null
+    },
+    {
+        "name": {
+            "cn": "软绵绵节",
+            "jp": "羊祭り"
+        },
+        "month": "秋",
+        "day": 21,
+        "start_time": "AM10:00",
+        "end_time": "PM6:00",
+        "address": "广场",
+        "note": null
+    },
+    {
+        "name": {
+            "cn": "南瓜节",
+            "jp": "カボチャ祭り"
+        },
+        "month": "秋",
+        "day": 30,
+        "start_time": null,
+        "end_time": null,
+        "address": null,
+        "note": "<ul><li><b>梅</b>&nbsp;&nbsp;AM6:00 ~ AM7:00</li><li><b>优</b>&nbsp;&nbsp;AM8:00 ~ AM9:00</li><li><b>珀布莉</b>&nbsp;&nbsp;AM10:00 ~ AM11:00</li></ul>"
+    },
+    {
+        "name": {
+            "cn": "冬季感恩节",
+            "jp": "冬の感謝祭"
+        },
+        "month": "冬",
+        "day": 14,
+        "start_time": null,
+        "end_time": null,
+        "address": null,
+        "note": "<ul><li><b>珀布莉</b>&nbsp;&nbsp;AM6:00 ~ AM7:00</li><li><b>兰</b>&nbsp;&nbsp;AM8:00 ~ AM9:00</li><li><b>艾丽</b>&nbsp;&nbsp;AM10:00 ~ AM11:00</li><li><b>卡莲</b>&nbsp;&nbsp;AM12:00 ~ PM1:00</li><li><b>玛丽</b>&nbsp;&nbsp;PM2:00 ~ PM3:00</li><li><b>珍妮弗</b>&nbsp;&nbsp;PM4:00 ~PM5:00</li></ul>"
+    },
+    {
+        "name": {
+            "cn": "星夜祭",
+            "jp": "星夜祭"
+        },
+        "month": "冬",
+        "day": 24,
+        "start_time": "PM6:00",
+        "end_time": "AM12:00",
+        "address": null,
+        "note": null
+    },
+    {
+        "name": {
+            "cn": "新年荞麦面",
+            "jp": "年越しそば"
+        },
+        "month": "冬",
+        "day": 30,
+        "start_time": "PM6:00",
+        "end_time": "AM12:00",
+        "address": "广场",
+        "note": null
+    },
+    {
+        "name": {
+            "cn": "跨年夜",
+            "jp": "年越しの集い"
+        },
+        "month": "冬",
+        "day": 30,
+        "start_time": "AM12:00",
+        "end_time": "AM4:00",
+        "address": "山顶",
+        "note": null
+    }
+]

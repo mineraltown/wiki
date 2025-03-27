@@ -1,0 +1,206 @@
+@charset "utf-8";
+
+.todo {
+    color: #333333;
+    background-color: #ebebeb;
+}
+
+.todo_shop {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    margin: 0.5rem;
+    padding: 0.5rem 0;
+    background-color: #fff;
+    font-size: 0.8rem;
+}
+
+.todo_shop_holiday {
+    color: #aaa;
+    margin: 0 0.3rem 0 0.3rem;
+}
+
+.todo_shop_working {
+    color: #198d44;
+    margin: 0 0.3rem 0 0.3rem;
+}
+
+.todo_shop_working_red {
+    color: #9b4546;
+    margin: 0 0.3rem 0 0.3rem;
+}
+
+.todo_season {
+    width: 100%;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: #999999;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.todo_season_date {
+    flex-grow: 1;
+    margin-left: 1rem;
+    font-weight: bold;
+}
+
+.todo_season_moon {
+    margin: 0 1rem 0 0.5rem;
+}
+
+.todo_calendar {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: flex-start;
+    padding-bottom: 1rem;
+    border-bottom: solid 1px #cccccc;
+    margin-top: 0.5rem;
+}
+
+.todo_calendar_days {
+    margin: 0.2rem;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.todo_calendar_week {
+    font-size: 0.7rem;
+}
+
+.todo_calendar_day {
+    margin-top: 0.3rem;
+    width: 12vw;
+    max-width: 5rem;
+    min-height: 2.5rem;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.todo_calendar_num {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.todo_calendar_event {
+    font-size: 0.6rem;
+    line-height: 0.8rem;
+    text-align: center;
+    color: #666666;
+}
+
+.todo_calendar_this .todo_calendar_week {
+    color: #0071bc;
+}
+
+.todo_calendar_this .todo_calendar_day {
+    color: #ffffff;
+    border-radius: 0.5rem;
+    padding-bottom: 0.5rem;
+    background-color: #0071bc;
+}
+
+.todo_calendar_this .todo_calendar_event {
+    color: #ffffff;
+}
+
+.todo_card_list {
+    margin: 0.5rem;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.todo_card {
+    border-radius: 5px;
+    width: 100%;
+    margin: 5px 0 5px 0;
+    position: relative;
+    background-color: #ddd;
+}
+
+.todo_card_today {
+    background-color: #ccc !important;
+}
+
+.wool {
+    background-color: #9b4546;
+    color: #ffffff;
+}
+
+.todo_flex {
+    margin: 0.5rem;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.todo_title {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.todo_note {
+    margin-left: 1rem;
+    font-size: 0.8rem;
+}
+
+.todo_flex ul {
+    margin-left: 2rem;
+}
+
+.todo_advance_days {
+    position: absolute;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #bbbbbb;
+    top: 10px;
+    right: 1rem;
+}
+
+.todo_spacing {
+    height: 5rem;
+}
+
+.todo_next {
+    position: fixed;
+    bottom: 3.8rem;
+    width: 90vw;
+    padding: 0 5vw 0 5vw;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+}
+
+.next_button {
+    margin: 0.8rem 0 0.8rem 0;
+    width: 80vw;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    text-align: center;
+    color: #ffffff;
+    background-color: #198d44cc;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.next_button:hover {
+    background-color: #198d4499;
+}
+
+.next_button:active {
+    background-color: #198d44;
+}

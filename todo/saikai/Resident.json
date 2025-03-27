@@ -1,0 +1,1069 @@
+[{
+        "name": {
+            "cn": "里克",
+            "jp": "リック"
+        },
+        "href": "/Resident/Boy/rikku.html",
+        "birthday": {
+            "month": "秋",
+            "day": 27,
+            "day2": 23
+        },
+        "like": {
+            "best": [
+                "温泉蛋"
+            ],
+            "more": [
+                "玉米",
+                "鸡蛋",
+                "蛋黄酱",
+                "玉子烧",
+                "布丁"
+            ]
+        },
+        "sex": 1
+    },
+    {
+        "name": {
+            "cn": "格雷",
+            "jp": "グレイ"
+        },
+        "href": "/Resident/Boy/gray.html",
+        "birthday": {
+            "month": "冬",
+            "day": 6,
+            "day2": 23
+        },
+        "like": {
+            "best": [
+                "烤玉米"
+            ],
+            "more": [
+                "超强体力药",
+                "超强消除疲劳药",
+                "巧克力",
+                "炒饭",
+                "铜",
+                "银",
+                "金",
+                "秘银"
+            ]
+        },
+        "sex": 1
+    },
+    {
+        "name": {
+            "cn": "多特",
+            "jp": "ドクター"
+        },
+        "href": "/Resident/Boy/doctor.html",
+        "birthday": {
+            "month": "秋",
+            "day": 19,
+            "day2": 25
+        },
+        "like": {
+            "best": [
+                "牛奶"
+            ],
+            "more": [
+                "蜂蜜",
+                "毒蘑菇",
+                "红草",
+                "炖菜"
+            ]
+        },
+        "sex": 1
+    },
+    {
+        "name": {
+            "cn": "克里夫",
+            "jp": "クリフ"
+        },
+        "href": "/Resident/Boy/kurifu.html",
+        "birthday": {
+            "month": "夏",
+            "day": 6,
+            "day2": 10
+        },
+        "like": {
+            "best": [
+                "咖喱饭"
+            ],
+            "more": [
+                "炖菜",
+                "味噌汤",
+                "炒蔬菜",
+                "炒饭",
+                "大阪烧",
+                "三明治",
+                "玉子烧",
+                "石锅拌饭"
+            ]
+        },
+        "sex": 1
+    },
+    {
+        "name": {
+            "cn": "凯",
+            "jp": "カイ"
+        },
+        "href": "/Resident/Boy/kai.html",
+        "birthday": {
+            "month": "夏",
+            "day": 22,
+            "day2": 17
+        },
+        "like": {
+            "best": [
+                "凤梨"
+            ],
+            "more": [
+                "番茄",
+                "玉米",
+                "洋葱",
+                "鸡蛋",
+                "面包",
+                "油",
+                "小麦粉",
+                "炒饭"
+            ]
+        },
+        "sex": 1
+    },
+    {
+        "name": {
+            "cn": "布兰登",
+            "jp": "ブランドン"
+        },
+        "href": "/Resident/Boy/brandon.html",
+        "birthday": {
+            "month": "秋",
+            "day": 7,
+            "day2": 29
+        },
+        "like": {
+            "best": [
+                "松茸",
+                "铜锣烧"
+            ],
+            "more": [
+                "土豆",
+                "黄瓜",
+                "鸡蛋",
+                "蜂蜜",
+                "油",
+                "小麦粉",
+                "黄油",
+                "烤苹果"
+            ]
+        },
+        "sex": 1
+    },
+    {
+        "name": {
+            "cn": "霍安",
+            "jp": "ホアン"
+        },
+        "href": "/Resident/Boy/hoan.html",
+        "birthday": {
+            "month": "冬",
+            "day": 19,
+            "day2": 21
+        },
+        "like": {
+            "best": [],
+            "more": [
+                "金蛋",
+                "金",
+                "秘银",
+                "精金",
+                "月亮石",
+                "沙漠玫瑰石",
+                "红宝石",
+                "海盗宝藏"
+            ]
+        },
+        "sex": 1
+    },
+    {
+        "name": {
+            "cn": "美食家",
+            "jp": "グルメマン"
+        },
+        "href": "/Resident/Boy/gourmetman.html",
+        "birthday": {
+            "month": "春",
+            "day": 21,
+            "day2": 20
+        },
+        "like": {
+            "best": [],
+            "more": [
+                "艾利草"
+            ]
+        },
+        "sex": 1
+    },
+    {
+        "name": {
+            "cn": "河童",
+            "jp": "かっぱ"
+        },
+        "href": "/Resident/Boy/kappa.html",
+        "birthday": {
+            "month": "春",
+            "day": 8,
+            "day2": 9
+        },
+        "like": {
+            "best": [],
+            "more": [
+                "黄瓜"
+            ]
+        },
+        "sex": 1
+    },
+    {
+        "name": {
+            "cn": "珀布莉",
+            "jp": "ポプリ"
+        },
+        "href": "/Resident/Girl/popuri.html",
+        "birthday": {
+            "month": "夏",
+            "day": 3,
+            "day2": 10
+        },
+        "like": {
+            "best": [
+                "玉子烧",
+                "蛋包饭",
+                "印尼炒饭",
+                "石锅拌饭"
+            ],
+            "more": [
+                "草莓",
+                "鸡蛋",
+                "水煮蛋",
+                "曲奇",
+                "布丁",
+                "玛德莲蛋糕",
+                "钻石"
+            ]
+        },
+        "sex": 0
+    },
+    {
+        "name": {
+            "cn": "玛丽",
+            "jp": "マリー"
+        },
+        "href": "/Resident/Girl/marie.html",
+        "birthday": {
+            "month": "冬",
+            "day": 20,
+            "day2": 23
+        },
+        "like": {
+            "best": [
+                "蔬菜汁",
+                "放松茶"
+            ],
+            "more": [
+                "竹笋",
+                "黑草",
+                "巧克力",
+                "葡萄面包",
+                "巧克力曲奇",
+                "烤栗子",
+                "装信的瓶子"
+            ]
+        },
+        "sex": 0
+    },
+    {
+        "name": {
+            "cn": "卡莲",
+            "jp": "カレン"
+        },
+        "href": "/Resident/Girl/karen.html",
+        "birthday": {
+            "month": "秋",
+            "day": 15,
+            "day2": 23
+        },
+        "like": {
+            "best": [
+                "炸薯条",
+                "爆米花",
+                "玛格丽特披萨"
+            ],
+            "more": [
+                "芝士",
+                "竹笋",
+                "高级葡萄果汁",
+                "山葡萄水",
+                "生鱼片",
+                "超辣炒蔬菜"
+            ]
+        },
+        "sex": 0
+    },
+    {
+        "name": {
+            "cn": "艾丽",
+            "jp": "エリィ"
+        },
+        "href": "/Resident/Girl/ellie.html",
+        "birthday": {
+            "month": "春",
+            "day": 16,
+            "day2": 20
+        },
+        "like": {
+            "best": [
+                "赏月丸子",
+                "杏仁豆腐",
+                "红色奇幻朱草",
+                "橙色维纳斯"
+            ],
+            "more": [
+                "牛奶",
+                "丸子粉",
+                "三色花"
+            ]
+        },
+        "sex": 0
+    },
+    {
+        "name": {
+            "cn": "兰",
+            "jp": "ラン"
+        },
+        "href": "/Resident/Girl/ran.html",
+        "birthday": {
+            "month": "夏",
+            "day": 17,
+            "day2": 22
+        },
+        "like": {
+            "best": [
+                "芝士锅",
+                "松茸饭",
+                "蛋糕",
+                "松饼",
+                "年轮蛋糕",
+                "芝士炖饭"
+            ],
+            "more": [
+                "温泉蛋",
+                "巧克力",
+                "炒饭"
+            ]
+        },
+        "sex": 0
+    },
+    {
+        "name": {
+            "cn": "珍妮弗",
+            "jp": "ジェニファー"
+        },
+        "href": "/Resident/Girl/jennifer.html",
+        "birthday": {
+            "month": "冬",
+            "day": 2,
+            "day2": 18
+        },
+        "like": {
+            "best": [
+                "栗子饭",
+                "烤栗子",
+                "蒙布朗蛋糕"
+            ],
+            "more": [
+                "巧克力",
+                "番薯",
+                "曲奇",
+                "巧克力曲奇",
+                "布丁",
+                "玛德莲蛋糕"
+            ]
+        },
+        "sex": 0
+    },
+    {
+        "name": {
+            "cn": "女神",
+            "jp": "女神さま"
+        },
+        "href": "/Resident/Girl/megami.html",
+        "birthday": {
+            "month": "春",
+            "day": 8,
+            "day2": 9
+        },
+        "like": {
+            "best": [],
+            "more": [
+                "草莓",
+                "凤梨"
+            ]
+        },
+        "sex": 0
+    },
+    {
+        "name": {
+            "cn": "莉莉娅",
+            "jp": "リリア"
+        },
+        "href": "/Resident/Ordinary/riria.html",
+        "birthday": {
+            "month": "春",
+            "day": 19,
+            "day2": null
+        },
+        "like": {
+            "best": [],
+            "more": [
+                "番茄",
+                "胡萝卜",
+                "牛奶",
+                "芝士",
+                "苹果",
+                "体力药",
+                "消除疲劳药"
+            ]
+        },
+        "sex": 0
+    },
+    {
+        "name": {
+            "cn": "穆奇",
+            "jp": "ムギ"
+        },
+        "href": "/Resident/Ordinary/mugi.html",
+        "birthday": {
+            "month": "春",
+            "day": 17,
+            "day2": null
+        },
+        "like": {
+            "best": [],
+            "more": [
+                "温泉蛋",
+                "饭团",
+                "味噌汤",
+                "玉子烧",
+                "乌冬面",
+                "荞麦面",
+                "年糕",
+                "大福"
+            ]
+        },
+        "sex": 1
+    },
+    {
+        "name": {
+            "cn": "梅",
+            "jp": "メイ"
+        },
+        "href": "/Resident/Ordinary/mei.html",
+        "birthday": {
+            "month": "冬",
+            "day": 26,
+            "day2": null
+        },
+        "like": {
+            "best": [],
+            "more": [
+                "凤梨",
+                "蜂蜜",
+                "葡萄果汁",
+                "甜蜜烤番薯",
+                "曲奇",
+                "牧草",
+                "石材",
+                "木材"
+            ]
+        },
+        "sex": 0
+    },
+    {
+        "name": {
+            "cn": "赛巴拉",
+            "jp": "サイバラ"
+        },
+        "href": "/Resident/Ordinary/saibara.html",
+        "birthday": {
+            "month": "春",
+            "day": 11,
+            "day2": null
+        },
+        "like": {
+            "best": [],
+            "more": [
+                "芜菁",
+                "竹笋",
+                "味噌汤",
+                "荞麦面",
+                "年糕",
+                "秘银",
+                "山铜",
+                "精金"
+            ]
+        },
+        "sex": 1
+    },
+    {
+        "name": {
+            "cn": "狄克",
+            "jp": "デューク"
+        },
+        "href": "/Resident/Ordinary/duke.html",
+        "birthday": {
+            "month": "冬",
+            "day": 15,
+            "day2": null
+        },
+        "like": {
+            "best": [],
+            "more": [
+                "黄瓜",
+                "菠菜",
+                "温泉蛋",
+                "葡萄果汁",
+                "面包",
+                "山葡萄水",
+                "芝士锅"
+            ]
+        },
+        "sex": 1
+    },
+    {
+        "name": {
+            "cn": "玛娜",
+            "jp": "マナ"
+        },
+        "href": "/Resident/Ordinary/mana.html",
+        "birthday": {
+            "month": "秋",
+            "day": 11,
+            "day2": null
+        },
+        "like": {
+            "best": [],
+            "more": [
+                "凤梨",
+                "蜂蜜",
+                "金蛋",
+                "丸子粉",
+                "蔬菜汁",
+                "葡萄面包",
+                "小型鱼"
+            ]
+        },
+        "sex": 0
+    },
+    {
+        "name": {
+            "cn": "巴吉尔",
+            "jp": "バジル"
+        },
+        "href": "/Resident/Ordinary/basil.html",
+        "birthday": {
+            "month": "夏",
+            "day": 11,
+            "day2": null
+        },
+        "like": {
+            "best": [],
+            "more": [
+                "山葡萄的果实",
+                "毒蘑菇",
+                "绿草",
+                "红草",
+                "蔬菜汁",
+                "橙色维纳斯"
+            ]
+        },
+        "sex": 1
+    },
+    {
+        "name": {
+            "cn": "安娜",
+            "jp": "アンナ"
+        },
+        "href": "/Resident/Ordinary/anna.html",
+        "birthday": {
+            "month": "秋",
+            "day": 23,
+            "day2": null
+        },
+        "like": {
+            "best": [],
+            "more": [
+                "玉米",
+                "南瓜",
+                "鸡蛋",
+                "巧克力",
+                "冰激凌",
+                "咸派"
+            ]
+        },
+        "sex": 0
+    },
+    {
+        "name": {
+            "cn": "托马斯",
+            "jp": "トーマス"
+        },
+        "href": "/Resident/Ordinary/tomas.html",
+        "birthday": {
+            "month": "夏",
+            "day": 25,
+            "day2": null
+        },
+        "like": {
+            "best": [],
+            "more": [
+                "高级葡萄果汁",
+                "荞麦粉",
+                "山葡萄水",
+                "甜蜜烤番薯",
+                "吉拿棒",
+                "钻石"
+            ]
+        },
+        "sex": 1
+    },
+    {
+        "name": {
+            "cn": "哈里斯",
+            "jp": "ハリス"
+        },
+        "href": "/Resident/Ordinary/haris.html",
+        "birthday": {
+            "month": "夏",
+            "day": 4,
+            "day2": null
+        },
+        "like": {
+            "best": [],
+            "more": [
+                "温泉蛋",
+                "体力药",
+                "消除疲劳药",
+                "山葡萄水",
+                "炒饭",
+                "小型鱼"
+            ]
+        },
+        "sex": 1
+    },
+    {
+        "name": {
+            "cn": "爱莲",
+            "jp": "エレン"
+        },
+        "href": "/Resident/Ordinary/ellen.html",
+        "birthday": {
+            "month": "冬",
+            "day": 13,
+            "day2": null
+        },
+        "like": {
+            "best": [],
+            "more": [
+                "南瓜",
+                "胡萝卜",
+                "牛奶",
+                "温泉蛋",
+                "蜂蜜",
+                "羊毛",
+                "毛线团"
+            ]
+        },
+        "sex": 0
+    },
+    {
+        "name": {
+            "cn": "优",
+            "jp": "ユウ"
+        },
+        "href": "/Resident/Ordinary/yuu.html",
+        "birthday": {
+            "month": "秋",
+            "day": 5,
+            "day2": null
+        },
+        "like": {
+            "best": [],
+            "more": [
+                "山葡萄的果实",
+                "葡萄果汁",
+                "巧克力",
+                "炸薯条",
+                "曲奇",
+                "蛋糕",
+                "毛线团"
+            ]
+        },
+        "sex": 1
+    },
+    {
+        "name": {
+            "cn": "杰夫",
+            "jp": "ジェフ"
+        },
+        "href": "/Resident/Ordinary/jefu.html",
+        "birthday": {
+            "month": "冬",
+            "day": 29,
+            "day2": null
+        },
+        "like": {
+            "best": [],
+            "more": [
+                "蜂蜜",
+                "蓝草",
+                "果汁",
+                "蔬菜汁",
+                "布丁",
+                "体力药",
+                "消除疲劳药"
+            ]
+        },
+        "sex": 1
+    },
+    {
+        "name": {
+            "cn": "莎夏",
+            "jp": "サーシャ"
+        },
+        "href": "/Resident/Ordinary/sasha.html",
+        "birthday": {
+            "month": "春",
+            "day": 30,
+            "day2": null
+        },
+        "like": {
+            "best": [],
+            "more": [
+                "巧克力",
+                "甜蜜烤番薯",
+                "曲奇",
+                "月泪草"
+            ]
+        },
+        "sex": 0
+    },
+    {
+        "name": {
+            "cn": "卡特",
+            "jp": "カーター"
+        },
+        "href": "/Resident/Ordinary/kata.html",
+        "birthday": {
+            "month": "秋",
+            "day": 20,
+            "day2": null
+        },
+        "like": {
+            "best": [],
+            "more": [
+                "芜菁",
+                "鸡蛋",
+                "牛奶",
+                "咖喱粉",
+                "油",
+                "小麦粉",
+                "烤玉米",
+                "栗子饭"
+            ]
+        },
+        "sex": 1
+    },
+    {
+        "name": {
+            "cn": "达特",
+            "jp": "ダッド"
+        },
+        "href": "/Resident/Ordinary/dadd.html",
+        "birthday": {
+            "month": "冬",
+            "day": 11,
+            "day2": null
+        },
+        "like": {
+            "best": [],
+            "more": [
+                "洋葱",
+                "鸡蛋",
+                "牛奶",
+                "蜂蜜",
+                "小麦粉",
+                "烤苹果",
+                "小型鱼",
+                "中型鱼",
+                "大型鱼"
+            ]
+        },
+        "sex": 1
+    },
+    {
+        "name": {
+            "cn": "哥兹",
+            "jp": "ゴッツ"
+        },
+        "href": "/Resident/Ordinary/gods.html",
+        "birthday": {
+            "month": "秋",
+            "day": 2,
+            "day2": null
+        },
+        "like": {
+            "best": [],
+            "more": [
+                "土豆",
+                "洋葱",
+                "鸡蛋",
+                "蛋黄酱",
+                "蜂蜜",
+                "小麦粉"
+            ]
+        },
+        "sex": 1
+    },
+    {
+        "name": {
+            "cn": "札克",
+            "jp": "ザク"
+        },
+        "href": "/Resident/Ordinary/zaku.html",
+        "birthday": {
+            "month": "夏",
+            "day": 29,
+            "day2": null
+        },
+        "like": {
+            "best": [],
+            "more": [
+                "黄瓜",
+                "番茄",
+                "芝士",
+                "山葡萄水",
+                "炒饭",
+                "山铜",
+                "钻石"
+            ]
+        },
+        "sex": 1
+    },
+    {
+        "name": {
+            "cn": "班",
+            "jp": "バァン"
+        },
+        "href": "/Resident/Ordinary/ban.html",
+        "birthday": {
+            "month": null,
+            "day": null,
+            "day2": null
+        },
+        "like": {
+            "best": [],
+            "more": [
+                "X型毛线团",
+                "粉红钻石",
+                "亚历山大石",
+                "钻石",
+                "海盗宝藏"
+            ]
+        },
+        "sex": 1
+    },
+    {
+        "name": {
+            "cn": "露",
+            "jp": "ルウ"
+        },
+        "href": "/Resident/Ordinary/loo.html",
+        "birthday": {
+            "month": null,
+            "day": null,
+            "day2": null
+        },
+        "like": {
+            "best": [],
+            "more": [
+                "炒饭",
+                "大阪烧",
+                "三明治",
+                "曲奇",
+                "蛋糕"
+            ]
+        },
+        "sex": 0
+    },
+    {
+        "name": {
+            "cn": "卓卡克",
+            "jp": "チョッカク"
+        },
+        "href": "/Resident/Ordinary/koro.html#chokkaku",
+        "birthday": {
+            "month": "春",
+            "day": 15,
+            "day2": null
+        },
+        "like": {
+            "best": [],
+            "more": [
+                "小麦粉",
+                "蓝草",
+                "面包",
+                "草莓牛奶",
+                "巧克力曲奇"
+            ]
+        },
+        "sex": 0
+    },
+    {
+        "name": {
+            "cn": "纳比",
+            "jp": "ナッピー"
+        },
+        "href": "/Resident/Ordinary/koro.html#nappi",
+        "birthday": {
+            "month": "冬",
+            "day": 22,
+            "day2": null
+        },
+        "like": {
+            "best": [],
+            "more": [
+                "小麦粉",
+                "苹果",
+                "橙草",
+                "葡萄果汁",
+                "面包"
+            ]
+        },
+        "sex": 0
+    },
+    {
+        "name": {
+            "cn": "波尔多",
+            "jp": "ボルドー"
+        },
+        "href": "/Resident/Ordinary/koro.html#borudo",
+        "birthday": {
+            "month": "春",
+            "day": 4,
+            "day2": null
+        },
+        "like": {
+            "best": [],
+            "more": [
+                "小麦粉",
+                "土豆",
+                "卷心菜",
+                "紫草",
+                "饭团"
+            ]
+        },
+        "sex": 0
+    },
+    {
+        "name": {
+            "cn": "谢夫涅",
+            "jp": "シェフネン"
+        },
+        "href": "/Resident/Ordinary/koro.html#shefunenn",
+        "birthday": {
+            "month": "秋",
+            "day": 14,
+            "day2": null
+        },
+        "like": {
+            "best": [],
+            "more": [
+                "小麦粉",
+                "番茄",
+                "苹果",
+                "红草",
+                "面包",
+                "番茄酱"
+            ]
+        },
+        "sex": 0
+    },
+    {
+        "name": {
+            "cn": "阿库娅",
+            "jp": "アクア"
+        },
+        "href": "/Resident/Ordinary/koro.html#aqua",
+        "birthday": {
+            "month": "春",
+            "day": 26,
+            "day2": null
+        },
+        "like": {
+            "best": [],
+            "more": [
+                "小麦粉",
+                "山葡萄的果实",
+                "丸子粉",
+                "冰淇淋"
+            ]
+        },
+        "sex": 0
+    },
+    {
+        "name": {
+            "cn": "古里笛",
+            "jp": "グリーディ"
+        },
+        "href": "/Resident/Ordinary/koro.html#greedy",
+        "birthday": {
+            "month": "秋",
+            "day": 10,
+            "day2": null
+        },
+        "like": {
+            "best": [],
+            "more": [
+                "小麦粉",
+                "温泉蛋",
+                "黄草",
+                "S型牛奶",
+                "生鱼片"
+            ]
+        },
+        "sex": 0
+    },
+    {
+        "name": {
+            "cn": "迪米特",
+            "jp": "ティミット"
+        },
+        "href": "/Resident/Ordinary/koro.html#timeet",
+        "birthday": {
+            "month": "夏",
+            "day": 16,
+            "day2": null
+        },
+        "like": {
+            "best": [],
+            "more": [
+                "小麦粉",
+                "绿草",
+                "巧克力",
+                "咖喱饭"
+            ]
+        },
+        "sex": 0
+    }
+]

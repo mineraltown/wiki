@@ -8,13 +8,14 @@
     <meta name="description" content="将荒芜的庄园变成繁盛的牧场，是我的梦想！">
     <meta name="keywords" content="矿石镇的攻略百科,牧场物语,矿石镇,牧場物語,攻略">
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="icon" type="image/png" href="/static/icon/favicon-96x96.png" sizes="96x96">
-    <link rel="icon" type="image/svg+xml" href="/static/icon/favicon.svg">
-    <link rel="shortcut icon" href="/static/icon/favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="/static/icon/apple-touch-icon.png">
+    <link rel="stylesheet" href="/css/todo.css">
+    <link rel="icon" type="image/png" href="/static/favicon/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/svg+xml" href="/static/favicon/favicon.svg">
+    <link rel="shortcut icon" href="/static/favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/favicon/apple-touch-icon.png">
     <meta name="apple-mobile-web-app-title" content="矿石镇">
-    <link rel="manifest" href="/static/icon/site.webmanifest">
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="manifest" href="/static/favicon/site.webmanifest">
+    <script src="https://unpkg.com/vue@3.5.13/dist/vue.global.js"></script>
     <script src="https://unpkg.com/vue-router@4.5.0/dist/vue-router.global.js"></script>
     <script src="https://res.wx.qq.com/t/wx_fed/weui.js/res/1.2.21/weui.min.js"></script>
     <link rel="stylesheet" href="https://res.wx.qq.com/t/wx_fed/weui-source/res/2.5.16/weui.min.css">
@@ -32,9 +33,19 @@
         gtag('config', 'G-T9JX4C52TL');
     </script>
 </head>
+<!--
+    版本 Ver 2.0.0 Beta
+    作者 矿石镇的攻略百科
+    网站 wiki.mineraltown.net
+    E-Mail friends@mineraltown.net
 
+    本站使用 WTFPL 开源协议，你他妈的想干嘛就干嘛。
+
+    如需清空缓存，请在控制台输入：localStorage.clear()
+    如遇BUG请尝试清空本地缓存，或将bug截图及说明发送至本站联系邮箱。
+ -->
 <body>
-    <div id="wiki">
+    <div id="wiki" v-cloak>
         <div class="title">
             <div class="back" v-show="hasMultipleSlashes()" @click="goBack()">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -43,10 +54,11 @@
                     </path>
                 </svg>
             </div>
-            <div v-text="version.dict[version.index]"></div>
+            <div v-if="$route.path=='/'">矿石镇的攻略百科</div>
+            <div v-else v-text="version.dict[version.index]"></div>
         </div>
         <router-view class="main"></router-view>
-        <!-- <div class="main"></div> -->
+         <!-- <div class="main"></div> -->
         <div class="tabbar">
             <router-link class="router-link" to="/wiki">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -63,13 +75,13 @@
                 </svg>
                 <div>居民</div>
             </router-link>
-            <router-link class="router-link" to="/todo">
+            <router-link class="router-link" :to="'/todo/' + version.index">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                     <path
                         d="M17 2H20C20.5523 2 21 2.44772 21 3V21C21 21.5523 20.5523 22 20 22H4C3.44772 22 3 21.5523 3 21V3C3 2.44772 3.44772 2 4 2H7V0H9V2H15V0H17V2ZM7 8V10H17V8H7ZM7 12V14H17V12H7Z">
                     </path>
                 </svg>
-                <div>清单</div>
+                <div>提醒</div>
             </router-link>
             <router-link class="router-link" to="/setting">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">

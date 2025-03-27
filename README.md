@@ -39,3 +39,10 @@
 
 本项目毕竟是游戏攻略，其内容不可避免的使用了部分游戏素材，该部分素材其版权归该游戏开发公司所有。  
 其余内容则适用于 [WTFPL](LICENSE) 开源协议。
+
+### 开放源代码许可
+
+- [vue.js](https://github.com/vuejs/core)
+- [vue-router](https://github.com/vuejs/router)
+- [axios](https://github.com/axios/axios)
+- [weui.js](https://github.com/Tencent/weui.js)
