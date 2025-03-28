@@ -176,6 +176,7 @@
 .todo_next {
     position: fixed;
     bottom: 3.8rem;
+    z-index: 999;
     width: 90vw;
     padding: 0 5vw 0 5vw;
     display: flex;
@@ -183,6 +184,7 @@
     justify-content: center;
     align-items: center;
     background-color: #ffffff;
+    border-top: solid 1px #dddddd;
 }
 
 .next_button {

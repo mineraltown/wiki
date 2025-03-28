@@ -103,11 +103,15 @@ img {
 }
 
 .title {
+    position: fixed;
+    z-index: 997;
+    top: 0;
     width: 100%;
-    height: 3rem;
+    height: 2.5rem;
     flex-shrink: 0;
-    color: #333;
-    border-bottom: solid 1px #ddd;
+    color: #333333;
+    background-color: #ffffff;
+    border-bottom: solid 1px #dddddd;
     font-size: 0.8rem;
     display: flex;
     flex-flow: row nowrap;
@@ -133,11 +137,14 @@ img {
 }
 
 .tabbar {
+    position: fixed;
+    z-index: 998;
+    background-color: #ffffff;
+    border-top: solid 1px #dddddd;
     bottom: 0;
     width: 100%;
     height: 3.8rem;
     flex-shrink: 0;
-    border-top: solid 1px #ddd;
     display: flex;
     flex-flow: row nowrap;
     justify-content: flex-start;
@@ -167,6 +174,8 @@ img {
 .main {
     width: 100%;
     min-height: 0;
+    padding-top: 3rem;
+    padding-bottom: 5rem;
     flex-grow: 1;
     overflow-y: auto;
 }
@@ -200,7 +209,7 @@ img {
     text-align: center;
     outline: none;
     border: none;
-    color: #555;
+    color: #555555;
     font-size: 0.9rem;
     height: 1.5rem;
     padding: 5px 0 5px 0;
@@ -443,7 +452,7 @@ img {
 }
 
 .item {
-    color: #666;
+    color: #666666;
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
@@ -453,7 +462,7 @@ img {
 .item-icon {
     width: 3rem;
     height: 3rem;
-    background-color: #eee;
+    background-color: #eeeeee;
     border-radius: 10px;
     padding: 0.5rem;
     display: flex;
@@ -475,7 +484,7 @@ img {
 }
 
 .resident {
-    color: #666;
+    color: #666666;
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
@@ -485,7 +494,7 @@ img {
 .resident-icon {
     width: 5rem;
     height: 5rem;
-    background-color: #eee;
+    background-color: #eeeeee;
     border-radius: 10px;
     display: flex;
     flex-flow: column nowrap;

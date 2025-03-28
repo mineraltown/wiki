@@ -1,10 +1,10 @@
 const { createApp } = Vue
-const { createRouter, createWebHistory } = VueRouter
+const { createRouter, createWebHashHistory } = VueRouter
 // createWebHistory
 // createWebHashHistory
 
 // 后端接口 URL 地址
-const url = "http://localhost:8888/"
+const url = "http://192.168.0.10:8888/"
 
 // 组件：主页
 const Home = {
@@ -86,9 +86,9 @@ const Content = {
             })
     },
     template: `<div>
-    <h1 v-text="contentData.title"></h1>
+    <h1 class="h1" v-text="contentData.title"></h1>
     <div class="time" v-text="contentData.time"></div>
-    <div v-html="contentData.text"></div>
+    <div class="content" v-html="contentData.text"></div>
 </div>`
 }
 
@@ -150,36 +150,39 @@ const Resident = {
 // 模板：居民
 const ResidentTemplate = {
     "saikai": `<div>
-    <h1 v-text="resident.name?.cn"></h1>
-    <div v-if="resident.desc" v-html="resident.desc"></div>
-    <div class="photo" v-if="resident.photo">
-        <img :src="url + resident.photo" :alt="resident.name?.en">
-    </div>
-    <ul>
-        <li v-if="resident.first"><b>登场</b>：<span v-text="resident.first"></span></li>
-        <li v-if="resident.address"><b>住所</b>：<span v-text="resident.address"></span></li>
-        <li v-if="resident.sex"><b>性别</b>：<span v-text="resident.sex"></span></li>
-        <li v-if="resident.birth">
-            <b>生日</b>：<span v-text="resident.birth?.month"></span>
-            <span v-text="resident.birth?.day"></span>日
-            <template v-if="resident.birth?.another">（
-                <span v-text="resident.birth?.month"></span>
-                <span v-text="resident.birth?.another"></span>日）
-            </template>
-        </li>
-        <li v-if="resident.family"><b>家庭成员</b>：<span v-text="resident.family"></span></li>
-    </ul><template v-if="resident.like">
-        <h2>喜欢与讨厌的物品</h2>
-        <ul v-for="x,y in resident.like">
-            <li><b v-text="y"></b>：<template v-for="(z, i) in x" :key="i"><span v-text="z"></span>
-                    <span v-if="i < x.length - 1">、</span></template></li>
+    <h1 class="h1" v-text="resident.name?.cn"></h1>
+    <div class="content">
+        <div v-if="resident.desc" v-html="resident.desc"></div>
+        <div class="photo" v-if="resident.photo">
+            <img :src="url + resident.photo" :alt="resident.name?.en">
+        </div>
+        <ul class="content">
+            <li v-if="resident.first"><b>登场</b>：<span v-text="resident.first"></span></li>
+            <li v-if="resident.address"><b>住所</b>：<span v-text="resident.address"></span></li>
+            <li v-if="resident.sex"><b>性别</b>：<span v-text="resident.sex"></span></li>
+            <li v-if="resident.birth">
+                <b>生日</b>：<span v-text="resident.birth?.month"></span>
+                <span v-text="resident.birth?.day"></span>日
+                <template v-if="resident.birth?.another">（
+                    <span v-text="resident.birth?.month"></span>
+                    <span v-text="resident.birth?.another"></span>日）
+                </template>
+            </li>
+            <li v-if="resident.family"><b>家庭成员</b>：<span v-text="resident.family"></span></li>
         </ul>
-    </template>
-    <template v-if="resident.trip">
-        <h2>行程</h2>
-        <div v-html="resident.trip"></div>
-    </template>
-    <div v-if="resident.note" v-html="resident.note"></div>
+        <template v-if="resident.like">
+            <h2>喜欢与讨厌的物品</h2>
+            <ul v-for="x,y in resident.like">
+                <li><b v-text="y"></b>：<template v-for="(z, i) in x" :key="i"><span v-text="z"></span>
+                        <span v-if="i < x.length - 1">、</span></template></li>
+            </ul>
+        </template>
+        <template v-if="resident.trip">
+            <h2>行程</h2>
+            <div v-html="resident.trip"></div>
+        </template>
+        <div v-if="resident.note" v-html="resident.note"></div>
+    </div>
 </div>`
 }
 
@@ -435,7 +438,7 @@ const ToDo_saikai = {
                     this.year += 1
                 }
             }
-            console.log('第' + this.year + '年 ' + this.season[this.month][1] + this.day + '日 星期' + this.week[get_week()])
+            console.log('第' + this.year + '年 ' + this.season[this.month][1] + this.day + '日 星期' + this.week[this.get_week()])
             // 存档
             this.data_to_localStorage(this.version.index)
         }
@@ -473,7 +476,7 @@ const ToDo_saikai = {
         <div class="todo_season_moon" v-text="season[month][1]"></div>
     </div>
     <div class="todo_calendar"><template v-for="i,n in get_calendar()" :key="n">
-            <div class="todo_calendar_days" :class="i[1] != day ? '' : 'todo_calendar_this'">
+            <div class="todo_calendar_days" :class="i[1] != day ? '' : 'todo_calendar_this'" @click="month=i[0];day=i[1];data_to_localStorage(version.index)">
                 <div class="todo_calendar_week" v-text="week[n]"></div>
                 <div class="todo_calendar_day">
                     <div class="todo_calendar_num" v-text="i[1]"></div>
@@ -515,9 +518,9 @@ const ToDo_saikai = {
                 </div>
             </template>
         </template>
-        <div class="todo_card todo_card_today" v-if="birthday_month==month && birthday_day==day">
+        <div class="todo_card todo_card_today" v-if="name!='' && birthday_month==month && birthday_day==day">
             <div class="todo_flex">
-                <div class="todo_title" v-if="name!=''" v-text="name"></div>
+                <div class="todo_title" v-text="name"></div>
                 <div class="bold">今天是你的生日，祝你生日快乐！</div>
                 <div class="todo_note">“对所有的烦恼说 Bye Bye，对所有的快乐说 Hi Hi”</div>
             </div>
@@ -931,7 +934,7 @@ const routes = [
 
 // 创建路由器实例
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHashHistory(),
     routes
 })
 
