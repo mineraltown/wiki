@@ -39,7 +39,7 @@ const Wiki = {
         axios.get(url + "menu/" + this.version.index)
             .then((response) => {
                 this.wiki = response.data.wiki
-                this.cover = url + response.data.cover
+                this.cover = response.data.cover
             })
     },
     inject: ["version", "url"],
@@ -51,13 +51,13 @@ const Wiki = {
             <template v-for="i,n in item.list">
                 <router-link class="item-link" v-if="'list' in i" :to="'/wiki/list/' + idx + '/' + n">
                     <div class="item">
-                        <div class="item-icon"><img :src="url + i.icon"></div>
+                        <div class="item-icon"><img :src="i.icon"></div>
                         <div class="item-text" v-text="n"></div>
                     </div>
                 </router-link>
                 <router-link class="item-link" v-else :to="'/wiki/content/' + i.id">
                     <div class="item">
-                        <div class="item-icon"><img :src="url + i.icon"></div>
+                        <div class="item-icon"><img :src="i.icon"></div>
                         <div class="item-text" v-text="n"></div>
                     </div>
                 </router-link>
@@ -108,9 +108,11 @@ const List = {
     },
     inject: ["version", "url"],
     template: `<div>
-    <div class="list" v-for="item,idx in wiki"><router-link v-if="'id' in item" :to="'/wiki/content/' + item.id">
+    <div class="list" v-for="item,idx in wiki">
+        <router-link v-if="'id' in item" :to="'/wiki/content/' + item.id">
             <div class="list-item" v-text="idx"></div>
-        </router-link><router-link v-else-if="'page' in item" :to="item.page">
+        </router-link>
+        <router-link v-else-if="'page' in item" :to="item.page">
             <div class="list-item" v-text="idx"></div>
         </router-link>
     </div>

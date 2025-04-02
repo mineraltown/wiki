@@ -2,20 +2,28 @@
 
 .content {
     margin-top: 1rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    line-height: 1.6rem;
-    color: #333333;
+    padding: 0 1rem;
+    line-height: 1.7rem;
+    color: #3a4750;
+}
+
+.link {
+    color: #386849 !important;
+}
+
+.link:hover {
+    color: #198d44 !important;
 }
 
 .p {
-    margin: 0.5rem 0;
+    margin: 1rem 0;
 }
 
 .img {
     width: auto;
     height: auto;
     max-width: 100%;
+    border-radius: 0.5rem;
 }
 
 .red {
@@ -25,44 +33,40 @@
 .time {
     margin-left: 1rem;
     font-size: 0.9rem;
-    color: #999999;
+    color: #84969e;
 }
 
 .center {
+    margin: 0.5rem 0;
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-start;
     align-items: center;
 }
 
-.gamepad {
-    width: 1.3rem;
-    height: 1.3rem;
-    margin: 0 0.2rem;
-}
-
 .h1 {
+    color: #3a4750;
     font-size: 2rem;
     line-height: 3rem;
-    margin: 0.5rem 0 0.5rem 1rem;
+    margin: 1rem 0 1rem 1rem;
 }
 
 .h2 {
     font-size: 1.5rem;
     line-height: 2rem;
-    margin: 0.5rem 0;
+    margin: 1rem 0;
 }
 
 .h3 {
     font-size: 1.3rem;
     line-height: 2rem;
-    margin: 0.3rem 0;
+    margin: 1rem 0;
 }
 
 .h4 {
     font-size: 1.1rem;
     line-height: 2rem;
-    margin: 0.3rem 0;
+    margin: 1rem 0;
 }
 
 .ol,
@@ -72,76 +76,127 @@
 
 .li {
     margin: 0.2rem 0;
-    line-height: 1.5rem;
+    line-height: 1.7rem;
 }
 
 .table {
+    border-radius: 0.5rem;
     margin: 0.5rem 0;
     width: 100%;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     overflow: hidden;
     border-collapse: collapse;
     border-spacing: 0;
+    color: #52616b;
 }
 
 .thead {
-    background-color: #999999;
+    background-color: #52616b;
     color: #fff;
 }
 
 .th,
 .td {
-    border: solid 1px #555555;
     height: 1.7rem;
     padding: 5px 10px;
     text-align: center;
 }
 
+.tr {
+    transition: background-color 0.2s;
+}
+
 .th_mini,
 .td_mini {
-    border: solid 1px #555555;
+    font-size: 0.8rem;
     height: 1.5rem;
     line-height: 1.5rem;
     padding: 3px;
     text-align: center;
 }
 
-.tbody .tr:nth-child(odd) {
-    background-color: #eeeeee;
+.tbody .tr:nth-of-type(odd) {
+    background-color: #f8f9fa;
 }
 
-.tbody .tr:nth-child(even) {
-    background-color: #dddddd;
+.tbody .tr:nth-of-type(even) {
+    background-color: #e9ecef;
 }
 
-/* 添加行激活状态！！！！！ */
-.tr:active {
-    background-color: #dee2e6 !important;
-}
+.tbody .tr:active {
+    color: #ffffff !important;
+    background-color: #8d6262 !important;
 
-.key {
-    border: solid 2px #333333;
-    background-color: #dddddd;
-    padding: 0.5rem;
-    margin: 0.5rem 0;
-    border-radius: 10px;
-}
-
-.note {
-    margin: 0.5rem 0;
-    padding: 0.5rem;
-    background-color: #dddddd;
+    .repeat {
+        color: #ffffff;
+    }
 }
 
 .repeat {
-    font-size: 0.9em;
-    color: #888888;
+    font-size: 0.8rem;
+    color: #7e8c8d;
+}
+
+.key {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 0;
+    border-radius: 1rem;
+    border: solid 2px #52616b;
+    background-color: #e9ecef;
+}
+
+.note {
+    font-size: 0.9rem;
+    margin: 0.5rem 0;
+    padding: 0.5rem 1rem;
+    background-color: #e9ecef;
+}
+
+.gamepad {
+    display: inline-block;
+    vertical-align: sub;
+    width: 1.3rem;
+    height: 1.3rem;
+    margin: 0 0.3rem;
 }
 
 .icon {
-    width: 18px;
+    display: inline-block;
+    vertical-align: sub;
+    width: 1.3rem;
+    height: 1.3rem;
+}
+
+.icon_mini {
+    display: inline-block;
+    vertical-align: sub;
+    width: 1rem;
+    height: 1rem;
 }
 
 .left1em {
     margin-left: 0.5rem;
+}
+
+.animal {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+.animal .img {
+    margin: 0 0.5rem;
+    max-width: 7rem;
+    max-height: 7rem;
+}
+
+.mining {
+    margin: 0 1rem;
+}
+
+.mining .img {
+    max-width: 20rem;
+    max-height: 20rem;
 }
