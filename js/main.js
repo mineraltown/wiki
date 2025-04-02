@@ -46,7 +46,7 @@ const Wiki = {
     template: `<div>
     <div class="cover"><img :src="cover" alt="cover"></div>
     <template v-for="item,idx in wiki">
-        <div class="setting_sub" v-text="idx"></div>
+        <div class="menu_sub" v-text="idx"></div>
         <div class="menu">
             <template v-for="i,n in item.list">
                 <router-link class="item-link" v-if="'list' in i" :to="'/wiki/list/' + idx + '/' + n">
@@ -133,7 +133,7 @@ const Resident = {
     },
     inject: ["version", "url"],
     template: `<div><template v-for="item,idx in resident">
-        <div class="setting_sub" v-text="idx"></div>
+        <div class="menu_sub" v-text="idx"></div>
         <div class="menu-resident">
             <template v-for="i,n in item"><router-link :to="'/resident/' + n">
                     <div class="item">
@@ -202,6 +202,16 @@ const ResidentContent = {
     },
     inject: ["version", "url"],
     template: ResidentTemplate[localStorage.getItem('version')]
+}
+
+// 组件：提醒 > 未定义
+const ToDo = {
+    inject: ["version"],
+    data() {
+        return {
+        }
+    },
+    template: `<div class="todo_none">暂时无法使用该功能</div>`
 }
 
 // 组件：提醒 > 重聚矿石镇
@@ -635,7 +645,9 @@ const Setting = {
     data() {
         return {
             season: {
-                "saikai": ["春", "夏", "秋", "冬"]
+                "saikai": [["春", "夏", "秋", "冬"], 30],
+                "grabaza": [["春", "夏", "秋", "冬"], 31],
+                "welcome": [["郁金香", "胡椒", "琥珀", "靛蓝"], 10],
             },
             year: 1,  // 年
             month: 0,  // 月（0-3）
@@ -654,10 +666,12 @@ const Setting = {
             let that = this
             let p = []
             for (let i in that.version.dict) {
-                p.push({
-                    label: that.version.dict[i],
-                    value: i,
-                })
+                if (i in that.season) {
+                    p.push({
+                        label: that.version.dict[i],
+                        value: i,
+                    })
+                }
             }
             weui.picker(p, {
                 // 默认值
@@ -683,15 +697,11 @@ const Setting = {
         // 修改生日
         birthday() {
             let that = this
-            let template = {
-                "saikai": {
-                    // 季节（0-3）
-                    "season": Array.from({ length: 4 }, (_, index) => ({ label: `${this.season[this.version.index][index]}`, value: index })),
-                    // 日期（1-30）/（0-29）+1
-                    "day": Array.from({ length: 30 }, (_, index) => ({ label: `${index + 1}`, value: index + 1 }))
-                }
-            }
-            weui.picker(template[that.version.index].season, template[that.version.index].day, {
+            // 季节
+            let season = Array.from({ length: this.season[this.version.index][0].length }, (_, index) => ({ label: `${this.season[this.version.index][0][index]}`, value: index }))
+            // 每月天数
+            let day = Array.from({ length: this.season[this.version.index][1] }, (_, index) => ({ label: `${index + 1}`, value: index + 1 }))
+            weui.picker(season, day, {
                 defaultValue: [that.birthday_month, that.birthday_day],
                 onConfirm: function (result) {
                     that.birthday_month = result[0].value
@@ -802,7 +812,7 @@ const Setting = {
             if (e.target.value == "") {
                 this.day = 1
             } else if (INT.test(e.target.value)) {
-                if (e.target.value > 30) {
+                if (e.target.value > this.season[this.version.index][1]) {
                     this.day = 1
                 } else if (e.target.value < 1) {
                     this.day = 1
@@ -817,14 +827,14 @@ const Setting = {
         switch_day(i) {
             // button
             if (i == "add") {
-                if (this.day + 1 <= 30) {
+                if (this.day + 1 <= this.season[this.version.index][1]) {
                     this.day += 1
                 } else {
                     this.day = 1
                 }
             } else if (i == "sub") {
                 if (this.day - 1 < 1) {
-                    this.day = 30
+                    this.day = this.season[this.version.index][1]
                 } else {
                     this.day -= 1
                 }
@@ -850,10 +860,10 @@ const Setting = {
             <input type="text" :value="name" @input="change_name">
             <div class="setting_button" @click="set_name=false">确认</div>
         </div>
-        <list-item title="生日" :sub="season[version.index][birthday_month]  + '&nbsp;' + birthday_day + '&nbsp;日'"
+        <list-item title="生日" :sub="season[version.index][0][birthday_month]  + '&nbsp;' + birthday_day + '&nbsp;日'"
             @click="birthday()" />
         <list-item title="游戏时间" :arrow="!set_days" @click="set_days=true"
-            :sub="!set_days?'第&nbsp;' + year  + '&nbsp;年&nbsp;' + season[version.index][month] + '&nbsp;' + day + '&nbsp;日':''" />
+            :sub="!set_days?'第&nbsp;' + year  + '&nbsp;年&nbsp;' + season[version.index][0][month] + '&nbsp;' + day + '&nbsp;日':''" />
         <div v-show="set_days" class="setting_days">
             <div class="setting_block">
                 <span class="setting_block_sub">年</span>
@@ -878,7 +888,7 @@ const Setting = {
             <div class="setting_block">
                 <span class="setting_block_sub">月</span>
                 <div class="setting_season">
-                    <div v-for="i,s in season[version.index]"
+                    <div v-for="i,s in season[version.index][0]"
                         :class="[s==month ? 'season_'+s : 'none_'+s, 'season_month']" @click="switch_month(s)"
                         v-text="i">
                     </div>
@@ -929,6 +939,7 @@ const routes = [
     { path: '/resident', component: Resident },
     { path: '/resident/:name', component: ResidentContent, props: true },
     { path: '/todo/saikai', component: ToDo_saikai, props: true },
+    { path: '/todo/:ver', component: ToDo },
     { path: '/setting', component: Setting },
 ]
 

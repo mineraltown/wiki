@@ -5,17 +5,21 @@
     padding-left: 1rem;
     padding-right: 1rem;
     line-height: 1.6rem;
-}
-
-.h1 {
-    font-size: 1.5rem;
-    line-height: 2em;
     color: #333333;
-    margin-left: 1rem;
 }
 
-h2 {
-    margin-top: 1rem;
+.p {
+    margin: 0.5rem 0;
+}
+
+.img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+}
+
+.red {
+    color: #c1272d;
 }
 
 .time {
@@ -24,17 +28,55 @@ h2 {
     color: #999999;
 }
 
-ol,
-ul {
-    margin-left: 2rem;
+.center {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: center;
 }
 
-p {
+.gamepad {
+    width: 1.3rem;
+    height: 1.3rem;
+    margin: 0 0.2rem;
+}
+
+.h1 {
+    font-size: 2rem;
+    line-height: 3rem;
+    margin: 0.5rem 0 0.5rem 1rem;
+}
+
+.h2 {
+    font-size: 1.5rem;
+    line-height: 2rem;
     margin: 0.5rem 0;
 }
 
-table {
-    margin-top: 1rem;
+.h3 {
+    font-size: 1.3rem;
+    line-height: 2rem;
+    margin: 0.3rem 0;
+}
+
+.h4 {
+    font-size: 1.1rem;
+    line-height: 2rem;
+    margin: 0.3rem 0;
+}
+
+.ol,
+.ul {
+    margin: 0.5rem 0 0.5rem 1rem;
+}
+
+.li {
+    margin: 0.2rem 0;
+    line-height: 1.5rem;
+}
+
+.table {
+    margin: 0.5rem 0;
     width: 100%;
     font-size: 0.8rem;
     overflow: hidden;
@@ -42,24 +84,64 @@ table {
     border-spacing: 0;
 }
 
-thead {
-    background-color: #999;
+.thead {
+    background-color: #999999;
     color: #fff;
 }
 
-th,
-td {
-
-    height: 1.7em;
-    line-height: 1.7em;
+.th,
+.td {
+    border: solid 1px #555555;
+    height: 1.7rem;
     padding: 5px 10px;
     text-align: center;
 }
 
-tbody tr:nth-child(odd) {
+.th_mini,
+.td_mini {
+    border: solid 1px #555555;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    padding: 3px;
+    text-align: center;
+}
+
+.tbody .tr:nth-child(odd) {
     background-color: #eeeeee;
 }
 
-tbody tr:nth-child(even) {
+.tbody .tr:nth-child(even) {
     background-color: #dddddd;
+}
+
+/* 添加行激活状态！！！！！ */
+.tr:active {
+    background-color: #dee2e6 !important;
+}
+
+.key {
+    border: solid 2px #333333;
+    background-color: #dddddd;
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+    border-radius: 10px;
+}
+
+.note {
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    background-color: #dddddd;
+}
+
+.repeat {
+    font-size: 0.9em;
+    color: #888888;
+}
+
+.icon {
+    width: 18px;
+}
+
+.left1em {
+    margin-left: 0.5rem;
 }

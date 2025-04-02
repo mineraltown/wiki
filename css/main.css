@@ -175,7 +175,7 @@ img {
     width: 100%;
     min-height: 0;
     padding-top: 3rem;
-    padding-bottom: 5rem;
+    padding-bottom: 4.5rem;
     flex-grow: 1;
     overflow-y: auto;
 }
@@ -253,8 +253,8 @@ img {
 .season_month {
     border-radius: 5px;
     text-align: center;
-    width: 2rem;
     margin: 0 0.3rem;
+    padding: 0 0.5rem;
     height: 2rem;
     line-height: 2rem;
     border-radius: 5px;
@@ -422,7 +422,6 @@ img {
 
 .copyright {
     width: 100%;
-    padding-bottom: 0.5rem;
     flex-grow: 1;
     display: flex;
     flex-flow: column wrap;
@@ -434,6 +433,7 @@ img {
 }
 
 .cover {
+    height: 12rem;
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
@@ -443,12 +443,25 @@ img {
     border-radius: 0.5rem;
 }
 
+.cover img {
+    max-width: none;
+    max-height: 100%;
+}
+
 .menu {
     padding: 1rem 0;
     display: grid;
     grid-template-columns: repeat(auto-fill, 4rem);
     place-content: start center;
     gap: 10px;
+}
+
+.menu_sub {
+    border-bottom: solid 1px #eeeeee;
+    margin: 0.5rem 1rem 0 1rem;
+    padding: 0 0 0.2rem 0;
+    font-size: 0.8rem;
+    color: #acacac;
 }
 
 .item {
