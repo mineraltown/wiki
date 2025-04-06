@@ -154,33 +154,43 @@ const ResidentTemplate = {
     "saikai": `<div>
     <h1 class="h1" v-text="resident.name?.cn"></h1>
     <div class="content">
-        <div v-if="resident.desc" v-html="resident.desc"></div>
-        <div class="photo" v-if="resident.photo">
-            <img :src="url + resident.photo" :alt="resident.name?.en">
+        <div class="resident">
+            <div class="resident_left" v-if="resident.photo">
+                <img class="img" :src="url + resident.photo" :alt="resident.name?.en">
+            </div>
+            <div class="resident_right">
+                <div class="note" v-if="resident.desc" v-html="resident.desc"></div>
+                <ul class="ul">
+                    <li v-if="resident.first"><b>登场</b>：<span v-text="resident.first"></span></li>
+                    <li v-if="resident.address"><b>住所</b>：<span v-text="resident.address"></span></li>
+                    <li v-if="resident.sex && resident.sex!='未知'"><b>性别</b>：<span v-text="resident.sex"></span></li>
+                    <li v-if="resident.birth && resident.birth.month!='无'">
+                        <b>生日</b>：<span v-text="resident.birth?.month"></span>
+                        <span v-text="resident.birth?.day"></span>日
+                        <template v-if="resident.birth?.another">（
+                            <span v-text="resident.birth?.month"></span>
+                            <span v-text="resident.birth?.another"></span>日）
+                        </template>
+                    </li>
+                    <li v-if="resident.family"><b>家庭成员</b>：<span v-text="resident.family"></span></li>
+                </ul>
+            </div>
         </div>
-        <ul class="content">
-            <li v-if="resident.first"><b>登场</b>：<span v-text="resident.first"></span></li>
-            <li v-if="resident.address"><b>住所</b>：<span v-text="resident.address"></span></li>
-            <li v-if="resident.sex"><b>性别</b>：<span v-text="resident.sex"></span></li>
-            <li v-if="resident.birth">
-                <b>生日</b>：<span v-text="resident.birth?.month"></span>
-                <span v-text="resident.birth?.day"></span>日
-                <template v-if="resident.birth?.another">（
-                    <span v-text="resident.birth?.month"></span>
-                    <span v-text="resident.birth?.another"></span>日）
-                </template>
-            </li>
-            <li v-if="resident.family"><b>家庭成员</b>：<span v-text="resident.family"></span></li>
-        </ul>
         <template v-if="resident.like">
-            <h2>喜欢与讨厌的物品</h2>
-            <ul v-for="x,y in resident.like">
-                <li><b v-text="y"></b>：<template v-for="(z, i) in x" :key="i"><span v-text="z"></span>
-                        <span v-if="i < x.length - 1">、</span></template></li>
+            <h2 class="h2">喜欢与讨厌的物品</h2>
+            <ul class="ul">
+                <template v-for="x in ['最喜欢','很喜欢','喜欢','普通','讨厌','很讨厌']">
+                    <li v-if="x in resident.like"><b v-text="x"></b>：
+                        <template v-for="(z, i) in resident.like[x]" :key="i">
+                            <span v-text="z"></span>
+                            <span v-if="i < resident.like[x].length - 1">、</span>
+                        </template>
+                    </li>
+                </template>
             </ul>
         </template>
         <template v-if="resident.trip">
-            <h2>行程</h2>
+            <h2 class="h2">行程</h2>
             <div v-html="resident.trip"></div>
         </template>
         <div v-if="resident.note" v-html="resident.note"></div>

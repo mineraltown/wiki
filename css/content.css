@@ -118,7 +118,7 @@
     font-size: 0.8rem;
     height: 1.5rem;
     line-height: 1.5rem;
-    padding: 3px;
+    padding: 2px;
     text-align: center;
 }
 
@@ -268,4 +268,19 @@
     line-height: 0;
     border: solid 1px #52616b;
     background-color: #e9ecef;
+}
+
+.resident {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.resident_left {
+    max-width: 30vw;
+}
+
+.resident_right {
+    margin-left: 1rem;
 }
