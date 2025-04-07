@@ -5,6 +5,7 @@ const { createRouter, createWebHashHistory } = VueRouter
 
 // 后端接口 URL 地址
 const url = "http://192.168.0.10:8888/"
+const suffix = ""
 
 // 组件：主页
 const Home = {
@@ -36,7 +37,7 @@ const Wiki = {
     },
     mounted() {
         // 获取游戏版本【攻略内容】列表
-        axios.get(url + "menu/" + this.version.index)
+        axios.get(url + "menu/" + this.version.index + suffix)
             .then((response) => {
                 this.wiki = response.data.wiki
                 this.cover = response.data.cover
@@ -44,7 +45,7 @@ const Wiki = {
     },
     inject: ["version", "url"],
     template: `<div>
-    <div class="cover"><img :src="cover" alt="cover"></div>
+    <div class="cover" v-show="cover"><img :src="cover" alt="cover"></div>
     <template v-for="item,idx in wiki">
         <div class="menu_sub" v-text="idx"></div>
         <div class="menu">
@@ -80,7 +81,7 @@ const Content = {
     },
     mounted() {
         // 通过 id 索引至文章列表
-        axios.get(url + 'html/' + this.$route.params.id)
+        axios.get(url + 'html/' + this.$route.params.id + suffix)
             .then((response) => {
                 this.contentData = response.data
             })
@@ -101,7 +102,7 @@ const List = {
     },
     mounted() {
         // 获取游戏版本【攻略内容】列表
-        axios.get(url + "menu/" + this.version.index)
+        axios.get(url + "menu/" + this.version.index + suffix)
             .then((response) => {
                 this.wiki = response.data.wiki[this.$route.params.idx]["list"][this.$route.params.item]["list"]
             })
@@ -128,7 +129,7 @@ const Resident = {
     },
     mounted() {
         // 获取游戏版本【居民】列表
-        axios.get(url + this.version.index + '/resident')
+        axios.get(url + this.version.index + '/resident' + suffix)
             .then((response) => {
                 this.resident = response.data
             })
@@ -207,7 +208,7 @@ const ResidentContent = {
     },
     mounted() {
         // 获取游戏版本【居民】内容
-        axios.get(url + this.version.index + '/resident/' + this.$route.params.name)
+        axios.get(url + this.version.index + '/resident/' + this.$route.params.name + suffix)
             .then((response) => {
                 this.resident = response.data
             })
@@ -1008,7 +1009,7 @@ const app = createApp({
     // 在组件被挂载之后调用。
     mounted() {
         // 获取【游戏版本】列表
-        axios.get(url + 'menu/')
+        axios.get(url + 'menu/' + suffix)
             .then((response) => {
                 this.version.dict = response.data
             })
