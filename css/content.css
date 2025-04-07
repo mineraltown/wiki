@@ -87,7 +87,6 @@
 }
 
 .table {
-    border-radius: 0.5rem;
     margin: 0.5rem 0;
     width: 100%;
     font-size: 0.9rem;
@@ -104,6 +103,7 @@
 
 .th,
 .td {
+    border: solid 1px #c3d6e3;
     height: 1.7rem;
     padding: 5px 10px;
     text-align: center;
@@ -115,6 +115,7 @@
 
 .th_mini,
 .td_mini {
+    border: solid 1px #c3d6e3;
     font-size: 0.8rem;
     height: 1.5rem;
     line-height: 1.5rem;

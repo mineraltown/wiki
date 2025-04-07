@@ -7,6 +7,20 @@ const { createRouter, createWebHashHistory } = VueRouter
 const url = "http://192.168.0.10:8888/"
 const suffix = ""
 
+// 定义替换映射表（字典）
+const replacementMap = {
+    "小黄瓜": "黄瓜",
+    "高丽菜": "卷心菜",
+    "土豆": "马铃薯",
+    "菠萝": "凤梨",
+    "西红柿": "番茄",
+    "地瓜": "番薯",
+    "红薯": "番薯",
+    "起司": "芝士",
+    "美乃滋": "蛋黄酱",
+    "奥利哈钢": "山铜",
+}
+
 // 组件：主页
 const Home = {
     template: `<div class="default">
@@ -56,6 +70,10 @@ const Wiki = {
                         <div class="item-text" v-text="n"></div>
                     </div>
                 </router-link>
+                <router-link class="item-link" v-else-if="'page' in i" :to="i.page">
+                    <div class="item-icon"><img :src="i.icon"></div>
+                    <div class="item-text" v-text="n"></div>
+                </router-link>
                 <router-link class="item-link" v-else :to="'/wiki/content/' + i.id">
                     <div class="item">
                         <div class="item-icon"><img :src="i.icon"></div>
@@ -65,6 +83,33 @@ const Wiki = {
             </template>
         </div>
     </template>
+</div>`
+}
+
+// 组件：攻略 > 内容列表
+const List = {
+    data() {
+        return {
+            "wiki": {}
+        }
+    },
+    mounted() {
+        // 获取游戏版本【攻略内容】列表
+        axios.get(url + "menu/" + this.version.index + suffix)
+            .then((response) => {
+                this.wiki = response.data.wiki[this.$route.params.idx]["list"][this.$route.params.item]["list"]
+            })
+    },
+    inject: ["version", "url"],
+    template: `<div>
+    <div class="list" v-for="item,idx in wiki">
+        <router-link v-if="'id' in item" :to="'/wiki/content/' + item.id">
+            <div class="list-item" v-text="idx"></div>
+        </router-link>
+        <router-link v-else-if="'page' in item" :to="item.page">
+            <div class="list-item" v-text="idx"></div>
+        </router-link>
+    </div>
 </div>`
 }
 
@@ -93,29 +138,99 @@ const Content = {
 </div>`
 }
 
-// 组件：攻略 > 内容列表
-const List = {
+// 组件：攻略 > 特殊页面（料理菜谱：重聚）
+const Cookbook_Saikai = {
     data() {
         return {
-            "wiki": {}
+            cookbook_raw: [],  // 菜谱:完整
+            cookbook: [],  // 菜谱:显示
+            search: "", // 检索
         }
     },
+    methods: {
+        search_cookbook() {
+            // 使用字典完成名词替换
+            this.search = replacementMap[this.search] || this.search
+            // 清空菜谱
+            this.cookbook = []
+            // 循环完整菜谱，向显示菜谱增加匹配到的结果
+            for (let i of this.cookbook_raw) {
+                if (i.name.includes(this.search)) {
+                    this.cookbook.push(i)
+                } else if (i.ingredients.some(item => item.includes(this.search))) {
+                    this.cookbook.push(i)
+                }
+            }
+        },
+    },
     mounted() {
-        // 获取游戏版本【攻略内容】列表
-        axios.get(url + "menu/" + this.version.index + suffix)
+        // 获取游戏版本【菜谱】列表
+        axios.get(url + "/" + this.version.index + "/cookbook/" + suffix)
             .then((response) => {
-                this.wiki = response.data.wiki[this.$route.params.idx]["list"][this.$route.params.item]["list"]
+                this.cookbook_raw = response.data
+                this.cookbook = response.data
             })
     },
     inject: ["version", "url"],
     template: `<div>
-    <div class="list" v-for="item,idx in wiki">
-        <router-link v-if="'id' in item" :to="'/wiki/content/' + item.id">
-            <div class="list-item" v-text="idx"></div>
-        </router-link>
-        <router-link v-else-if="'page' in item" :to="item.page">
-            <div class="list-item" v-text="idx"></div>
-        </router-link>
+    <h1 class="h1">料理菜谱</h1>
+    <div class="content">
+        <div class="search">
+            <input class="search_input" placeholder="输入料理或材料名称进行查询" type="text" v-model="search" @keyup.enter="search_cookbook">
+            <button class="search_button" @click="search_cookbook">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"></path></svg>
+            </button>
+        </div>
+        <table class="table">
+            <thead class="thead">
+                <tr class="tr">
+                    <th class="th_mini" style="min-width: 4rem;">名称</th>
+                    <th class="th_mini" style="min-width: 4rem;">出售价格</th>
+                    <th class="th_mini">回复体力</th>
+                    <th class="th_mini">回复疲劳</th>
+                </tr>
+            </thead>
+            <tbody class="tbody">
+                <template v-for="(item,index) in cookbook">
+                    <tr class="tr">
+                        <td class="td_mini" rowspan="4" v-text="item.name"></td>
+                        <td class="td_mini" v-text="item.price"></td>
+                        <td class="td_mini" v-text="item.physical"></td>
+                        <td class="td_mini" v-text="item.fatigue"></td>
+                    </tr>
+                    <tr class="tr">
+                        <td class="td_mini">材料</td>
+                        <td class="td_mini" colspan="2" style="text-align: left; padding-left: 0.5rem;">
+                            <template v-for="(i,n) in item.ingredients">
+                                <template v-if="n != item.ingredients.length-1">
+                                    <span v-text="i+' + '"></span>
+                                </template>
+                                <template v-else>
+                                    <span v-text="i"></span>
+                                </template>
+                            </template>
+                        </td>
+                    </tr>
+                    <tr class="tr">
+                        <td class="td_mini">厨具</td>
+                        <td class="td_mini" colspan="2" style="text-align: left; padding-left: 0.5rem;">
+                            <template v-for="(i,n) in item.kitchenware">
+                                <template v-if="n != item.kitchenware.length-1">
+                                    <span v-text="i+' + '"></span>
+                                </template>
+                                <template v-else>
+                                    <span v-text="i"></span>
+                                </template>
+                            </template>
+                        </td>
+                    </tr>
+                    <tr class="tr">
+                        <td class="td_mini">获得方法</td>
+                        <td class="td_mini" v-text="item.how_to_get" colspan="2" style="text-align: left; padding-left: 0.5rem;"></td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
     </div>
 </div>`
 }
@@ -954,6 +1069,7 @@ const routes = [
     { path: '/todo/saikai', component: ToDo_saikai, props: true },
     { path: '/todo/:ver', component: ToDo },
     { path: '/setting', component: Setting },
+    { path: '/cookbook/saikai', component: Cookbook_Saikai },
 ]
 
 // 创建路由器实例
