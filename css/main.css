@@ -263,13 +263,12 @@ img {
 }
 
 .season_0 {
-    color: #00ad94;
-    border: solid 1px #00ad94;
-    background-color: #9ad1cb;
+    color: #ffffff;
+    background-color: #00ad94;
 }
 
 .none_0 {
-    color: #ffffff;
+    color: #00ad94;
     background-color: #aad7d2aa;
 }
 
@@ -278,13 +277,12 @@ img {
 }
 
 .season_1 {
-    color: #45933a;
-    border: solid 1px #45933a;
-    background-color: #88c283;
+    color: #ffffff;
+    background-color: #45933a;
 }
 
 .none_1 {
-    color: #ffffff;
+    color: #45933a;
     background-color: #88c283aa;
 }
 
@@ -293,13 +291,12 @@ img {
 }
 
 .season_2 {
-    color: #e28100;
-    border: solid 1px #e28100;
-    background-color: #efbb66;
+    color: #ffffff;
+    background-color: #e28100;
 }
 
 .none_2 {
-    color: #ffffff;
+    color: #e28100;
     background-color: #efbb66aa;
 }
 
@@ -308,13 +305,12 @@ img {
 }
 
 .season_3 {
-    color: #308ece;
-    border: solid 1px #308ece;
-    background-color: #a7cae6;
+    color: #ffffff;
+    background-color: #308ece;
 }
 
 .none_3 {
-    color: #ffffff;
+    color: #308ece;
     background-color: #a7cae6aa;
 }
 
@@ -366,29 +362,55 @@ img {
     flex-grow: 1;
 }
 
-.setting_button {
+.button {
     margin: 0.8rem 1rem 0.8rem 0;
     width: 5rem;
     height: 1.5rem;
     line-height: 1.5rem;
-    padding: 5px 0 5px 0;
+    padding: 5px 10px;
     text-align: center;
-    color: #ffffff;
-    background-color: #198d44cc;
     border-radius: 5px;
     transition: all 0.25s ease-out;
 }
 
-.setting_button:hover {
+.btn_select {
+    color: #ffffff;
+    background-color: #198d44cc;
+}
+
+.btn_select:hover {
     background-color: #198d4499;
 }
 
-.setting_button:active {
+.btn_select:active {
     background-color: #198d44;
+}
+
+.btn_select_none {
+    color: #3a4750;
+    background-color: #e9ecef;
+}
+
+.btn_select_none:hover {
+    color: #3a4750;
+    background-color: #becddd;
+}
+
+.btn_select_none:active {
+    color: #ffffff;
+    background-color: #198d4499;
 }
 
 .list {
     width: 100%;
+}
+
+.list-title {
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+    padding: 0 0 0.2rem 1rem;
+    color: #acacac;
+    border-bottom: solid 1px #eeeeee;
 }
 
 .list-item {
@@ -451,7 +473,7 @@ img {
 .menu {
     padding: 1rem 0;
     display: grid;
-    grid-template-columns: repeat(auto-fill, 4rem);
+    grid-template-columns: repeat(auto-fill, 3.8rem);
     place-content: start center;
     gap: 10px;
 }
@@ -555,4 +577,27 @@ img {
 .search_button:hover {
     color: #ffffff;
     background-color: #a9bcc9;
+}
+
+.filter_sub {
+    margin-top: 1rem;
+    padding-left: 0.5rem;
+    color: #acacac;
+}
+
+.filter_item {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.filter_btn {
+    margin: 0.2rem;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    padding: 0.3rem 0.8rem;
+    text-align: center;
+    border-radius: 5px;
+    transition: all 0.25s ease-out;
 }

@@ -210,7 +210,7 @@
 }
 
 .flex_prop {
-    max-width: 55rem;
+    max-width: 70rem;
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
@@ -218,7 +218,8 @@
 }
 
 .prop {
-    width: 15rem;
+    width: 100%;
+    max-width: 20rem;
     height: 25rem;
     padding: 0 1rem;
     margin: 0.5rem;

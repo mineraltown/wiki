@@ -71,8 +71,10 @@ const Wiki = {
                     </div>
                 </router-link>
                 <router-link class="item-link" v-else-if="'page' in i" :to="i.page">
-                    <div class="item-icon"><img :src="i.icon"></div>
-                    <div class="item-text" v-text="n"></div>
+                    <div class="item">
+                        <div class="item-icon"><img :src="i.icon"></div>
+                        <div class="item-text" v-text="n"></div>
+                    </div>
                 </router-link>
                 <router-link class="item-link" v-else :to="'/wiki/content/' + i.id">
                     <div class="item">
@@ -102,6 +104,7 @@ const List = {
     },
     inject: ["version", "url"],
     template: `<div>
+    <div class="list-title" v-text="$route.params.item"></div>
     <div class="list" v-for="item,idx in wiki">
         <router-link v-if="'id' in item" :to="'/wiki/content/' + item.id">
             <div class="list-item" v-text="idx"></div>
@@ -138,12 +141,187 @@ const Content = {
 </div>`
 }
 
+// 组件：攻略 > 特殊页面（鱼图鉴：重聚）
+const Fish_Saikai = {
+    data() {
+        return {
+            raw: [],  // 鱼图鉴:完整
+            list: [],  // 鱼图鉴:显示
+            season: {
+                spring: true,
+                summer: true,
+                autumn: true,
+                winter: true
+            },
+            ground: {
+                "海边": true,
+                "湖边": true,
+                "泉水": true,
+                "上游": true,
+                "下游": true,
+                "池塘": true,
+                "温泉": true,
+                "地底湖": true,
+            },
+        }
+    },
+    methods: {
+        // 按选中项过滤
+        filter() {
+            this.list = []
+            // 循环完整列表
+            for (let x of this.raw) {
+                // 循环匹配选中季节
+                for (let z in this.season) {
+                    if (this.season[z] && x.season[z] != 0) {
+                        // 循环匹配选中地点
+                        for (let y in this.ground) {
+                            if (this.ground[y] && x.location.includes(y)) {
+                                this.list.push(x)
+                                break
+                            } else if (x.trash) {
+                                // 垃圾全年存在
+                                this.list.push(x)
+                                break
+                            }
+                        }
+                        break
+                    }
+                }
+            }
+        },
+        // 修改季节
+        change_season(n) {
+            this.season[n] = !this.season[n]
+            this.filter()
+        },
+        // 修改地点
+        change_ground(n) {
+            this.ground[n] = !this.ground[n]
+            this.filter()
+        },
+        // 全选 & 反选
+        reverse(e, all = false) {
+            if (e == "season") {
+                // 季节
+                for (let n in this.season) {
+                    if (all) {
+                        this.season[n] = true
+                    } else {
+                        this.season[n] = !this.season[n]
+                    }
+                }
+            } else if (e == "ground") {
+                // 地点
+                for (let n in this.ground) {
+                    if (all) {
+                        this.ground[n] = true
+                    } else {
+                        this.ground[n] = !this.ground[n]
+                    }
+                }
+            }
+            this.filter()
+        },
+    },
+    mounted() {
+        // 获取游戏版本【鱼图鉴】列表
+        axios.get(url + "/" + this.version.index + "/fish" + suffix)
+            .then((response) => {
+                this.raw = response.data
+                this.list = response.data
+            })
+    },
+    inject: ["version", "url"],
+    template: `<div>
+    <h1 class="h1">鱼图鉴</h1>
+    <div class="content">
+        <div class="filter_sub">季节</div>
+        <div class="filter_item">
+            <div :class="['filter_btn', season.spring?'season_0':'none_0']" @click="change_season('spring')">春</div>
+            <div :class="['filter_btn', season.summer?'season_1':'none_1']" @click="change_season('summer')">夏</div>
+            <div :class="['filter_btn', season.autumn?'season_2':'none_2']" @click="change_season('autumn')">秋</div>
+            <div :class="['filter_btn', season.winter?'season_3':'none_3']" @click="change_season('winter')">冬</div>
+            <div class="filter_btn btn_select_none" @click="reverse('season',true)">全选</div>
+            <div class="filter_btn btn_select_none" @click="reverse('season')">反选</div>
+        </div>
+        <div class="filter_sub">地点</div>
+        <div class="filter_item">
+            <template v-for="i,n in ground">
+                <div :class="['filter_btn',i?'btn_select':'btn_select_none']" @click="change_ground(n)" v-text="n"></div>
+            </template>
+            <div class="filter_btn btn_select_none" @click="reverse('ground',true)">全选</div>
+            <div class="filter_btn btn_select_none" @click="reverse('ground')">反选</div>
+        </div>
+    </div>
+    <div class="content">
+        <table class="table">
+            <thead class="thead">
+                <tr class="tr">
+                    <th class="th_mini" style="min-width: 6rem" rowspan="3">名称</th>
+                    <th class="th_mini" rowspan="2">蓄力</th>
+                    <th class="th_mini" colspan="4">季节</th>
+                    <th class="th_mini" colspan="2">体长</th>
+                </tr>
+                <tr class="tr">
+                    <th class="th_mini">春</th>
+                    <th class="th_mini">夏</th>
+                    <th class="th_mini">秋</th>
+                    <th class="th_mini">冬</th>
+                    <th class="th_mini">最小</th>
+                    <th class="th_mini">最大</th>
+                </tr>
+                <tr class="tr">
+                    <th class="th_mini" colspan="3">地点</th>
+                    <th class="th_mini" colspan="4">其他</th>
+                </tr>
+            </thead>
+            <tbody class="tbody">
+                <template v-for="(item,index) in list">
+                    <tr class="tr">
+                        <td class="td" rowspan="2" v-if="item.king">
+                            <b v-text="item.name + '*'"></b>
+                        </td>
+                        <td class="td" rowspan="2" v-else>
+                            <b v-text="item.name"></b>
+                        </td>
+                        <td class="td" v-text="item.level"></td>
+                        <template v-for="i in item.season">
+                            <td class="td" v-if="i == 2"><img class="icon" src="/static/icon/circle.svg" alt="○"></td>
+                            <td class="td" v-else-if="i == 1"><img class="icon" src="/static/icon/triangle.svg" alt="△"></td>
+                            <td class="td" v-else><img class="icon" src="/static/icon/close.svg" alt="×"></td>
+                        </template>
+                        <td class="td" v-text="item.size.min"></td>
+                        <td class="td" v-text="item.size.max"></td>
+                    </tr>
+                    <tr class="tr">
+                        <td class="td_mini" :colspan="item.note?'3':'7'">
+                            <template v-for="(z, i) in item.location" :key="i">
+                                <span v-text="z"></span>
+                                <span v-if="i < item.location.length - 1">、</span>
+                            </template>
+                        </td>
+                        <td class="td_mini" v-if="item.note" colspan="4" style="max-width: 10rem;" v-text="item.note"></td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+        <div class="note">
+            <p class="p">带有「 * 」标记的是鱼王！</p>
+            <div><img class="icon" src="/static/icon/circle.svg" alt="○">：高概率钓到</div>
+            <div><img class="icon" src="/static/icon/triangle.svg" alt="△">：低概率钓到</div>
+            <div><img class="icon" src="/static/icon/close.svg" alt="×">：无法钓到</div>
+        </div>
+    </div>
+</div>`
+}
+
 // 组件：攻略 > 特殊页面（料理菜谱：重聚）
 const Cookbook_Saikai = {
     data() {
         return {
-            cookbook_raw: [],  // 菜谱:完整
-            cookbook: [],  // 菜谱:显示
+            raw: [],  // 菜谱:完整
+            list: [],  // 菜谱:显示
             search: "", // 检索
         }
     },
@@ -152,23 +330,23 @@ const Cookbook_Saikai = {
             // 使用字典完成名词替换
             this.search = replacementMap[this.search] || this.search
             // 清空菜谱
-            this.cookbook = []
+            this.list = []
             // 循环完整菜谱，向显示菜谱增加匹配到的结果
-            for (let i of this.cookbook_raw) {
+            for (let i of this.raw) {
                 if (i.name.includes(this.search)) {
-                    this.cookbook.push(i)
+                    this.list.push(i)
                 } else if (i.ingredients.some(item => item.includes(this.search))) {
-                    this.cookbook.push(i)
+                    this.list.push(i)
                 }
             }
         },
     },
     mounted() {
         // 获取游戏版本【菜谱】列表
-        axios.get(url + "/" + this.version.index + "/cookbook/" + suffix)
+        axios.get(url + "/" + this.version.index + "/cookbook" + suffix)
             .then((response) => {
-                this.cookbook_raw = response.data
-                this.cookbook = response.data
+                this.raw = response.data
+                this.list = response.data
             })
     },
     inject: ["version", "url"],
@@ -191,7 +369,7 @@ const Cookbook_Saikai = {
                 </tr>
             </thead>
             <tbody class="tbody">
-                <template v-for="(item,index) in cookbook">
+                <template v-for="(item,index) in list">
                     <tr class="tr">
                         <td class="td_mini" rowspan="4" v-text="item.name"></td>
                         <td class="td_mini" v-text="item.price"></td>
@@ -244,7 +422,7 @@ const Resident = {
     },
     mounted() {
         // 获取游戏版本【居民】列表
-        axios.get(url + this.version.index + '/resident' + suffix)
+        axios.get(url + this.version.index + "/resident" + suffix)
             .then((response) => {
                 this.resident = response.data
             })
@@ -990,7 +1168,7 @@ const Setting = {
         <list-item title="昵称" :arrow="!set_name" :sub="!set_name?name:''" @click="set_name=true" />
         <div v-show="set_name" class="setting_name">
             <input type="text" :value="name" @keyup.enter="set_name=false" @input="change_name">
-            <div class="setting_button" @click="set_name=false">确认</div>
+            <div class="button btn_select" @click="set_name=false">确认</div>
         </div>
         <list-item title="生日" :sub="season[version.index][0][birthday_month]  + '&nbsp;' + birthday_day + '&nbsp;日'"
             @click="birthday()" />
@@ -1049,7 +1227,7 @@ const Setting = {
             <div class="setting_block">
                 <span class="flex_grow">
                 </span>
-                <div class="setting_button" @click="set_days=false">确认</div>
+                <div class="button btn_select" @click="set_days=false">确认</div>
             </div>
         </div>
         <list-item title="提前提醒天数" :sub="advance_day==0 ? '不提醒' : advance_day + ' 天'" @click="advance()" />
@@ -1075,6 +1253,7 @@ const routes = [
     { path: '/todo/:ver', component: ToDo },
     { path: '/setting', component: Setting },
     { path: '/cookbook/saikai', component: Cookbook_Saikai },
+    { path: '/fish/saikai', component: Fish_Saikai },
 ]
 
 // 创建路由器实例
@@ -1130,7 +1309,7 @@ const app = createApp({
     // 在组件被挂载之后调用。
     mounted() {
         // 获取【游戏版本】列表
-        axios.get(url + 'menu/' + suffix)
+        axios.get(url + 'menu' + suffix)
             .then((response) => {
                 this.version.dict = response.data
             })
