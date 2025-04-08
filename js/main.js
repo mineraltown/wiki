@@ -985,7 +985,7 @@ const Setting = {
         <div class="setting_sub">提醒</div>
         <list-item title="昵称" :arrow="!set_name" :sub="!set_name?name:''" @click="set_name=true" />
         <div v-show="set_name" class="setting_name">
-            <input type="text" :value="name" @input="change_name">
+            <input type="text" :value="name" @keyup.enter="set_name=false" @input="change_name">
             <div class="setting_button" @click="set_name=false">确认</div>
         </div>
         <list-item title="生日" :sub="season[version.index][0][birthday_month]  + '&nbsp;' + birthday_day + '&nbsp;日'"
@@ -1032,7 +1032,7 @@ const Setting = {
                         </svg>
                     </div>
                     <div class="setting_text">
-                        <input type="text" :value="day" @input.native="change_day($event)">
+                        <input type="text" :value="day" @keyup.enter="set_days=false" @input.native="change_day($event)">
                     </div>
                     <div class="setting_arrow" @click="switch_day('add')">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
