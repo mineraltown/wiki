@@ -407,7 +407,10 @@ const ToDo_saikai = {
                 // 日历事件
                 for (let y of this.festival) {
                     if (this.season[x[0]][1] == y.month && x[1] == y.day) {
-                        z.push(y.name.cn)
+                        // 第一年春1日的年糕大会不举行
+                        if (!(this.year == 1 && this.month == 0 && x[1] == 1)) {
+                            z.push(y.name.cn)
+                        }
                     }
                 }
                 // 居民生日
@@ -613,7 +616,8 @@ const ToDo_saikai = {
         <div>第&nbsp;<span v-text="year"></span>&nbsp;年</div>
         <div class="todo_season_moon" v-text="season[month][1]"></div>
     </div>
-    <div class="todo_calendar"><template v-for="i,n in get_calendar()" :key="n">
+    <div class="todo_calendar">
+        <template v-for="i,n in get_calendar()" :key="n">
             <div class="todo_calendar_days" :class="i[1] != day ? '' : 'todo_calendar_this'" @click="month=i[0];day=i[1];data_to_localStorage(version.index)">
                 <div class="todo_calendar_week" v-text="week[n]"></div>
                 <div class="todo_calendar_day">
@@ -794,12 +798,11 @@ const Setting = {
             let that = this
             let p = []
             for (let i in that.version.dict) {
-                if (i in that.season) {
-                    p.push({
-                        label: that.version.dict[i],
-                        value: i,
-                    })
-                }
+                // if (i in that.season) {}
+                p.push({
+                    label: that.version.dict[i],
+                    value: i,
+                })
             }
             weui.picker(p, {
                 // 默认值
@@ -982,6 +985,7 @@ const Setting = {
     <div class="setting_sub">设置</div>
     <div class="list">
         <list-item title="切换游戏版本" :sub="version.dict[version.index]" @click="pick()" />
+        <template v-if="version.index in season">
         <div class="setting_sub">提醒</div>
         <list-item title="昵称" :arrow="!set_name" :sub="!set_name?name:''" @click="set_name=true" />
         <div v-show="set_name" class="setting_name">
@@ -1049,6 +1053,7 @@ const Setting = {
             </div>
         </div>
         <list-item title="提前提醒天数" :sub="advance_day==0 ? '不提醒' : advance_day + ' 天'" @click="advance()" />
+        </template>
     </div>
     <div class="copyright">
         <div>矿石镇的攻略百科 &copy; 2015-<span v-text="new Date().getFullYear()">
