@@ -226,7 +226,7 @@ const Fish_Saikai = {
     },
     mounted() {
         // 获取游戏版本【鱼图鉴】列表
-        axios.get(url + "/" + this.version.index + "/fish" + suffix)
+        axios.get(url + this.version.index + "/fish" + suffix)
             .then((response) => {
                 this.raw = response.data
                 this.list = response.data
@@ -343,7 +343,7 @@ const Cookbook_Saikai = {
     },
     mounted() {
         // 获取游戏版本【菜谱】列表
-        axios.get(url + "/" + this.version.index + "/cookbook" + suffix)
+        axios.get(url + this.version.index + "/cookbook" + suffix)
             .then((response) => {
                 this.raw = response.data
                 this.list = response.data
@@ -422,7 +422,7 @@ const Resident = {
     },
     mounted() {
         // 获取游戏版本【居民】列表
-        axios.get(url + this.version.index + "/resident" + suffix)
+        axios.get(url + "resident/" + this.version.index + suffix)
             .then((response) => {
                 this.resident = response.data
             })
@@ -501,7 +501,7 @@ const ResidentContent = {
     },
     mounted() {
         // 获取游戏版本【居民】内容
-        axios.get(url + this.version.index + '/resident/' + this.$route.params.name + suffix)
+        axios.get(url + "resident/" + this.version.index + "/" + this.$route.params.name + suffix)
             .then((response) => {
                 this.resident = response.data
             })
