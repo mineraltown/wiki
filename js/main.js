@@ -4,7 +4,7 @@ const { createRouter, createWebHashHistory } = VueRouter
 // createWebHashHistory
 
 // 后端接口 URL 地址
-const url = "http://192.168.0.10:8888/"
+const url = "https://api.mineraltown.net/"
 const suffix = ""
 
 // 定义替换映射表（字典）
@@ -431,7 +431,7 @@ const Resident = {
     template: `<div><template v-for="item,idx in resident">
         <div class="menu_sub" v-text="idx"></div>
         <div class="menu-resident">
-            <template v-for="i,n in item"><router-link :to="'/resident/' + n">
+            <template v-for="i,n in item"><router-link :to="'/resident/' + i.id">
                     <div class="item">
                         <div class="resident-icon"><img :src="url + i.icon"></div>
                         <div class="resident-text" v-text="i.name"></div>
@@ -501,7 +501,7 @@ const ResidentContent = {
     },
     mounted() {
         // 获取游戏版本【居民】内容
-        axios.get(url + "resident/" + this.version.index + "/" + this.$route.params.name + suffix)
+        axios.get(url + "resident/" + this.version.index + "/" + this.$route.params.id + suffix)
             .then((response) => {
                 this.resident = response.data
             })
@@ -1248,7 +1248,7 @@ const routes = [
     { path: '/wiki/content/:id', component: Content, props: true },
     { path: '/wiki/list/:idx/:item', component: List, props: true },
     { path: '/resident', component: Resident },
-    { path: '/resident/:name', component: ResidentContent, props: true },
+    { path: '/resident/:id', component: ResidentContent, props: true },
     { path: '/todo/saikai', component: ToDo_saikai, props: true },
     { path: '/todo/:ver', component: ToDo },
     { path: '/setting', component: Setting },
