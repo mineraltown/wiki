@@ -1,5 +1,5 @@
 const { createApp } = Vue
-const { createRouter, createWebHashHistory } = VueRouter
+const { createRouter, createWebHistory } = VueRouter
 // createWebHistory
 // createWebHashHistory
 
@@ -1258,7 +1258,7 @@ const routes = [
 
 // 创建路由器实例
 const router = createRouter({
-    history: createWebHashHistory(),
+    history: createWebHistory(),
     routes
 })
 
