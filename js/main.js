@@ -1,10 +1,10 @@
 const { createApp } = Vue
-const { createRouter, createWebHistory } = VueRouter
+const { createRouter, createWebHashHistory } = VueRouter
 // createWebHistory
 // createWebHashHistory
 
 // 后端接口 URL 地址
-const url = "https://api.mineraltown.net/"
+const url = "http://192.168.0.10:8888/"
 const suffix = ""
 
 // 定义替换映射表（字典）
@@ -25,9 +25,8 @@ const replacementMap = {
 const Home = {
     template: `<div class="default">
     <div class="qrcode">
-        <img src="/static/qrcode_for_weixin.jpg" alt="mini program">
-        <!-- <img src="/static/qrcode_for_mini_program.jpg" alt="mini program">
-        本站已发布「微信小程序」 -->
+        <img src="/static/qrcode_for_mini_program.jpg" alt="mini program">
+        本站已发布「微信小程序」
     </div>
     <div class="default_text">
         <p>欢迎使用「矿石镇的攻略百科」<br>
@@ -1215,7 +1214,7 @@ const routes = [
 
 // 创建路由器实例
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHashHistory(),
     routes
 })
 
