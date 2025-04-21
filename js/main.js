@@ -397,7 +397,7 @@ const Cookbook_Saikai = {
                     </tr>
                     <tr class="tr">
                         <td class="td_mini">获得方法</td>
-                        <td class="td_mini" v-text="item.how_to_get" colspan="2" style="text-align: left; padding-left: 0.5rem;"></td>
+                        <td class="td_mini" v-html="item.how_to_get" colspan="2" style="text-align: left; padding-left: 0.5rem;"></td>
                     </tr>
                 </template>
             </tbody>
