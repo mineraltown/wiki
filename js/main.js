@@ -7,20 +7,6 @@ const { createRouter, createWebHistory } = VueRouter
 const url = "https://api.mineraltown.net/"
 const suffix = ""
 
-// 定义替换映射表（字典）
-const replacementMap = {
-    "小黄瓜": "黄瓜",
-    "高丽菜": "卷心菜",
-    "土豆": "马铃薯",
-    "菠萝": "凤梨",
-    "西红柿": "番茄",
-    "地瓜": "番薯",
-    "红薯": "番薯",
-    "起司": "芝士",
-    "美乃滋": "蛋黄酱",
-    "奥利哈钢": "山铜",
-}
-
 // 组件：主页
 const Home = {
     template: `<div class="default">
@@ -321,13 +307,14 @@ const Cookbook_Saikai = {
         return {
             raw: [],  // 菜谱:完整
             list: [],  // 菜谱:显示
-            search: "", // 检索
+            search: "",  // 检索
+            replacementMap: {}  // 替换映射表（字典）
         }
     },
     methods: {
         search_cookbook() {
             // 使用字典完成名词替换
-            this.search = replacementMap[this.search] || this.search
+            this.search = this.replacementMap[this.search] || this.search
             // 清空菜谱
             this.list = []
             // 循环完整菜谱，向显示菜谱增加匹配到的结果
@@ -346,6 +333,11 @@ const Cookbook_Saikai = {
             .then((response) => {
                 this.raw = response.data
                 this.list = response.data
+            })
+        // 定义替换映射表（字典）
+        axios.get(url + "replacementMap" + suffix)
+            .then((response) => {
+                this.replacementMap = response.data
             })
     },
     inject: ["version", "url"],
@@ -372,8 +364,10 @@ const Cookbook_Saikai = {
                     <tr class="tr">
                         <td class="td_mini" rowspan="4" v-text="item.name"></td>
                         <td class="td_mini" v-text="item.price"></td>
-                        <td class="td_mini" v-text="item.physical"></td>
-                        <td class="td_mini" v-text="item.fatigue"></td>
+                        <td class="td_mini" v-if="item.physical != 999" v-text="item.physical"></td>
+                        <td class="td_mini" v-else>-</td>
+                        <td class="td_mini" v-if="item.fatigue != 999" v-text="item.fatigue"></td>
+                        <td class="td_mini" v-else>-</td>
                     </tr>
                     <tr class="tr">
                         <td class="td_mini">材料</td>
