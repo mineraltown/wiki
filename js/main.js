@@ -740,7 +740,7 @@ const ToDo_saikai = {
         <div :class="day==15 && !if_festival() ? 'todo_shop_working_red' : 'todo_shop_holiday'">宠物店</div>
     </div>
     <div class="todo_season">
-        <div class="todo_season_date">日期</div>
+        <div class="todo_season_date">日历</div>
         <div>第&nbsp;<span v-text="year"></span>&nbsp;年</div>
         <div class="todo_season_moon" v-text="season[month][1]"></div>
     </div>
@@ -800,14 +800,14 @@ const ToDo_saikai = {
                 <div class="todo_card todo_card_today" v-if="!(year==1 && i.name.cn=='年糕大会')">
                     <div class="todo_flex">
                         <div class="todo_title" v-text="i.name.cn"></div>
-                        <template v-if="i.address!=null">
+                        <template v-if="i.address">
                             <div class="bold">地点：<span class="normal" v-text="i.address"></span></div>
                             <div class="bold">时间：<span class="normal" v-text="i.start_time + ' ～ ' + i.end_time"></span></div>
                         </template>
                         <template v-else>
                             <div class="bold">时间：<span class="normal">全天</span></div>
                         </template>
-                        <template v-if="i.note!=null">
+                        <template v-if="i.note">
                             <div v-html="i.note"></div>
                         </template>
                     </div>
