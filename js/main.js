@@ -539,14 +539,14 @@ const ToDo_saikai = {
                     if (this.season[x[0]][1] == y.month && x[1] == y.day) {
                         // 第一年春1日的年糕大会不举行
                         if (!(this.year == 1 && this.month == 0 && x[1] == 1)) {
-                            z.push(y.name.cn)
+                            z.push(y.name)
                         }
                     }
                 }
                 // 居民生日
                 for (let y of this.resident) {
                     if (this.season[x[0]][1] == y.birthday.month && x[1] == y.birthday.day) {
-                        z.push(y.name.cn)
+                        z.push(y.name)
                     }
                 }
                 x.push(z)
@@ -557,7 +557,7 @@ const ToDo_saikai = {
         // 导入JSON格式游戏数据
         import_data() {
             // 居民信息
-            axios.get(url + "static/saikai/Resident.json").then((response) => {
+            axios.get(url + "/todo/saikai/resident" + suffix).then((response) => {
                 for (i in response.data) {
                     // 如果生日和候补生日重复，则替换为备选生日日期
                     if (response.data[i]["birthday"]["month"] == this.season[this.birthday_month][1]) {
@@ -572,11 +572,11 @@ const ToDo_saikai = {
                 this.resident = response.data
             })
             // 节日信息
-            axios.get(url + "static/saikai/Festival.json").then((response) => {
+            axios.get(url + "/todo/saikai/festival" + suffix).then((response) => {
                 this.festival = response.data
             })
             // 电视料理菜谱
-            axios.get(url + "static/saikai/Cookbook.json").then((response) => {
+            axios.get(url + "/todo/saikai/cookbook" + suffix).then((response) => {
                 this.cookbook = response.data
             })
         },
@@ -641,9 +641,9 @@ const ToDo_saikai = {
                 if (this.day == f[i].day && this.season[this.month][1] == f[i].month) {
                     if (
                         // 无固定场所的节日商店不休息
-                        f[i].name.cn == "春季感恩节" ||
-                        f[i].name.cn == "南瓜节" ||
-                        f[i].name.cn == "冬季感恩节"
+                        f[i].name == "春季感恩节" ||
+                        f[i].name == "南瓜节" ||
+                        f[i].name == "冬季感恩节"
                     ) {
                         return false
                     } else if (this.year == 1 && this.month == 0 && this.day == 1) {
@@ -799,9 +799,9 @@ const ToDo_saikai = {
         </div>
         <template v-for="i in festival">
             <template v-if="i.month==season[month][1] && i.day==day">
-                <div class="todo_card todo_card_today" v-if="!(year==1 && i.name.cn=='年糕大会')">
+                <div class="todo_card todo_card_today" v-if="!(year==1 && i.name=='年糕大会')">
                     <div class="todo_flex">
-                        <div class="todo_title" v-text="i.name.cn"></div>
+                        <div class="todo_title" v-text="i.name"></div>
                         <template v-if="i.address">
                             <div class="bold">地点：<span class="normal" v-text="i.address"></span></div>
                             <div class="bold">时间：<span class="normal" v-text="i.start_time + ' ～ ' + i.end_time"></span></div>
@@ -820,7 +820,7 @@ const ToDo_saikai = {
             <template v-if="i.birthday.month==season[month][1] && i.birthday.day==day">
                 <div class="todo_card todo_card_today">
                     <div class="todo_flex">
-                        <div class="todo_title" v-text="i.name.cn"></div>
+                        <div class="todo_title" v-text="i.name"></div>
                         <div class="bold" v-if="i.like.best.length!=0">最喜欢</div>
                         <div v-if="i.like.best.length!=0">
                             <template v-for="(x,y) in i.like.best">
@@ -850,11 +850,11 @@ const ToDo_saikai = {
                             </div>
                             <div class="todo_flex">
                                 <div class="gray">
-                                    <span class="todo_title" v-text="i.name.cn"></span>
+                                    <span class="todo_title" v-text="i.name"></span>
                                     <span class="todo_note">距离
-                                        <span v-text="i.name.cn"></span>还有
+                                        <span v-text="i.name"></span>还有
                                         <span v-text="n"></span>天<br>
-                                        <span v-if="i.name.cn=='软绵绵节'" class="warning">（不要剪羊毛了！）</span>
+                                        <span v-if="i.name=='软绵绵节'" class="warning">（不要剪羊毛了！）</span>
                                     </span>
                                 </div>
                             </div>
@@ -870,7 +870,7 @@ const ToDo_saikai = {
                             </div>
                             <div class="todo_flex">
                                 <div class="gray">
-                                    <span class="todo_title" v-text="i.name.cn"></span>
+                                    <span class="todo_title" v-text="i.name"></span>
                                     <span class="todo_note">距离生日还有<span v-text="n"></span>天</span>
                                 </div>
                                 <div class="gray bold" v-if="i.like.best.length!=0">最喜欢</div>
