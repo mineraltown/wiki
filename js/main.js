@@ -507,26 +507,28 @@ const ToDo_saikai = {
             for (let i = today; i > 0; i--) {
                 let d = this.day - i
                 if (d <= 0) {
-                    ThisWeek.push([this.month - 1, 30 + d])
+                    ThisWeek.push([this.month - 1, 30 + d, this.year])
                 } else {
-                    ThisWeek.push([this.month, d])
+                    ThisWeek.push([this.month, d, this.year])
                 }
             }
             // 当天之后（含当天）
             for (let i = today; i < 7; i++) {
                 let d = this.day + (i - today)
                 if (d > 30) {
-                    ThisWeek.push([this.month + 1, d - 30])
+                    ThisWeek.push([this.month + 1, d - 30, this.year])
                 } else {
-                    ThisWeek.push([this.month, d])
+                    ThisWeek.push([this.month, d, this.year])
                 }
             }
             // 如果出现'-1'或'4'则重置为'3'或'0'
             for (let x of ThisWeek) {
                 if (x[0] > 3) {
                     x[0] = 0
+                    x[2] += 1
                 } else if (x[0] < 0) {
                     x[0] = 3
+                    x[2] -= 1
                 }
             }
             // 循环日历列表（周），通过月份和日期添加事件名
@@ -746,11 +748,11 @@ const ToDo_saikai = {
     </div>
     <div class="todo_calendar">
         <template v-for="i,n in get_calendar()" :key="n">
-            <div class="todo_calendar_days" :class="i[1] != day ? '' : 'todo_calendar_this'" @click="month=i[0];day=i[1];data_to_localStorage(version.index)">
+            <div class="todo_calendar_days" :class="i[1] != day ? '' : 'todo_calendar_this'" @click="month=i[0];day=i[1];year=i[2];data_to_localStorage(version.index)">
                 <div class="todo_calendar_week" v-text="week[n]"></div>
                 <div class="todo_calendar_day">
                     <div class="todo_calendar_num" v-text="i[1]"></div>
-                    <div class="todo_calendar_event" v-for="z in i[2]" v-text="z"></div>
+                    <div class="todo_calendar_event" v-for="z in i[3]" v-text="z"></div>
                 </div>
             </div>
         </template></div>
