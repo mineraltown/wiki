@@ -10,6 +10,7 @@ body {
     height: 100vh;
     margin: 0;
     padding: 0;
+    font-family: Helvetica, Tahoma, Arial, STXihei, "华文细黑", "Microsoft YaHei", "微软雅黑", SimSun, "宋体", Heiti, "黑体", sans-serif;
 }
 
 a {
@@ -455,7 +456,7 @@ img {
 }
 
 .cover {
-    height: 12rem;
+    height: 10rem;
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
@@ -473,9 +474,9 @@ img {
 .menu {
     padding: 1rem 0;
     display: grid;
-    grid-template-columns: repeat(auto-fill, 3.8rem);
+    grid-template-columns: repeat(auto-fill, 3.5rem);
     place-content: start center;
-    gap: 10px;
+    gap: 3px;
 }
 
 .menu_sub {
@@ -495,8 +496,8 @@ img {
 }
 
 .item-icon {
-    width: 3rem;
-    height: 3rem;
+    width: 2rem;
+    height: 2rem;
     background-color: #eeeeee;
     border-radius: 10px;
     padding: 0.5rem;
@@ -513,7 +514,7 @@ img {
 .menu-resident {
     padding: 1rem 0;
     display: grid;
-    grid-template-columns: repeat(auto-fill, 5rem);
+    grid-template-columns: repeat(auto-fill, 3.8rem);
     place-content: start center;
     gap: 10px;
 }
@@ -527,8 +528,8 @@ img {
 }
 
 .resident-icon {
-    width: 5rem;
-    height: 5rem;
+    width: 3.8rem;
+    height: 3.8rem;
     background-color: #eeeeee;
     border-radius: 10px;
     display: flex;
