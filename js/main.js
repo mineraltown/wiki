@@ -470,7 +470,7 @@ const ToDo = {
     template: `<div class="todo_none">暂时无法使用该功能</div>`
 }
 
-// 组件：提醒 > 重聚矿石镇
+// 组件：提醒 > 重聚矿石镇 & 矿石镇的伙伴们
 const ToDo_saikai = {
     inject: ["version"],
     data() {
@@ -557,7 +557,7 @@ const ToDo_saikai = {
         // 导入JSON格式游戏数据
         import_data() {
             // 居民信息
-            axios.get(url + "/todo/saikai/resident" + suffix).then((response) => {
+            axios.get(url + "/todo/" + this.version.index + "/resident" + suffix).then((response) => {
                 for (i in response.data) {
                     // 如果生日和候补生日重复，则替换为备选生日日期
                     if (response.data[i]["birthday"]["month"] == this.season[this.birthday_month][1]) {
@@ -572,13 +572,15 @@ const ToDo_saikai = {
                 this.resident = response.data
             })
             // 节日信息
-            axios.get(url + "/todo/saikai/festival" + suffix).then((response) => {
+            axios.get(url + "/todo/" + this.version.index + "/festival" + suffix).then((response) => {
                 this.festival = response.data
             })
             // 电视料理菜谱
+            if (this.version.index == "saikai") {
             axios.get(url + "/todo/saikai/cookbook" + suffix).then((response) => {
                 this.cookbook = response.data
             })
+            }
         },
         // 下个月
         next_month() {
@@ -643,7 +645,10 @@ const ToDo_saikai = {
                         // 无固定场所的节日商店不休息
                         f[i].name == "春季感恩节" ||
                         f[i].name == "南瓜节" ||
-                        f[i].name == "冬季感恩节"
+                        f[i].name == "冬季感恩节" ||
+                        f[i].name == "春之感谢祭" ||
+                        f[i].name == "冬之感谢祭" ||
+                        f[i].name == "南瓜祭"
                     ) {
                         return false
                     } else if (this.year == 1 && this.month == 0 && this.day == 1) {
@@ -738,8 +743,8 @@ const ToDo_saikai = {
         <div :class="get_week()==6 || if_festival() ? 'todo_shop_holiday' : 'todo_shop_working'">伐木之家</div>
         <div :class="if_festival() ? 'todo_shop_holiday' : 'todo_shop_working'">霍安的店</div>
         <div :class="get_week()!=0 && month==1 && !if_festival() ? 'todo_shop_working' : 'todo_shop_holiday'">海之家</div>
-        <div :class="get_week()==3 && !if_festival() ? 'todo_shop_working' : 'todo_shop_holiday'">班的店</div>
-        <div :class="day==15 && !if_festival() ? 'todo_shop_working_red' : 'todo_shop_holiday'">宠物店</div>
+        <div :class="get_week()==3 && !if_festival() ? 'todo_shop_working' : 'todo_shop_holiday'" v-if="version.index == 'saikai'">班的店</div>
+        <div :class="day==15 && !if_festival() ? 'todo_shop_working_red' : 'todo_shop_holiday'" v-if="version.index == 'saikai'">宠物店</div>
     </div>
     <div class="todo_season">
         <div class="todo_season_date">日历</div>
@@ -758,9 +763,9 @@ const ToDo_saikai = {
         </template></div>
     <div class="todo_card_list">
         <div class="todo_card wool" v-if="month==2 && day==14">
-            <div class="todo_flex">答应我，准备参加参加软绵绵节的动物，从今天开始就不要剪毛了好吗？</div>
+            <div class="todo_flex">答应我，准备参加参加<template v-if="version.index == 'saikai'">软绵绵节</template><template v-else>羊祭</template>的动物，从今天开始就不要剪毛了好吗？</div>
         </div>
-        <div class="todo_card wool" v-if="day==15">
+        <div class="todo_card wool" v-if="day==15 && version.index == 'saikai'">
             <div class="todo_flex">
                 <div class="todo_title">宠物店</div>
                 <div class="bold">地点：<span class="normal">广场</span></div>
@@ -907,6 +912,7 @@ const Setting = {
     data() {
         return {
             season: {
+                "mineraltown": [["春", "夏", "秋", "冬"], 30],
                 "saikai": [["春", "夏", "秋", "冬"], 30],
                 "grabaza": [["春", "夏", "秋", "冬"], 31],
                 "welcome": [["郁金香", "胡椒", "琥珀", "靛蓝"], 10],
@@ -1202,6 +1208,7 @@ const routes = [
     { path: '/resident', component: Resident },
     { path: '/resident/:id', component: ResidentContent, props: true },
     { path: '/todo/saikai', component: ToDo_saikai, props: true },
+    { path: '/todo/mineraltown', component: ToDo_saikai, props: true },
     { path: '/todo/:ver', component: ToDo },
     { path: '/setting', component: Setting },
     { path: '/cookbook/saikai', component: Cookbook_Saikai },
