@@ -557,7 +557,7 @@ const ToDo_saikai = {
         // 导入JSON格式游戏数据
         import_data() {
             // 居民信息
-            axios.get(url + "/todo/" + this.version.index + "/resident" + suffix).then((response) => {
+            axios.get(url + "todo/" + this.version.index + "/resident" + suffix).then((response) => {
                 for (i in response.data) {
                     // 如果生日和候补生日重复，则替换为备选生日日期
                     if (response.data[i]["birthday"]["month"] == this.season[this.birthday_month][1]) {
@@ -572,12 +572,12 @@ const ToDo_saikai = {
                 this.resident = response.data
             })
             // 节日信息
-            axios.get(url + "/todo/" + this.version.index + "/festival" + suffix).then((response) => {
+            axios.get(url + "todo/" + this.version.index + "/festival" + suffix).then((response) => {
                 this.festival = response.data
             })
             // 电视料理菜谱
             if (this.version.index == "saikai") {
-            axios.get(url + "/todo/saikai/cookbook" + suffix).then((response) => {
+                axios.get(url + "todo/saikai/cookbook" + suffix).then((response) => {
                 this.cookbook = response.data
             })
             }
