@@ -932,7 +932,7 @@ const ToDo_bazaar = {
     methods: {
         // 通过年月日计算是周几
         get_week() {
-            return ((this.year - 1) * 120 + this.month * 31 + this.day - 1) % 7
+            return ((this.year - 1) * 124 + this.month * 31 + this.day - 1) % 7
         },
         // 日历（当周）
         get_calendar() {
