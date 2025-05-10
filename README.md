@@ -1,14 +1,15 @@
 # 矿石镇的攻略百科
 
-项目重构，开发基于半动态架构的新版攻略站，命名为「重生」（reborn）
+项目重构，开发新版攻略站，命名为「重生」（reborn）
 
 ## 架构介绍
 
-因为需要使用 [vercel](https://vercel.com/home) 部署静态网站，本次开发依旧采用不使用后端。  
-并尝试采用 `json` 格式声明富文本内容，方便小程序的开发及使用。  
-同时也可以解决之前 `<iframe>` 框架带来的问题。  
+为方便小程序的开发及使用，本项目使用前后端分离的方式，并使用[Django](https://www.djangoproject.com/)作为后端。  
+同时也可以解决之前使用 `<iframe>` 框架带来的问题。  
 
-但也许会有一个后端程序，用于将 Excel 表格的内容导出为 `json` 格式，方便表格内容的编辑和维护。  
+- [前端](https://github.com/mineraltown/wiki/tree/reborn)（本项目）
+- [后端](https://github.com/mineraltown/wiki-server)
+- [小程序端](https://github.com/mineraltown/miniprogram)
 
 本次开发优先考虑手机用户的体验。  
 为减轻开发负担，本站不进行黑暗模式（DarkMode）的适配。
@@ -21,7 +22,7 @@
   - 缩放 `100%` `150%`
 - 手机 `Xiaomi 15`
 - 平板 `iPad Air (2024)`
-- 浏览器 `Chrome` `Edge` `Firefox`
+- 浏览器 `Chrome` `Edge` `Firefox` `Safari`
 
 如出现任何问题，欢迎提 [issues](https://github.com/mineraltown/wiki/issues)
 

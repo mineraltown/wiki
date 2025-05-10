@@ -857,7 +857,7 @@ const ToDo_saikai = {
                                 <div class="gray">
                                     <span class="todo_title" v-text="i.name"></span>
                                     <span class="todo_note">距离
-                                        <span v-text="i.name"></span>还有
+                                        <span v-text="i.name"></span> 还有
                                         <span v-text="n"></span>天<br>
                                         <span v-if="i.name=='软绵绵节'" class="warning">（不要剪羊毛了！）</span>
                                     </span>
@@ -1197,7 +1197,346 @@ const ToDo_bazaar = {
                                 <div class="gray">
                                     <span class="todo_title" v-text="i.name"></span>
                                     <span class="todo_note">距离
-                                        <span v-text="i.name"></span>还有
+                                        <span v-text="i.name"></span> 还有
+                                        <span v-text="n"></span>天<br>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </template>
+                <template v-for="i in resident">
+                    <template v-if="test_birthday(i,n)">
+                        <div class="todo_card">
+                            <div class="todo_advance_days">
+                                <span v-text="i.birthday.month"></span>
+                                <span v-text="i.birthday.day"></span>日
+                            </div>
+                            <div class="todo_flex">
+                                <div class="gray">
+                                    <span class="todo_title" v-text="i.name"></span>
+                                    <span class="todo_note">距离生日还有<span v-text="n"></span>天</span>
+                                </div>
+                                <div class="gray bold" v-if="i.like.best.length!=0">最喜欢</div>
+                                <div class="gray" v-if="i.like.best.length!=0">
+                                    <template v-for="(x,y) in i.like.best">
+                                        <span v-if="y<i.like.best.length-1" v-text="x+'、'"></span>
+                                        <span v-else v-text="x"></span>
+                                    </template>
+                                </div>
+                                <div class="gray bold">喜欢</div>
+                                <div class="birthday_like gray">
+                                    <template v-for="(x,y) in i.like.more">
+                                        <span v-if="y<i.like.more.length-1" v-text="x+'、'"></span>
+                                        <span v-else v-text="x"></span>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </template>
+            </template>
+        </template>
+    </div>
+    <div class="todo_spacing"></div>
+    <div class="todo_next">
+        <div class="next_button" @click="next()">下一天</div>
+    </div>
+</div>`
+}
+
+// 组件：提醒 > 双子村
+const ToDo_twotowns = {
+    inject: ["version"],
+    data() {
+        return {
+            season: [
+                ["spring", "春"],
+                ["summer", "夏"],
+                ["autumn", "秋"],
+                ["winter", "冬"],
+            ],
+            week: ["日", "一", "二", "三", "四", "五", "六"],
+            year: 1,  // 年
+            month: 0,  // 月（0-3）
+            day: 1,  // 日（1-31）
+            advance_day: 3,  // 提前提醒天数
+            name: "",  // 昵称
+            birthday_month: 0,  // 生日（月）
+            birthday_day: 1,  // 生日（日）
+            resident: [],  // 居民生日
+            festival: [],  // 节日
+        }
+    },
+    methods: {
+        // 通过年月日计算是周几
+        get_week() {
+            return ((this.year - 1) * 124 + this.month * 31 + this.day - 1) % 7
+        },
+        // 日历（当周）
+        get_calendar() {
+            let ThisWeek = []
+            let today = this.get_week()
+            // 当天之前（不含当天）
+            for (let i = today; i > 0; i--) {
+                let d = this.day - i
+                if (d <= 0) {
+                    ThisWeek.push([this.month - 1, 31 + d, this.year])
+                } else {
+                    ThisWeek.push([this.month, d, this.year])
+                }
+            }
+            // 当天之后（含当天）
+            for (let i = today; i < 7; i++) {
+                let d = this.day + (i - today)
+                if (d > 31) {
+                    ThisWeek.push([this.month + 1, d - 31, this.year])
+                } else {
+                    ThisWeek.push([this.month, d, this.year])
+                }
+            }
+            // 如果出现'-1'或'4'则重置为'3'或'0'
+            for (let x of ThisWeek) {
+                if (x[0] > 3) {
+                    x[0] = 0
+                    x[2] += 1
+                } else if (x[0] < 0) {
+                    x[0] = 3
+                    x[2] -= 1
+                }
+            }
+            // 循环日历列表（周），通过月份和日期添加事件名
+            for (let x of ThisWeek) {
+                z = []
+                // 日历事件
+                for (let y of this.festival) {
+                    if (this.season[x[0]][1] == y.month && x[1] == y.day) {
+                        z.push(y.name)
+                    }
+                }
+                // 居民生日
+                for (let y of this.resident) {
+                    if (this.season[x[0]][1] == y.birthday.month && x[1] == y.birthday.day) {
+                        z.push(y.name)
+                    }
+                }
+                x.push(z)
+            }
+            // 返回值 [[<月>,<日>,<节日/生日>],...]
+            return ThisWeek
+        },
+        // 导入JSON格式游戏数据
+        import_data() {
+            // 居民信息
+            axios.get(url + "todo/" + this.version.index + "/resident" + suffix).then((response) => {
+                this.resident = response.data
+            })
+            // 节日信息
+            axios.get(url + "todo/" + this.version.index + "/festival" + suffix).then((response) => {
+                this.festival = response.data
+            })
+        },
+        // 下个月
+        next_month() {
+            // 如果这个月是冬，下一个月则是春。
+            let n
+            if (this.month == 3) {
+                n = 0
+            } else {
+                n = this.month + 1
+            }
+            return n
+        },
+        // 生日：是否在n天之内举行
+        test_birthday(i, n) {
+            let next = this.next_month()
+            if (i.birthday.month == this.season[this.month][1]) {
+                // 判断生日月份是否在当前月份
+                if (i.birthday.day - this.day == n) {
+                    return true
+                } else {
+                    return false
+                }
+            } else if (i.birthday.month == this.season[next][1]) {
+                // 或者下个月
+                if (i.birthday.day + 31 - this.day == n) {
+                    return true
+                } else {
+                    return false
+                }
+            } else {
+                return false
+            }
+        },
+        // 节日：是否在n天之内举行
+        test_festival(i, n) {
+            let next = this.next_month()
+            if (i.month == this.season[this.month][1]) {
+                // 判断节日月份是否在当前月份
+                if (i.day - this.day == n) {
+                    return true
+                } else {
+                    return false
+                }
+            } else if (i.month == this.season[next][1]) {
+                // 或者下个月
+                if (i.day + 31 - this.day == n) {
+                    return true
+                } else {
+                    return false
+                }
+            } else {
+                return false
+            }
+        },
+        // 初始化
+        reset(e) {
+            console.log("初始化")
+            var d = {
+                "year": 1,
+                "month": 0,
+                "day": 1,
+                "advance_day": 3,
+                "name": "",
+                "birthday_month": 0,
+                "birthday_day": 1,
+            }
+            localStorage.setItem(e, JSON.stringify(d))
+            this.localStorage_to_data(e)
+        },
+        // 从 localStorage 写入 data
+        localStorage_to_data(e) {
+            var d = JSON.parse(localStorage.getItem(e))
+            this.year = parseInt(d["year"])
+            this.month = parseInt(d["month"])
+            this.day = parseInt(d["day"])
+            this.advance_day = parseInt(d["advance_day"])
+            this.name = d["name"]
+            this.birthday_month = parseInt(d["birthday_month"])
+            this.birthday_day = parseInt(d["birthday_day"])
+        },
+        // 从 data 写入 localStorage
+        data_to_localStorage(e) {
+            var d = {
+                "year": this.year,
+                "month": this.month,
+                "day": this.day,
+                "advance_day": this.advance_day,
+                "name": this.name,
+                "birthday_month": this.birthday_month,
+                "birthday_day": this.birthday_day,
+            }
+            localStorage.setItem(e, JSON.stringify(d))
+        },
+        // 下一天
+        next() {
+            // 日期 +1
+            if (this.day + 1 <= 31) {
+                this.day += 1
+            } else {
+                this.day = 1
+                if (this.month + 1 < 4) {
+                    this.month += 1
+                } else {
+                    this.month = 0
+                    this.year += 1
+                }
+            }
+            console.log('第' + this.year + '年 ' + this.season[this.month][1] + this.day + '日 星期' + this.week[this.get_week()])
+            // 存档
+            this.data_to_localStorage(this.version.index)
+        }
+    },
+    created() {
+        // 导入JSON格式游戏数据
+        this.import_data()
+        // 导入本地存储的存档数据，无数据则初始化
+        if (localStorage.getItem(this.version.index)) {
+            this.localStorage_to_data(this.version.index)
+        } else {
+            this.reset(this.version.index)
+        }
+    },
+    template: `<div class="todo">
+    <div class="todo_season">
+        <div class="todo_season_date">日历</div>
+        <div>第&nbsp;<span v-text="year"></span>&nbsp;年</div>
+        <div class="todo_season_moon" v-text="season[month][1]"></div>
+    </div>
+    <div class="todo_calendar">
+        <template v-for="i,n in get_calendar()" :key="n">
+            <div class="todo_calendar_days" :class="i[1] != day ? '' : 'todo_calendar_this'" @click="month=i[0];day=i[1];year=i[2];data_to_localStorage(version.index)">
+                <div class="todo_calendar_week" v-text="week[n]"></div>
+                <div class="todo_calendar_day">
+                    <div class="todo_calendar_num" v-text="i[1]"></div>
+                    <div class="todo_calendar_event" v-for="z in i[3]" v-text="z"></div>
+                </div>
+            </div>
+        </template></div>
+    <div class="todo_card_list">
+        <div class="todo_card todo_card_today" v-if="name!='' && birthday_month==month && birthday_day==day">
+            <div class="todo_flex">
+                <div class="todo_title" v-text="name"></div>
+                <div class="bold">今天是你的生日，祝你生日快乐！</div>
+                <div class="todo_note">“对所有的烦恼说 Bye Bye，对所有的快乐说 Hi Hi”</div>
+            </div>
+        </div>
+        <template v-for="i in festival">
+            <template v-if="i.month==season[month][1] && i.day==day">
+                <div class="todo_card todo_card_today">
+                    <div class="todo_flex">
+                        <div class="todo_title" v-text="i.name"></div>
+                        <template v-if="i.address">
+                            <div class="bold">地点：<span class="normal" v-text="i.address"></span></div>
+                            <div class="bold">时间：<span class="normal" v-text="i.start_time"></span></div>
+                        </template>
+                        <template v-else>
+                            <div class="bold">时间：<span class="normal">全天</span></div>
+                        </template>
+                        <template v-if="i.note">
+                            <div v-html="i.note"></div>
+                        </template>
+                    </div>
+                </div>
+            </template>
+        </template>
+        <template v-for="i in resident">
+            <template v-if="i.birthday.month==season[month][1] && i.birthday.day==day">
+                <div class="todo_card todo_card_today">
+                    <div class="todo_flex">
+                        <div class="todo_title" v-text="i.name"></div>
+                        <div class="bold" v-if="i.like.best.length!=0">最喜欢</div>
+                        <div v-if="i.like.best.length!=0">
+                            <template v-for="(x,y) in i.like.best">
+                                <span v-if="y<i.like.best.length-1" v-text="x+'、'"></span>
+                                <span v-else v-text="x"></span>
+                            </template>
+                        </div>
+                        <div class="bold">喜欢</div>
+                        <div>
+                            <template v-for="(x,y) in i.like.more">
+                                <span v-if="y<i.like.more.length-1" v-text="x+'、'"></span>
+                                <span v-else v-text="x"></span>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </template>
+        <template v-if="advance_day!=0">
+            <template v-for="n in advance_day">
+                <template v-for="i in festival">
+                    <template v-if="test_festival(i,n)">
+                        <div class="todo_card">
+                            <div class="todo_advance_days">
+                                <span v-text="i.month"></span>
+                                <span v-text="i.day"></span>日
+                            </div>
+                            <div class="todo_flex">
+                                <div class="gray">
+                                    <span class="todo_title" v-text="i.name"></span><br>
+                                    <span class="todo_note">距离
+                                        <span v-text="i.name"></span> 还有
                                         <span v-text="n"></span>天<br>
                                     </span>
                                 </div>
@@ -1253,6 +1592,7 @@ const Setting = {
             season: {
                 "mineraltown": [["春", "夏", "秋", "冬"], 30],
                 "saikai": [["春", "夏", "秋", "冬"], 30],
+                "twotowns": [["春", "夏", "秋", "冬"], 31],
                 "bazaar": [["春", "夏", "秋", "冬"], 31],
                 "grabaza": [["春", "夏", "秋", "冬"], 31],
                 "welcome": [["郁金香", "胡椒", "琥珀", "靛蓝"], 10],
@@ -1549,6 +1889,7 @@ const routes = [
     { path: '/resident/:id', component: ResidentContent, props: true },
     { path: '/todo/mineraltown', component: ToDo_saikai, props: true },
     { path: '/todo/saikai', component: ToDo_saikai, props: true },
+    { path: '/todo/twotowns', component: ToDo_twotowns, props: true },
     { path: '/todo/bazaar', component: ToDo_bazaar, props: true },
     { path: '/todo/grabaza', component: ToDo_bazaar, props: true },
     { path: '/todo/:ver', component: ToDo },
