@@ -1595,6 +1595,7 @@ const Setting = {
                 "twotowns": [["春", "夏", "秋", "冬"], 31],
                 "bazaar": [["春", "夏", "秋", "冬"], 31],
                 "grabaza": [["春", "夏", "秋", "冬"], 31],
+                "trio": [["春", "夏", "秋", "冬"], 31],
                 "welcome": [["郁金香", "胡椒", "琥珀", "靛蓝"], 10],
             },
             year: 1,  // 年
@@ -1892,6 +1893,7 @@ const routes = [
     { path: '/todo/twotowns', component: ToDo_twotowns, props: true },
     { path: '/todo/bazaar', component: ToDo_bazaar, props: true },
     { path: '/todo/grabaza', component: ToDo_bazaar, props: true },
+    { path: '/todo/trio', component: ToDo_bazaar, props: true },
     { path: '/todo/:ver', component: ToDo },
     { path: '/setting', component: Setting },
     { path: '/cookbook/saikai', component: Cookbook_Saikai },
