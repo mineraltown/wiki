@@ -253,6 +253,16 @@
     font-size: 0.8em;
 }
 
+.scope {
+    flex-grow: 1;
+    width: auto;
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
 .invalid {
     width: 20px;
     height: 20px;
