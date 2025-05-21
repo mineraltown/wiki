@@ -164,7 +164,7 @@
 
 .gamepad {
     display: inline-block;
-    vertical-align: sub;
+    vertical-align: middle;
     width: 1.3rem;
     height: 1.3rem;
     margin: 0 0.3rem;
@@ -172,14 +172,14 @@
 
 .icon {
     display: inline-block;
-    vertical-align: sub;
+    vertical-align: middle;
     width: 1.3rem;
     height: 1.3rem;
 }
 
 .icon_mini {
     display: inline-block;
-    vertical-align: sub;
+    vertical-align: middle;
     width: 1rem;
     height: 1rem;
 }
@@ -257,7 +257,6 @@
     flex-grow: 1;
     width: auto;
     display: flex;
-    display: -webkit-flex;
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
