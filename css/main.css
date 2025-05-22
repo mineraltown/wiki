@@ -236,9 +236,10 @@ img {
 }
 
 .setting_block_sub {
-    width: 5rem;
+    width: 4rem;
     margin: 0;
-    text-align: center;
+    padding-left: 1rem;
+    text-align: left;
 }
 
 .setting_season {

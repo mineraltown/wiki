@@ -198,7 +198,7 @@
 }
 
 .next_button {
-    margin: 0.8rem 0 0.8rem 0;
+    margin: 0.8rem 0.5rem;
     width: 80vw;
     height: 2.5rem;
     line-height: 2.5rem;
@@ -215,4 +215,128 @@
 
 .next_button:active {
     background-color: #198d44;
+}
+
+.animal_button {
+    margin: 0.8rem 0.5rem;
+    width: 80vw;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    text-align: center;
+    color: #ffffff;
+    background-color: #cccccc;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.animal_button:hover {
+    background-color: #aaaaaa;
+}
+
+.animal_button:active {
+    background-color: #999999;
+}
+
+.del_button {
+    margin: 0.8rem 0.5rem;
+    width: 80vw;
+    max-width: 5rem;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    text-align: center;
+    color: #ffffff;
+    background-color: #9b454680;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.del_button:hover {
+    background-color: #9b4546cc;
+}
+
+.del_button:active {
+    background-color: #9b4546;
+}
+
+.animal_name {
+    padding: 0.3rem 0;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.animal_name input {
+    width: 10rem;
+    text-align: center;
+    outline: none;
+    border: none;
+    color: #555555;
+    font-size: 0.9rem;
+    height: 1.5rem;
+    padding: 5px 0 5px 0;
+    border-radius: 5px;
+    background-color: #dddddd;
+}
+
+.animal_box {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+.animal_box_name {
+    flex-grow: 1;
+    padding-left: 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.animal_type {
+    width: 2.3rem;
+    text-align: center;
+    font-size: 0.8rem;
+}
+.animal_cookies {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+.animal_cookie {
+    font-size: 0.8rem;
+    width: 2.3rem;
+    margin: 0 0.1rem;
+    text-align: center;
+}
+
+.cookie_none {
+    background-color: #ccc;
+}
+
+.cookie_0 {
+    color: #ffffff;
+    background-color: #4bbead;
+}
+
+.cookie_1 {
+    color: #ffffff;
+    background-color: #add58a;
+}
+
+.cookie_2 {
+    color: #ffffff;
+    background-color: #f9a870;
+}
+
+.cookie_3 {
+    color: #ffffff;
+    background-color: #6ab4e6;
+}
+.animal_edit {
+    width: 2rem;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
 }

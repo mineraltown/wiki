@@ -1266,9 +1266,181 @@ const ToDo_twotowns = {
             birthday_day: 1,  // 生日（日）
             resident: [],  // 居民生日
             festival: [],  // 节日
+            animal_id: -1, // 动物ID
+            animal_page: false, // 添加动物
+            animal_change: false, // 修改动物
+            animal_list: [], // 动物列表
+            animal_type: ["鸡","黑鸡","牛","茶牛","羊","黑羊","白色羊驼","茶色羊驼"], // 动物类型
+            animal: {
+                name: "", // 名字
+                type: "鸡", // 类型
+                plan: 1, // 计划增产
+                cookie: [0,0,0,0], // 普通、野菜、谷物、鱼味
+                current: -1, // 选中项
+            }, // 添加动物
         }
     },
     methods: {
+        // 添加动物
+        animal_add() {
+            this.animal_page = true
+            this.animal = {
+                name: "",
+                type: "鸡",
+                plan: 1,
+                cookie: [0,0,0,0],
+                current: -1,
+            }
+        },
+        // 修改饼干数量
+        change_animal_cookie(e,n) {
+            const INT = new RegExp("^[1-9][0-9]*$")
+            // input
+            this.animal.cookie[n] = 0
+            if (e.target.value == "") {
+                this.animal.cookie[n] = 0
+            } else if (INT.test(e.target.value)) {
+                 if (e.target.value < 1) {
+                     this.animal.cookie[n] = 0
+                 } else {
+                     this.animal.cookie[n] = parseInt(e.target.value)
+                 }
+            } else {
+                e.target.value = parseInt(this.animal.cookie[n])
+            }
+        },
+        switch_animal_cookie(i,n) {
+            // button
+            if (i == "add") {
+                this.animal.cookie[n] += 1
+            } else if (i == "sub") {
+                if (this.animal.cookie[n] - 1 < 1) {
+                    this.animal.cookie[n] = 0
+                } else {
+                    this.animal.cookie[n] -= 1
+                }
+            }
+        },
+        // 修改计划增产数量
+        change_animal_plan(e) {
+            // input
+            const INT = new RegExp("^[1-4]$")
+            if (e.target.value == "") {
+                this.animal.plan = 1
+            } else if (INT.test(e.target.value)) {
+                if (e.target.value > 4) {
+                    this.animal.plan = 1
+                } else if (e.target.value < 1) {
+                    this.animal.plan = 1
+                } else {
+                    this.animal.plan = parseInt(e.target.value)
+                }
+            } else {
+                e.target.value = parseInt(this.animal.plan)
+            }
+        },
+        switch_animal_plan(i) {
+            // button
+            if (i == "add") {
+                if (this.animal.plan + 1 <= 4) {
+                    this.animal.plan += 1
+                } else {
+                    this.animal.plan = 1
+                }
+            } else if (i == "sub") {
+                if (this.animal.plan - 1 < 1) {
+                    this.animal.plan = 4
+                } else {
+                    this.animal.plan -= 1
+                }
+            }
+        },
+        // 保存动物
+        animal_save() {
+            if (this.animal.name == "") {
+                this.animal.name = this.animal.type + "@" + (this.animal_list.length + 1).toString()
+            }
+            if (this.animal_id == -1) {
+                this.animal_list.push(this.animal)
+            }
+            this.animal_page = false
+            this.animal_change = false
+            this.animal_id = -1
+            this.data_to_localStorage(this.version.index)
+        },
+        // 选择动物类型
+        animal_picker() {
+            let that = this
+            weui.picker(this.animal_type, {
+                defaultValue: [that.animal.type],
+                onConfirm: function (result) {
+                    that.animal.type = result[0].value
+                },
+                id: 'animal_picker'
+            })
+        },
+        // 需要的茶点数量
+        cookie_need(s,i) {
+            const cookie = {
+                "鸡": [[2, 4, 6, 8],
+                [15, 30, 45, 60],
+                [4, 8, 12, 16],
+                [10, 20, 30, 40]],
+                "黑鸡": [[1, 2, 3, 4],
+                [14, 28, 42, 56],
+                [2, 4, 6, 8],
+                [14, 28, 42, 56]],
+                "牛": [[7, 14, 21, 28],
+                [8, 16, 24, 32],
+                [15, 30, 45, 60, ],
+                [1, 2, 3, 4, ]],
+                "茶牛": [[4, 8, 12, 16],
+                [6, 12, 18, 24],
+                [20, 40, 60, 80],
+                [1, 2, 3, 4]],
+                "羊": [[2, 4, 6, 8],
+                [12, 24, 36, 48],
+                [12, 24, 36, 48],
+                [5, 10, 15, 20]],
+                "黑羊": [[1, 2, 3, 4],
+                [15, 30, 45, 60],
+                [9, 18, 27, 36],
+                [6, 12, 18, 24]],
+                "白色羊驼": [[0, 0, 0, 0],
+                [15, 30, 45, 60],
+                [15, 20, 25, 30],
+                [15, 20, 25, 30]],
+                "茶色羊驼": [[0, 0, 0, 0],
+                [15, 30, 45, 60],
+                [15, 20, 25, 30],
+                [15, 20, 25, 30]]
+            }
+            return cookie[this.animal_list[s].type][i][this.animal_list[s].plan-1]
+        },
+        // 选择茶点类型
+        switch_counter(s,i) {
+            if (this.animal_list[s].current == i) {
+                this.animal_list[s].current = -1
+            } else {
+                this.animal_list[s].current = i
+            }
+            this.data_to_localStorage(this.version.index)
+        },
+        // 修改动物信息
+        animal_edit(i) {
+            this.animal = this.animal_list[i]
+            this.animal_id = i
+            this.animal_page = true
+            this.animal_change = true
+        },
+        // 删除动物
+        animal_del() {
+            this.animal_list.splice(this.animal_id, 1)
+            this.animal_page = false
+            this.animal_change = false
+            this.animal_id = -1
+            this.data_to_localStorage(this.version.index)
+        },
         // 通过年月日计算是周几
         get_week() {
             return ((this.year - 1) * 124 + this.month * 31 + this.day - 1) % 7
@@ -1400,6 +1572,7 @@ const ToDo_twotowns = {
                 "name": "",
                 "birthday_month": 0,
                 "birthday_day": 1,
+                "animal_list": [],
             }
             localStorage.setItem(e, JSON.stringify(d))
             this.localStorage_to_data(e)
@@ -1414,6 +1587,7 @@ const ToDo_twotowns = {
             this.name = d["name"]
             this.birthday_month = parseInt(d["birthday_month"])
             this.birthday_day = parseInt(d["birthday_day"])
+            this.animal_list = d["animal_list"] ? d["animal_list"] : []
         },
         // 从 data 写入 localStorage
         data_to_localStorage(e) {
@@ -1425,6 +1599,7 @@ const ToDo_twotowns = {
                 "name": this.name,
                 "birthday_month": this.birthday_month,
                 "birthday_day": this.birthday_day,
+                "animal_list": this.animal_list,
             }
             localStorage.setItem(e, JSON.stringify(d))
         },
@@ -1440,6 +1615,12 @@ const ToDo_twotowns = {
                 } else {
                     this.month = 0
                     this.year += 1
+                }
+            }
+            // 茶点计数器
+            for (let i in this.animal_list) {
+                if (this.animal_list[i].current != -1) {
+                    this.animal_list[i].cookie[this.animal_list[i].current] += 1
                 }
             }
             console.log('第' + this.year + '年 ' + this.season[this.month][1] + this.day + '日 星期' + this.week[this.get_week()])
@@ -1458,12 +1639,12 @@ const ToDo_twotowns = {
         }
     },
     template: `<div class="todo">
-    <div class="todo_season">
+    <div class="todo_season" v-if="!animal_page">
         <div class="todo_season_date">日历</div>
         <div>第&nbsp;<span v-text="year"></span>&nbsp;年</div>
         <div class="todo_season_moon" v-text="season[month][1]"></div>
     </div>
-    <div class="todo_calendar">
+    <div class="todo_calendar" v-if="!animal_page">
         <template v-for="i,n in get_calendar()" :key="n">
             <div class="todo_calendar_days" :class="i[1] != day ? '' : 'todo_calendar_this'" @click="month=i[0];day=i[1];year=i[2];data_to_localStorage(version.index)">
                 <div class="todo_calendar_week" v-text="week[n]"></div>
@@ -1473,7 +1654,32 @@ const ToDo_twotowns = {
                 </div>
             </div>
         </template></div>
-    <div class="todo_card_list">
+    <div class="animal_box" v-if="!animal_page" v-for="i,s in animal_list">
+        <div class="animal_box_name" v-text="i.name"></div>
+        <div class="animal_type" v-text="i.type"></div>
+        <div class="animal_cookies">
+            <div class="animal_cookie" @click="switch_counter(s,0)">
+                <div :class="i.current==0 ? 'cookie_0' : 'cookie_none'">普通</div>
+                <div><span v-text="i.cookie[0]"></span>/<span v-text="cookie_need(s,0)"></span></div>
+            </div>
+            <div class="animal_cookie" @click="switch_counter(s,1)">
+                <div :class="i.current==1 ? 'cookie_1' : 'cookie_none'">野菜</div>
+                <div><span v-text="i.cookie[1]"></span>/<span v-text="cookie_need(s,1)"></span></div>
+            </div>
+            <div class="animal_cookie" @click="switch_counter(s,2)">
+                <div :class="i.current==2 ? 'cookie_2' : 'cookie_none'">谷物</div>
+                <div><span v-text="i.cookie[2]"></span>/<span v-text="cookie_need(s,2)"></span></div>
+            </div>
+            <div class="animal_cookie" @click="switch_counter(s,3)">
+                <div :class="i.current==3 ? 'cookie_3' : 'cookie_none'">鱼味</div>
+                <div><span v-text="i.cookie[3]"></span>/<span v-text="cookie_need(s,3)"></span></div>
+            </div>
+            <div class="animal_edit" @click="animal_edit(s)">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M9.243 19H21v2H3v-4.243l9.9-9.9 4.242 4.244L9.242 19zm5.07-13.556l2.122-2.122a1 1 0 0 1 1.414 0l2.829 2.829a1 1 0 0 1 0 1.414l-2.122 2.121-4.242-4.242z" fill="rgba(52,72,94,1)"/></svg>
+            </div>
+        </div>
+    </div>
+    <div class="todo_card_list" v-if="!animal_page">
         <div class="todo_card todo_card_today" v-if="name!='' && birthday_month==month && birthday_day==day">
             <div class="todo_flex">
                 <div class="todo_title" v-text="name"></div>
@@ -1577,9 +1783,123 @@ const ToDo_twotowns = {
             </template>
         </template>
     </div>
+    <div class="todo_animal" v-if="animal_page">
+        <div class="setting_block">
+            <span class="setting_block_sub">名字</span>
+            <div class="setting_season">
+                <div class="animal_name">
+                    <input type="text" v-model="animal.name">
+                </div>
+            </div>
+        </div>
+        <list-item title="类型" style="border: none;" :sub="animal.type" @click="animal_picker()" />
+        <div class="setting_block">
+            <span class="setting_block_sub">计划增产</span>
+            <div class="setting_season">
+                <div class="setting_arrow" @click="switch_animal_plan('sub')">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="none" d="M0 0h24v24H0z" />
+                        <path d="M8 12l6-6v12z" fill="rgba(255,255,255,1)" />
+                    </svg>
+                </div>
+                <div class="setting_text">
+                    <input type="text" :value="animal.plan" @input.native="change_animal_plan($event)">
+                </div>
+                <div class="setting_arrow" @click="switch_animal_plan('add')">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="none" d="M0 0h24v24H0z" />
+                        <path d="M16 12l-6 6V6z" fill="rgba(255,255,255,1)" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <div class="setting_block" v-if="animal_change">
+            <span class="setting_block_sub">普通茶点</span>
+            <div class="setting_season">
+                <div class="setting_arrow" @click="switch_animal_cookie('sub',0)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="none" d="M0 0h24v24H0z" />
+                        <path d="M8 12l6-6v12z" fill="rgba(255,255,255,1)" />
+                    </svg>
+                </div>
+                <div class="setting_text">
+                    <input type="text" :value="animal.cookie[0]" @input.native="change_animal_cookie($event,0)">
+                </div>
+                <div class="setting_arrow" @click="switch_animal_cookie('add',0)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="none" d="M0 0h24v24H0z" />
+                        <path d="M16 12l-6 6V6z" fill="rgba(255,255,255,1)" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <div class="setting_block" v-if="animal_change">
+            <span class="setting_block_sub">野菜茶点</span>
+            <div class="setting_season">
+                <div class="setting_arrow" @click="switch_animal_cookie('sub',1)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="none" d="M0 0h24v24H0z" />
+                        <path d="M8 12l6-6v12z" fill="rgba(255,255,255,1)" />
+                    </svg>
+                </div>
+                <div class="setting_text">
+                    <input type="text" :value="animal.cookie[1]" @input.native="change_animal_cookie($event,1)">
+                </div>
+                <div class="setting_arrow" @click="switch_animal_cookie('add',1)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="none" d="M0 0h24v24H0z" />
+                        <path d="M16 12l-6 6V6z" fill="rgba(255,255,255,1)" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <div class="setting_block" v-if="animal_change">
+            <span class="setting_block_sub">谷物茶点</span>
+            <div class="setting_season">
+                <div class="setting_arrow" @click="switch_animal_cookie('sub',2)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="none" d="M0 0h24v24H0z" />
+                        <path d="M8 12l6-6v12z" fill="rgba(255,255,255,1)" />
+                    </svg>
+                </div>
+                <div class="setting_text">
+                    <input type="text" :value="animal.cookie[2]" @input.native="change_animal_cookie($event,2)">
+                </div>
+                <div class="setting_arrow" @click="switch_animal_cookie('add',2)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="none" d="M0 0h24v24H0z" />
+                        <path d="M16 12l-6 6V6z" fill="rgba(255,255,255,1)" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <div class="setting_block" v-if="animal_change">
+            <span class="setting_block_sub">鱼味茶点</span>
+            <div class="setting_season">
+                <div class="setting_arrow" @click="switch_animal_cookie('sub',3)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="none" d="M0 0h24v24H0z" />
+                        <path d="M8 12l6-6v12z" fill="rgba(255,255,255,1)" />
+                    </svg>
+                </div>
+                <div class="setting_text">
+                    <input type="text" :value="animal.cookie[3]" @input.native="change_animal_cookie($event,3)">
+                </div>
+                <div class="setting_arrow" @click="switch_animal_cookie('add',3)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="none" d="M0 0h24v24H0z" />
+                        <path d="M16 12l-6 6V6z" fill="rgba(255,255,255,1)" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="todo_spacing"></div>
     <div class="todo_next">
-        <div class="next_button" @click="next()">下一天</div>
+        <div class="animal_button" v-if="!animal_page" @click="animal_add()">添加动物</div>
+        <div class="next_button" v-if="!animal_page" @click="next()">下一天</div>
+        <div class="del_button" v-if="animal_page&&animal_change" @click="animal_del()">删除</div>
+        <div class="next_button" v-if="animal_page" @click="animal_save()">保存</div>
     </div>
 </div>`
 }
