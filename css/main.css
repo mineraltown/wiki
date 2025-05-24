@@ -10,6 +10,8 @@ body {
     height: 100vh;
     margin: 0;
     padding: 0;
+    cursor: default;
+    user-select: none;
     font-family: Helvetica, Tahoma, Arial, STXihei, "华文细黑", "Microsoft YaHei", "微软雅黑", SimSun, "宋体", Heiti, "黑体", sans-serif;
 }
 
@@ -174,6 +176,8 @@ img {
 
 .main {
     width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
     min-height: 0;
     padding-top: 3rem;
     padding-bottom: 4.5rem;
@@ -508,8 +512,13 @@ img {
     align-items: center;
 }
 
+.item-icon img {
+    width: 2rem;
+    height: 2rem;
+}
+
 .item-text {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
 }
 
 .menu-resident {
