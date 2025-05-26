@@ -11,7 +11,7 @@ const suffix = ""
 const Home = {
     template: `<div class="default">
     <div class="qrcode">
-        <img src="/static/qrcode_for_mini_program.jpg" alt="mini program">
+        <img src="/static/qrcode_for_mini_program.webp" alt="mini program">
         本站已发布「微信小程序」
     </div>
     <div class="default_text">

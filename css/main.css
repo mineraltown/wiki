@@ -12,7 +12,6 @@ body {
     padding: 0;
     cursor: default;
     user-select: none;
-    font-family: Helvetica, Tahoma, Arial, STXihei, "华文细黑", "Microsoft YaHei", "微软雅黑", SimSun, "宋体", Heiti, "黑体", sans-serif;
 }
 
 a {
@@ -518,7 +517,7 @@ img {
 }
 
 .item-text {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
 }
 
 .menu-resident {
