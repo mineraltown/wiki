@@ -1,18 +1,37 @@
 const { createApp } = Vue
-const { createRouter, createWebHistory } = VueRouter
+const { createRouter, createWebHashHistory } = VueRouter
 // createWebHistory
 // createWebHashHistory
 
 // 后端接口 URL 地址
-const url = "https://api.mineraltown.net/"
+const url = "http://192.168.0.10:8888/"
 const suffix = ""
 
 // 组件：主页
 const Home = {
+    inject: ["version"],
+    data() {
+        return {
+        }
+    },
+    methods: {
+        // 切换游戏版本
+        switch_version(v) {
+            this.version.index = v
+            localStorage.setItem('version', this.version.index)
+        },
+    },
     template: `<div class="default">
     <div class="qrcode">
         <img src="/static/qrcode_for_mini_program.webp" alt="mini program">
         本站已发布「微信小程序」
+    </div>
+    <div class="grandbazaar" @click="switch_version('grandbazaar')">
+        <img src="/static/logo_grandbazaar.webp" alt="grandbazaar">
+        <p>
+        《牧场物语 来吧！风之繁华集市》<br>攻略持续更新中～<br><br>
+        在【<b>设置</b>】中可【<b>切换游戏版本</b>】查看
+        </p>
     </div>
     <div class="default_text">
         <p>欢迎使用「矿石镇的攻略百科」<br>
@@ -578,8 +597,8 @@ const ToDo_saikai = {
             // 电视料理菜谱
             if (this.version.index == "saikai") {
                 axios.get(url + "todo/saikai/cookbook" + suffix).then((response) => {
-                this.cookbook = response.data
-            })
+                    this.cookbook = response.data
+                })
             }
         },
         // 下个月
@@ -1956,6 +1975,11 @@ const Setting = {
                 id: 'setting_pick'
             })
         },
+        // 切换游戏版本
+        switch_version(v) {
+            this.version.index = v
+            localStorage.setItem('version', this.version.index)
+        },
         // 修改姓名
         change_name(e) {
             this.name = e.target.value
@@ -2191,6 +2215,15 @@ const Setting = {
         <list-item title="提前提醒天数" :sub="advance_day==0 ? '不提醒' : advance_day + ' 天'" @click="advance()" />
         </template>
     </div>
+    <div class="setting_grandbazaar" @click="switch_version('grandbazaar')">
+        <div class="grandbazaar">
+            <img src="/static/logo_grandbazaar.webp" alt="grandbazaar">
+            <p>
+            《牧场物语 来吧！风之繁华集市》<br>攻略持续更新中～<br><br>
+            在【<b>设置</b>】中可【<b>切换游戏版本</b>】查看
+            </p>
+        </div>
+    </div>
     <div class="copyright">
         <div>矿石镇的攻略百科 &copy; 2015-<span v-text="new Date().getFullYear()">
             </span>
@@ -2221,7 +2254,7 @@ const routes = [
 
 // 创建路由器实例
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHashHistory(),
     routes
 })
 
