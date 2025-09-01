@@ -1,10 +1,11 @@
 const { createApp } = Vue
-const { createRouter, createWebHashHistory } = VueRouter
+const { createRouter, createWebHistory } = VueRouter
+
 // createWebHistory
 // createWebHashHistory
 
 // 后端接口 URL 地址
-const url = "http://192.168.0.10:8888/"
+const url = "https://api.mineraltown.net/"
 const suffix = ""
 
 // 组件：主页
@@ -2254,7 +2255,7 @@ const routes = [
 
 // 创建路由器实例
 const router = createRouter({
-    history: createWebHashHistory(),
+    history: createWebHistory(),
     routes
 })
 
