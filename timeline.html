@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- 移动端适配：宽度跟随设备，初始缩放比 1.0 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>牧场物语 · 编年史</title>
+
+    <!-- 预加载 Vue 3 生产版 JS，减少首屏阻塞 -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/vue/3.5.22/vue.global.prod.min.js" as="script">
+    <!-- 预加载游戏版本数据 JSON，后续在 created() 中 fetch -->
+    <link rel="preload" href="/version.json" as="fetch" crossorigin>
+
+    <!-- 时间线页面专用样式表 -->
+    <link rel="stylesheet" href="css/timeline.css">
+</head>
+
+<body>
+    <!-- 页面顶部标题区域 -->
+    <header class="page-header">
+        <h1>牧场物语 · 编年史</h1>
+        <p>从 1996 年到今天，一路走来的全部作品</p>
+    </header>
+
+    <!--
+        时间线主容器
+        - id="timeline" 作为 Vue 应用挂载点
+        - v-cloak：在 Vue 实例编译完成前隐藏模板，防止闪烁
+    -->
+    <div class="timeline-container" id="timeline" v-cloak>
+        <!--
+            遍历 items 数组，为每条游戏数据生成一个时间线节点
+            - index 用于计算入场动画延迟（每项递增 1s），产生依次浮现效果
+        -->
+        <div class="timeline-item" v-for="(item, index) in items" :style="{ animationDelay: index * 1 + 's' }">
+            <!--
+                时间线轴线上的圆点指示器
+                - active 类：当 item.enable 为 true 时添加，表示该作品已上线（绿色圆点）
+            -->
+            <div class="timeline-dot" :class="{ active: item.enable }"></div>
+
+            <!-- 左侧日期区域：显示发布年份和月/日 -->
+            <div class="time-area">
+                <div class="year">{{ item.release_date.year }} <span class="year_mini">年 </span></div>
+                <div class="month-day">{{ item.release_date.month }}月{{ item.release_date.day }}日
+                </div>
+            </div>
+
+            <!-- 右侧卡片内容区域 -->
+            <div class="content-area">
+                <!--
+                    整张卡片外层包裹 <a> 标签实现可点击跳转
+                    - 仅当 item.enable 为 true 时才设置 href（指向对应页面）
+                    - @click.prevent="!item.enable"：未上线的条目阻止默认跳转行为
+                -->
+                <a :href="item.enable ? item.link : null" @click="item.enable || $event.preventDefault()"
+                    style="text-decoration: none;">
+                    <!--
+                        内容卡片
+                        - active 类：已上线条目，带绿色左边框
+                        - disabled 类：未上线条目，半透明且无 hover 效果
+                    -->
+                    <div class="card" :class="{ active: item.enable, disabled: !item.enable }">
+                        <!-- 标签行 -->
+                        <div class="tags">
+                            <!-- 游戏分类标签（平台、类型等），过滤掉空值 -->
+                            <span class="tag" v-for="tag in item.tag.filter(t => t)">{{ tag }}</span>
+                        </div>
+                        <!-- 游戏中文标题 -->
+                        <h3 class="title">{{ item.title }}</h3>
+                        <!--
+                            日文标题，链接指向官方/资料站页面
+                            target="_blank"：新窗口打开
+                            rel="noopener"：安全属性，防止新页面通过 window.opener 访问原页面
+                        -->
+                        <span class="title_jp" :title="item.url">{{ item.title_jp }}</span>
+                        <!--
+                            游戏封面图容器
+                            - 外层 .cover-wrap 控制尺寸和背景底色
+                            - 图片源：本地 images/ 目录 + item.cover 文件名
+                            - loading="lazy"：原生懒加载，进入视口附近时才请求图片
+                        -->
+                        <div class="cover-wrap">
+                            <img :src="'images/' + item.cover" :alt="item.name" class="cover-img" loading="lazy" />
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vue 3 生产版 CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.5.22/vue.global.prod.min.js"></script>
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                // items 初始为空对象，等待从 version.json 异步加载
+                return { items: {} };
+            },
+            /**
+             * 生命周期钩子 —— 组件创建后自动执行
+             * 从 /version.json 拉取全部游戏作品数据，赋值给 items
+             * Vue 的响应式系统会自动驱动 DOM 更新
+             */
+            async created() {
+                const res = await fetch('/version.json');
+                const data = await res.json();
+                this.items = data;
+            }
+        }).mount('#timeline'); // 将 Vue 应用挂载到 id="timeline" 的容器
+    </script>
+
+</body>
+
+</html>

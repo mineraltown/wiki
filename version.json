@@ -1,0 +1,764 @@
+{
+    "sfc": {
+        "link": "sfc",
+        "title": "牧场物语",
+        "title_jp": "牧場物語",
+        "release_date": {
+            "year": 1996,
+            "month": 8,
+            "day": 6
+        },
+        "url": "https://www.bokumono.com/sub/bokumono.php",
+        "cover": "cover/soft_big_bokumono.png",
+        "enable": true,
+        "tag": [
+            "Super Famicom",
+            "SNES",
+            "Nintendo Switch Online"
+        ]
+    },
+    "gb": {
+        "link": "gb",
+        "title": "牧场物语GB",
+        "title_jp": "牧場物語GB",
+        "release_date": {
+            "year": 1997,
+            "month": 12,
+            "day": 19
+        },
+        "url": "https://www.bokumono.com/sub/bokumono_gb.php",
+        "cover": "cover/soft_big_bokumono_gb.png",
+        "enable": false,
+        "tag": [
+            "GAME BOY"
+        ]
+    },
+    "n64": {
+        "link": "n64",
+        "title": "牧场物语2",
+        "title_jp": "牧場物語2",
+        "release_date": {
+            "year": 1999,
+            "month": 2,
+            "day": 5
+        },
+        "url": "https://www.bokumono.com/series/bokumono2/bokumono.html",
+        "cover": "cover/soft_big_bokumono2.png",
+        "enable": false,
+        "tag": [
+            "Nintendo 64",
+            "Nintendo Switch Online + 追加パック"
+        ]
+    },
+    "gb2": {
+        "link": "gb2",
+        "title": "牧场物语GB2",
+        "title_jp": "牧場物語GB2",
+        "release_date": {
+            "year": 1999,
+            "month": 8,
+            "day": 6
+        },
+        "url": "http://www.bokumono.com/series/bokumonogb2/bokumonot.html",
+        "cover": "cover/soft_big_bokumono_gb2.png",
+        "enable": false,
+        "tag": [
+            "GAME BOY",
+            "GAME BOY COLOR"
+        ]
+    },
+    "harvest_moon": {
+        "link": "harvest_moon",
+        "title": "牧场物语 中秋满月",
+        "title_jp": "牧場物語 ～ハーベストムーン",
+        "release_date": {
+            "year": 1999,
+            "month": 12,
+            "day": 16
+        },
+        "url": "http://www.bokumono.com/series/harvest/hmb/",
+        "cover": "cover/soft_big_harvest.png",
+        "enable": false,
+        "tag": [
+            "PlayStation"
+        ]
+    },
+    "gb3": {
+        "link": "gb3",
+        "title": "牧场物语GB3 当男孩遇见女孩",
+        "title_jp": "牧場物語GB3 ボーイ・ミーツ・ガール",
+        "release_date": {
+            "year": 2000,
+            "month": 9,
+            "day": 29
+        },
+        "url": "http://www.bokumono.com/series/bokumonogb3/",
+        "cover": "cover/soft_big_bokumono_gb3.png",
+        "enable": false,
+        "tag": [
+            "GAME BOY COLOR"
+        ]
+    },
+    "harvest_moon_g": {
+        "link": "harvest_moon_g",
+        "title": "牧场物语 中秋满月 女孩版",
+        "title_jp": "牧場物語 ～ハーベストムーン for ガール",
+        "release_date": {
+            "year": 2000,
+            "month": 12,
+            "day": 7
+        },
+        "url": "http://www.bokumono.com/series/for_girl/",
+        "cover": "cover/soft_big_harvest_girl.png",
+        "enable": false,
+        "tag": [
+            "PlayStation"
+        ]
+    },
+    "ps2": {
+        "link": "ps2",
+        "title": "牧场物语 3 燃起心中的热火",
+        "title_jp": "牧場物語3 ～ハートに火をつけて",
+        "release_date": {
+            "year": 2001,
+            "month": 7,
+            "day": 5
+        },
+        "url": "http://www.bokumono.com/series/bokumono3/",
+        "cover": "cover/soft_big_bokumono3.png",
+        "enable": false,
+        "tag": [
+            "PlayStation2"
+        ]
+    },
+    "mineraltown": {
+        "link": "mineraltown",
+        "title": "牧场物语 矿石镇的伙伴们",
+        "title_jp": "牧場物語 ～ミネラルタウンのなかまたち",
+        "release_date": {
+            "year": 2003,
+            "month": 4,
+            "day": 18
+        },
+        "url": "http://www.bokumono.com/series/harvest/",
+        "cover": "cover/soft_big_mineral.png",
+        "enable": true,
+        "tag": [
+            "GAME BOY ADVANCE"
+        ]
+    },
+    "wonderfullife": {
+        "link": "wonderfullife",
+        "title": "牧场物语 美丽人生",
+        "title_jp": "牧場物語 ワンダフルライフ",
+        "release_date": {
+            "year": 2003,
+            "month": 9,
+            "day": 12
+        },
+        "url": "http://www.bokumono.com/series/cube_gba/cube/",
+        "cover": "cover/soft_big_wonderful.png",
+        "enable": false,
+        "tag": [
+            "GAME CUBE"
+        ]
+    },
+    "mineraltown_g": {
+        "link": "mineraltown_g",
+        "title": "牧场物语 矿石镇的伙伴们 女孩版",
+        "title_jp": "牧場物語 ～ミネラルタウンのなかまたち for ガール",
+        "release_date": {
+            "year": 2003,
+            "month": 12,
+            "day": 12
+        },
+        "url": "http://www.bokumono.com/series/cube_gba_girl/gba/",
+        "cover": "cover/soft_big_mineral_for_girl.png",
+        "enable": false,
+        "tag": [
+            "GAME BOY ADVANCE"
+        ]
+    },
+    "wonderfullife_g": {
+        "link": "wonderfullife_g",
+        "title": "牧场物语 美丽人生 女孩版",
+        "title_jp": "牧場物語 ワンダフルライフ for ガール",
+        "release_date": {
+            "year": 2004,
+            "month": 7,
+            "day": 8
+        },
+        "url": "http://www.bokumono.com/series/cube_gba_girl/cube/",
+        "cover": "cover/soft_big_wonderful_for_girl.png",
+        "enable": false,
+        "tag": [
+            "GAME CUBE"
+        ]
+    },
+    "oh_wonderful": {
+        "link": "oh_wonderful",
+        "title": "牧场物语 Oh！美丽人生",
+        "title_jp": "牧場物語 Oh！ワンダフルライフ",
+        "release_date": {
+            "year": 2004,
+            "month": 11,
+            "day": 11
+        },
+        "url": "http://www.bokumono.com/series/oh_wonderfullife/",
+        "cover": "cover/soft_big_ohwonderful.png",
+        "enable": false,
+        "tag": [
+            "PlayStation2"
+        ]
+    },
+    "shiauta": {
+        "link": "shiauta",
+        "title": "牧场物语 幸福之诗",
+        "title_jp": "牧場物語 しあわせの詩",
+        "release_date": {
+            "year": 2005,
+            "month": 3,
+            "day": 3
+        },
+        "url": "https://www.bokumono.com/series/shiauta/",
+        "cover": "cover/soft_big_shiawase.png",
+        "enable": false,
+        "tag": [
+            "GAME CUBE"
+        ]
+    },
+    "corosute": {
+        "link": "corosute",
+        "title": "牧场物语 精灵电台",
+        "title_jp": "牧場物語 コロボックルステーション",
+        "release_date": {
+            "year": 2005,
+            "month": 3,
+            "day": 17
+        },
+        "url": "http://www.bokumono.com/series/corosute/",
+        "cover": "cover/soft_big_Korobokkuru.png",
+        "enable": false,
+        "tag": [
+            "Nintendo DS"
+        ]
+    },
+    "shiauta_g": {
+        "link": "shiauta",
+        "title": "牧场物语 幸福之诗 女孩版",
+        "title_jp": "牧場物語 しあわせの詩 for ワールド",
+        "release_date": {
+            "year": 2005,
+            "month": 11,
+            "day": 10
+        },
+        "url": "http://www.bokumono.com/series/shiauta_world/",
+        "cover": "cover/soft_big_shiawase_forw.png",
+        "enable": false,
+        "tag": [
+            "GAME CUBE"
+        ]
+    },
+    "harvest_bandg": {
+        "link": "harvest_bandg",
+        "title": "牧场物语 中秋满月 男孩&女孩",
+        "title_jp": "牧場物語 ハーベストムーン ボーイ＆ガール",
+        "release_date": {
+            "year": 2005,
+            "month": 11,
+            "day": 23
+        },
+        "url": "http://www.bokumono.com/series/harvest_bandg/",
+        "cover": "cover/soft_big_harvest_bg.png",
+        "enable": false,
+        "tag": [
+            "PlayStationPortable"
+        ]
+    },
+    "corosute_g": {
+        "link": "corosute",
+        "title": "牧场物语 精灵电台 女孩版",
+        "title_jp": "牧場物語 コロボックルステーション for ガール",
+        "release_date": {
+            "year": 2005,
+            "month": 12,
+            "day": 8
+        },
+        "url": "http://www.bokumono.com/series/corosute_girl/",
+        "cover": "cover/soft_big_Korobokkuru_girl.png",
+        "enable": false,
+        "tag": [
+            "Nintendo DS"
+        ]
+    },
+    "innocent_psp": {
+        "link": "innocent_psp",
+        "title": "无暇人生 ~新牧场物语",
+        "title_jp": "イノセントライフ ～新牧場物語",
+        "release_date": {
+            "year": 2006,
+            "month": 4,
+            "day": 27
+        },
+        "url": "http://www.marv.jp/special/game/psp/innocent_life/",
+        "cover": "cover/soft_big_innocent.png",
+        "enable": false,
+        "tag": [
+            "PlayStationPortable"
+        ]
+    },
+    "rf1": {
+        "link": "rf1",
+        "title": "符文工房 新牧场物语",
+        "title_jp": "ルーンファクトリー －新牧場物語－",
+        "release_date": {
+            "year": 2006,
+            "month": 8,
+            "day": 24
+        },
+        "url": "http://www.bokumono.com/series/runefactory/",
+        "cover": "cover/soft_big_rune.png",
+        "enable": false,
+        "tag": [
+            "Nintendo DS"
+        ]
+    },
+    "kimishima": {
+        "link": "kimishima",
+        "title": "牧场物语 养育你的小岛",
+        "title_jp": "牧場物語 キミと育つ島",
+        "release_date": {
+            "year": 2007,
+            "month": 2,
+            "day": 1
+        },
+        "url": "http://www.bokumono.com/series/kimishima/",
+        "cover": "cover/soft_big_kimishima.png",
+        "enable": false,
+        "tag": [
+            "Nintendo DS"
+        ]
+    },
+    "innocent_ps2": {
+        "link": "innocent_ps2",
+        "title": "新牧场物语：无暇人生",
+        "title_jp": "新牧場物語：ピュア イノセントライフ",
+        "release_date": {
+            "year": 2007,
+            "month": 3,
+            "day": 29
+        },
+        "url": "http://www.marv.jp/special/game/ps2/innocent_life/",
+        "cover": "cover/soft_big_pure_innocent_life.png",
+        "enable": false,
+        "tag": [
+            "PlayStation2"
+        ]
+    },
+    "yasuragi": {
+        "link": "yasuragi",
+        "title": "牧场物语 济世之树",
+        "title_jp": "牧場物語 やすらぎの樹",
+        "release_date": {
+            "year": 2007,
+            "month": 6,
+            "day": 7
+        },
+        "url": "http://www.bokumono.com/series/yasuragi/",
+        "cover": "cover/soft_big_yasuragi.png",
+        "enable": false,
+        "tag": [
+            "Wii"
+        ]
+    },
+    "rf2": {
+        "link": "rf2",
+        "title": "符文工房2",
+        "title_jp": "ルーンファクトリー２",
+        "release_date": {
+            "year": 2008,
+            "month": 1,
+            "day": 3
+        },
+        "url": "https://www.marv.jp/special/game/ds/runefactory2/",
+        "cover": "cover/soft_big_rf2.jpg",
+        "enable": false,
+        "tag": [
+            "Nintendo DS"
+        ]
+    },
+    "kiranaka": {
+        "link": "kiranaka",
+        "title": "牧场物语 闪耀太阳和伙伴们",
+        "title_jp": "牧場物語 キラキラ太陽となかまたち",
+        "release_date": {
+            "year": 2008,
+            "month": 2,
+            "day": 21
+        },
+        "url": "http://www.bokumono.com/series/kiranaka/",
+        "cover": "cover/soft_big_kiranaka.png",
+        "enable": false,
+        "tag": [
+            "Nintendo DS"
+        ]
+    },
+    "wakuwaku": {
+        "link": "wakuwaku",
+        "title": "牧场物语 欢欣雀跃的动物进行曲",
+        "title_jp": "牧場物語 わくわくアニマルマーチ",
+        "release_date": {
+            "year": 2008,
+            "month": 10,
+            "day": 30
+        },
+        "url": "http://www.bokumono.com/series/wakuwaku/",
+        "cover": "cover/soft_big_wakuwaku.png",
+        "enable": false,
+        "tag": [
+            "Wii"
+        ]
+    },
+    "rf_frontier": {
+        "link": "rf_frontier",
+        "title": "符文工房 边境",
+        "title_jp": "ルーンファクトリー フロンティア",
+        "release_date": {
+            "year": 2008,
+            "month": 11,
+            "day": 27
+        },
+        "url": "https://runefactory.marv.jp/series/rf_frontier/",
+        "cover": "cover/rf_frontier_wii.jpg",
+        "enable": false,
+        "tag": [
+            "Wii"
+        ]
+    },
+    "bazaar": {
+        "link": "bazaar",
+        "title": "牧场物语 风之集市",
+        "title_jp": "牧場物語 ようこそ！風のバザールへ",
+        "release_date": {
+            "year": 2008,
+            "month": 12,
+            "day": 18
+        },
+        "url": "http://www.bokumono.com/series/kazebaza/",
+        "cover": "cover/soft_big_kazebaza.png",
+        "enable": true,
+        "tag": [
+            "Nintendo DS"
+        ]
+    },
+    "sugarmin": {
+        "link": "sugarmin",
+        "title": "牧场物语 蜜糖村与大家的心愿",
+        "title_jp": "牧場物語 シュガー村とみんなの願い",
+        "release_date": {
+            "year": 2009,
+            "month": 3,
+            "day": 19
+        },
+        "url": "http://www.bokumono.com/series/sugarmin/",
+        "cover": "cover/soft_big_sugarmin.png",
+        "enable": false,
+        "tag": [
+            "PlayStationPortable"
+        ]
+    },
+    "makiba": {
+        "link": "makiba",
+        "title": "牧场物语 牧场商店",
+        "title_jp": "牧場物語シリーズ まきばのおみせ",
+        "release_date": {
+            "year": 2009,
+            "month": 4,
+            "day": 28
+        },
+        "url": "http://www.bokumono.com/series/makiba/",
+        "cover": "cover/soft_big_makiba.png",
+        "enable": false,
+        "tag": [
+            "Wii Ware"
+        ]
+    },
+    "rf3": {
+        "link": "rf3",
+        "title": "符文工房3",
+        "title_jp": "ルーンファクトリー３",
+        "release_date": {
+            "year": 2009,
+            "month": 10,
+            "day": 22
+        },
+        "url": "https://www.marv.jp/special/game/ds/runefactory3/",
+        "cover": "cover/soft_big_rf3.jpg",
+        "enable": false,
+        "tag": [
+            "Nintendo DS"
+        ]
+    },
+    "twotowns": {
+        "link": "twotowns",
+        "title": "牧场物语 双子村",
+        "title_jp": "牧場物語 ふたごの村",
+        "release_date": {
+            "year": 2010,
+            "month": 7,
+            "day": 8
+        },
+        "url": "http://www.bokumono.com/series/futago/",
+        "cover": "cover/soft_big_futago.png",
+        "enable": true,
+        "tag": [
+            "Nintendo DS"
+        ]
+    },
+    "rf_oceans": {
+        "link": "rf_oceans",
+        "title": "符文工房 海洋",
+        "title_jp": "ルーンファクトリー オーシャンズ",
+        "release_date": {
+            "year": 2011,
+            "month": 2,
+            "day": 24
+        },
+        "url": "https://runefactory.marv.jp/series/rf_oceans/",
+        "cover": "cover/rf_oceans_wii.jpg",
+        "enable": false,
+        "tag": [
+            "Wii",
+            "PlayStation3"
+        ]
+    },
+    "origin_land": {
+        "link": "origin_land",
+        "title": "牧场物语 起源的大地",
+        "title_jp": "牧場物語 はじまりの大地",
+        "release_date": {
+            "year": 2012,
+            "month": 2,
+            "day": 23
+        },
+        "url": "http://www.bokumono.com/series/hajimari/",
+        "cover": "cover/soft_big_hajimari.png",
+        "enable": false,
+        "tag": [
+            "Nintendo 3DS"
+        ]
+    },
+    "rf4": {
+        "link": "rf4",
+        "title": "符文工房4",
+        "title_jp": "ルーンファクトリー４",
+        "release_date": {
+            "year": 2012,
+            "month": 7,
+            "day": 19
+        },
+        "url": "https://www.marv.jp/special/game/3ds/runefactory4/",
+        "cover": "cover/soft_big_rf4.jpg",
+        "enable": false,
+        "tag": [
+            "Nintendo 3DS"
+        ]
+    },
+    "connect": {
+        "link": "connect",
+        "title": "牧场物语 连接新天地",
+        "title_jp": "牧場物語　つながる新天地",
+        "release_date": {
+            "year": 2014,
+            "month": 2,
+            "day": 27
+        },
+        "url": "http://www.bokumono.com/series/tsunagaru/",
+        "cover": "cover/soft_big_tsunagaru.png",
+        "enable": false,
+        "tag": [
+            "Nintendo 3DS"
+        ]
+    },
+    "trio": {
+        "link": "trio",
+        "title": "牧场物语 三个村庄的珍贵朋友",
+        "title_jp": "牧場物語 ３つの里の大切な友だち",
+        "release_date": {
+            "year": 2016,
+            "month": 6,
+            "day": 23
+        },
+        "url": "http://www.bokumono.com/series/tomodachi/",
+        "cover": "cover/soft_big_tomodachi.png",
+        "enable": true,
+        "tag": [
+            "Nintendo 3DS"
+        ]
+    },
+    "twotowns_plus": {
+        "link": "twotowns_plus",
+        "title": "牧场物语 双子村+",
+        "title_jp": "牧場物語 ふたごの村＋",
+        "release_date": {
+            "year": 2017,
+            "month": 12,
+            "day": 14
+        },
+        "url": "http://www.bokumono.com/series/twin_plus/",
+        "cover": "cover/soft_big_futago_plus.png",
+        "enable": false,
+        "tag": [
+            "Nintendo 3DS"
+        ]
+    },
+    "rf4_s": {
+        "link": "rf4",
+        "title": "符文工房4 豪华版",
+        "title_jp": "ルーンファクトリー４スペシャル",
+        "release_date": {
+            "year": 2019,
+            "month": 7,
+            "day": 25
+        },
+        "url": "https://www.marv.jp/special/game/runefactory4SP/",
+        "cover": "cover/soft_big_rf4sp.png",
+        "enable": false,
+        "tag": [
+            "Nintendo Switch",
+            "PlayStation4",
+            "Xbox One",
+            "Steam"
+        ]
+    },
+    "saikai": {
+        "link": "saikai",
+        "title": "牧场物语 重聚矿石镇",
+        "title_jp": "牧場物語 再会のミネラルタウン",
+        "release_date": {
+            "year": 2019,
+            "month": 10,
+            "day": 17
+        },
+        "url": "http://www.bokumono.com/series/saikai/",
+        "cover": "cover/soft_big_saikai.png",
+        "enable": true,
+        "tag": [
+            "Nintendo Switch",
+            "PlayStation4",
+            "Xbox One",
+            "Steam"
+        ]
+    },
+    "olive": {
+        "link": "olive",
+        "title": "牧场物语 橄榄镇与希望的大地",
+        "title_jp": "牧場物語 オリーブタウンと希望の大地",
+        "release_date": {
+            "year": 2021,
+            "month": 2,
+            "day": 25
+        },
+        "url": "https://www.bokumono.com/series/olive/",
+        "cover": "cover/soft_big_olive.png",
+        "enable": true,
+        "tag": [
+            "Nintendo Switch",
+            "PlayStation4",
+            "Steam"
+        ]
+    },
+    "rf5": {
+        "link": "rf5",
+        "title": "符文工房5",
+        "title_jp": "ルーンファクトリー５",
+        "release_date": {
+            "year": 2021,
+            "month": 5,
+            "day": 20
+        },
+        "url": "https://runefactory.marv.jp/series/rf5/",
+        "cover": "cover/soft_rf5.png",
+        "enable": false,
+        "tag": [
+            "Nintendo Switch",
+            "Steam"
+        ]
+    },
+    "welcome": {
+        "link": "welcome",
+        "title": "牧场物语 Welcome！美丽人生",
+        "title_jp": "牧場物語 Welcome！ワンダフルライフ",
+        "release_date": {
+            "year": 2023,
+            "month": 1,
+            "day": 26
+        },
+        "url": "https://www.bokumono.com/series/welcome/",
+        "cover": "cover/soft_welcome.png",
+        "enable": true,
+        "tag": [
+            "Nintendo Switch",
+            "PlayStation5",
+            "Xbox Series X|S",
+            "Steam"
+        ]
+    },
+    "rf3_s": {
+        "link": "rf3",
+        "title": "符文工房3 豪华版",
+        "title_jp": "ルーンファクトリー３スペシャル",
+        "release_date": {
+            "year": 2023,
+            "month": 3,
+            "day": 2
+        },
+        "url": "https://runefactory.marv.jp/series/rf3SP/",
+        "cover": "cover/soft_big_rf3sp.png",
+        "enable": false,
+        "tag": [
+            "Nintendo Switch",
+            "Steam"
+        ]
+    },
+    "rf_ryu": {
+        "link": "rf_ryu",
+        "title": "符文工房 龙之天地",
+        "title_jp": "龍の国 ルーンファクトリー",
+        "release_date": {
+            "year": 2025,
+            "month": 5,
+            "day": 30
+        },
+        "url": "https://jp.runefactory.com/ryu-no-kuni/",
+        "cover": "cover/rf_ryu_ns2.png",
+        "enable": false,
+        "tag": [
+            "Nintendo Switch",
+            "Nintendo Switch 2",
+            "PlayStation5",
+            "Xbox Series X|S",
+            "Steam"
+        ]
+    },
+    "grandbazaar": {
+        "link": "grandbazaar",
+        "title": "牧场物语 来吧！风之繁华集市",
+        "title_jp": "牧場物語 Let's！風のグランドバザール",
+        "release_date": {
+            "year": 2025,
+            "month": 8,
+            "day": 28
+        },
+        "url": "https://www.bokumono.com/grabaza/",
+        "cover": "cover/soft_garabaza_ns2.webp",
+        "enable": true,
+        "tag": [
+            "Nintendo Switch",
+            "Nintendo Switch 2",
+            "PlayStation5",
+            "Xbox Series X|S",
+            "Steam"
+        ]
+    }
+}

@@ -1,0 +1,392 @@
+/* ── Vue 编译前隐藏模板，防止原始 {{ }} 模板语法闪烁 ── */
+[v-cloak] {
+    display: none;
+}
+
+/* ── 基础重置：统一盒模型 + 清除默认边距 ── */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* ── 页面全局样式 ──
+   - 字体：使用系统字体栈，在各平台上获得最佳原生渲染效果
+   - 背景：三段式渐变（淡蓝 → 淡紫 → 淡粉），营造柔和的氛围
+   - min-height: 100vh 确保页面至少撑满整个视口高度
+   - 底部留 60px 内边距，避免最后一个卡片紧贴浏览器边缘
+*/
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: linear-gradient(135deg, #f0f4ff 0%, #faf5ff 50%, #fff1f2 100%);
+    color: #334155;
+    min-height: 100vh;
+    padding: 0 0 60px;
+}
+
+/* ── 页面头部（标题 + 副标题） ──
+   - position: sticky 固定在屏幕顶部
+   - 毛玻璃背景 + 阴影，滚动时与下方内容形成层次
+*/
+.page-header {
+    text-align: center;
+    padding: 20px 20px 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 1px 12px rgba(0, 0, 0, 0.04);
+}
+
+/* 主标题：深色调，负字间距使标题更紧凑有力 */
+.page-header h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #1e293b;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+}
+
+/* 副标题：小号浅灰色文字 */
+.page-header p {
+    color: #94a3b8;
+    font-size: 0.95rem;
+}
+
+/* ── 时间线主容器 ──
+   - 限宽 880px 并水平居中
+   - position: relative 为内部伪元素轴线提供定位上下文
+*/
+.timeline-container {
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    padding: 40px 20px 0;
+}
+
+/* ── 垂直轴线（伪元素实现） ──
+   用 ::before 在容器左侧画一条 3px 宽的竖线
+   从上到下贯穿整个容器（top:0, bottom:0）
+   渐变色：淡蓝 → 淡紫 → 淡粉 → 淡蓝，循环呼应页面背景
+   left: 180px 使轴线恰好位于时间区域和卡片区域之间
+*/
+.timeline-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 180px;
+    width: 3px;
+    background: linear-gradient(to bottom, #c7d2fe, #e9d5ff, #fecdd3, #c7d2fe);
+    border-radius: 2px;
+}
+
+/* ── 单个时间线项目 ──
+   采用 flexbox 水平排列：左侧时间 + 右侧卡片
+   - opacity: 0 + animation: slideIn → 页面加载时各节点依次淡入上滑
+   - margin-bottom: 48px 为节点之间留出足够的垂直间距
+*/
+.timeline-item {
+    display: flex;
+    position: relative;
+    margin-bottom: 48px;
+    align-items: flex-start;
+    opacity: 0;
+    animation: slideIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* 入场动画：从下方 60px 处淡入滑入
+   forwards 保持动画结束状态（opacity: 1），不会回弹 */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(60px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ── 轴线圆点（时间线节点指示器） ──
+   绝对定位在轴线上，通过 left 值微调使圆点居中于 3px 轴线
+   - 白色背景 + 紫色边框 → 默认"未上线"外观
+   - 外圈 box-shadow 模拟柔和光晕效果
+   - transition 实现平滑的 hover 放大动画
+*/
+.timeline-dot {
+    position: absolute;
+    left: 151px;
+    top: 8px;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border: 3px solid #94a3b8;
+    border-radius: 50%;
+    z-index: 1;
+    box-shadow: 0 0 0 4px rgba(148, 163, 184, 0.12);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 鼠标悬停时圆点放大至 1.25 倍，光晕也增大 */
+.timeline-item:hover .timeline-dot {
+    transform: scale(1.25);
+    box-shadow: 0 0 0 4px rgba(148, 163, 184, 0.12);
+}
+
+/* 已上线条目：圆点变为绿色（与卡片左侧绿色边框呼应） */
+.timeline-dot.active {
+    border-color: #34d399;
+    box-shadow: 0 0 0 4px rgba(52, 211, 153, 0.15);
+}
+
+/* 已上线条目 hover 时绿色光晕增大 */
+.timeline-item:hover .timeline-dot.active {
+    box-shadow: 0 0 0 6px rgba(52, 211, 153, 0.22);
+}
+
+/* ── 左侧时间区域 ──
+   固定宽度 155px，右对齐，右侧留 32px 间距给轴线
+   flex-shrink: 0 防止被 flex 布局压缩
+*/
+.time-area {
+    width: 155px;
+    padding-left: 30px;
+    text-align: center;
+    padding-top: 6px;
+    flex-shrink: 0;
+}
+
+/* 年份：大号特粗字体，负字间距使数字更紧凑 */
+.time-area .year {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #1e293b;
+    line-height: 1;
+    letter-spacing: -1px;
+}
+
+.time-area .year_mini {
+    font-size: 1rem;
+}
+
+/* 月.日：小号中粗，灰色辅助信息 */
+.time-area .month-day {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #94a3b8;
+    margin-top: 4px;
+}
+
+/* ── 右侧卡片内容区域 ──
+   - flex: 1 占据时间区域之外的剩余空间
+   - min-width: 0 防止 flex 子项内容溢出
+   - padding-left: 48px 为轴线与卡片之间留出间距
+*/
+.content-area {
+    flex: 1;
+    min-width: 0;
+    padding-left: 48px;
+}
+
+/* ── 内容卡片 ──
+   毛玻璃效果（backdrop-filter: blur）配合半透明白色背景
+   圆角 + 白色边框 + 柔和阴影 → 卡片浮层感
+   transition 使用 cubic-bezier 曲线实现自然的悬停弹起动画
+*/
+.card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.06);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* hover 效果：卡片上浮 4px + 阴影加深 → 交互反馈 */
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.12);
+}
+
+/* 已上线条目：卡片左侧添加 4px 绿色边框，与绿色圆点形成视觉关联 */
+.card.active {
+    border-left: 4px solid #34d399;
+}
+
+/* 未上线条目：整体降低透明度，视觉上表示"不可用" */
+.card.disabled {
+    opacity: 1;
+    filter: grayscale(50%);
+}
+
+/* 未上线卡片禁用 hover 上浮效果 */
+.card.disabled:hover {
+    transform: none;
+    box-shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.06);
+}
+
+/* ── 标签容器 ──
+   flex + wrap 允许标签过多时自动换行
+   gap: 6px 为标签之间提供统一间距
+*/
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+/* 单个分类标签（如平台名、类型等）
+   淡紫底色 + 深紫文字，圆角药片样式
+   text-transform: uppercase 英文标签自动大写 */
+.tag {
+    background: #eef2ff;
+    color: #6366f1;
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    /* text-transform: uppercase; */
+}
+
+/* ── 游戏中文标题 ── */
+.title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #1e293b;
+    line-height: 1.35;
+}
+
+/* ── 日文标题 ──
+   纯文本展示，鼠标悬停时通过 title 属性显示链接地址 */
+.title_jp {
+    display: inline-block;
+    font-size: 0.7rem;
+    color: #a5b4c8;
+    margin-bottom: 16px;
+}
+
+/* ── 封面图片外层容器 ──
+   控制封面区域的尺寸限制和加载占位底色
+   - width: 100% 撑满卡片宽度
+   - max-height: 280px 限制最大高度，避免长图撑爆布局
+   - 浅灰背景色在图片加载期间 / 透明 PNG 下提供底色
+*/
+.cover-wrap {
+    width: 100%;
+    height: 280px;
+    background-color: #f1f5f9;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ── 封面图片 ──
+   - 禁止用户拖拽和选中（纯展示用途）
+   - width/height: 100% 撑满容器
+   - object-fit: contain 保持原始比例，完整显示不裁切
+   - drop-shadow 阴影使封面图与背景产生层次感
+*/
+.cover-img {
+    -webkit-user-drag: none;
+    user-select: none;
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
+    filter: drop-shadow(2px 4px 2px rgba(0, 0, 0, 0.3));
+    transition: transform 0.4s ease;
+}
+
+/* 卡片 hover 时封面图微微放大（1.02 倍），增加交互感 */
+.card:hover .cover-img {
+    transform: scale(1.02);
+}
+
+/* 未上线卡片禁用封面图 hover 放大 */
+.card.disabled:hover .cover-img {
+    transform: none;
+}
+
+/* ── 响应式适配（768px 以下，平板/手机端） ──
+   核心变化：
+   1. 轴线从左侧 180px 移至最左侧 20px
+   2. 时间和卡片从水平排列改为垂直堆叠
+   3. 时间区域改为左对齐 + 水平排列（年/月日并排）
+   4. 整体字号和间距缩小以适应小屏
+*/
+@media (max-width: 768px) {
+    .page-header {
+        padding: 16px 16px 12px;
+    }
+
+    .page-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .timeline-container {
+        padding: 0 12px;
+    }
+
+    /* 轴线左移到 20px 位置 */
+    .timeline-container::before {
+        left: 20px;
+    }
+
+    /* 圆点跟随轴线左移 */
+    .timeline-dot {
+        left: 0px;
+        width: 18px;
+        height: 18px;
+    }
+
+    /* 改为纵向堆叠布局 */
+    .timeline-item {
+        flex-direction: column;
+    }
+
+    /* 时间区域：改为左对齐、水平排列（年份和月日并排显示）
+       通过 padding-left 为轴线圆点腾出空间 */
+    .time-area {
+        width: 100%;
+        text-align: left;
+        padding-right: 0;
+        padding-left: 46px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+    }
+
+    /* 年份字号缩小 */
+    .time-area .year {
+        font-size: 1.4rem;
+    }
+
+    /* 卡片区域左内边距与时间区域对齐 */
+    .content-area {
+        padding-left: 42px;
+        width: 100%;
+    }
+
+    /* 卡片内边距收紧 */
+    .card {
+        padding: 18px;
+    }
+
+    /* 标题字号缩小 */
+    .title {
+        font-size: 1.1rem;
+    }
+}

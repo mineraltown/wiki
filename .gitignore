@@ -16,3 +16,7 @@ node_modules/
 # Python3
 *.pyc
 __pycache__
+
+# vue
+vue.global.js
+images/

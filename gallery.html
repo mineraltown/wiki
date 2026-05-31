@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- 移动端适配：宽度跟随设备，初始缩放比 1.0 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>矿石镇的攻略百科 ｜ 牧场物语 · 封面墙</title>
+
+    <!-- 预加载 Vue 3 生产版 JS，减少首屏阻塞 -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/vue/3.5.22/vue.global.prod.min.js" as="script">
+    <!-- 预加载游戏版本数据 JSON，后续在 created() 中 fetch -->
+    <link rel="preload" href="/version.json" as="fetch" crossorigin>
+
+    <!-- 封面墙页面专用样式表 -->
+    <link rel="stylesheet" href="css/gallery.css">
+</head>
+
+<body>
+
+    <!-- 整体布局容器：左侧标题栏 + 右侧瀑布流 -->
+    <div class="layout">
+        <!-- 页面标题：桌面端竖排，移动端横排 -->
+        <header class="page-header">
+            <h1>牧场物语</h1>
+            <p>从 1996 年到今天，一路走来的全部作品。</p>
+        </header>
+
+        <!--
+            瀑布流封面墙主容器
+            - id="gallery" 作为 Vue 应用挂载点
+            - v-cloak：Vue 实例编译完成前隐藏模板，防止闪烁
+
+            渲染流程（三阶段）：
+            1. created()  → 加载 JSON + 预加载图片尺寸 + 首次 distribute()
+            2. mounted()  → 等待 DOM 渲染完成，测量真实高度，redistributeFromDOM() 二次校正
+            3. resize     → 防抖触发 relayout()，重新计算列数并分配
+
+            DOM 结构：
+            .masonry > .masonry-col[N] > .masonry-item[M] > a.card-link > img + .card-info
+        -->
+        <div class="masonry-wrap">
+            <div class="masonry" id="gallery" v-cloak>
+                <!-- 外层 v-for：遍历 columns 数组，每项代表一列 -->
+                <div class="masonry-col" v-for="(col, ci) in columns" :key="ci">
+                    <!-- 内层 v-for：遍历该列中的每个游戏条目 -->
+                    <div class="masonry-item" v-for="item in col" :key="item.link" :data-key="item.link">
+                        <!--
+                            卡片链接：整卡可点击
+                            - enable=true: href 指向对应页面，点击正常跳转
+                            - enable=false: href 为 null，$event.preventDefault() 阻止无效跳转
+                        -->
+                        <a class="card-link" :href="item.enable ? item.link : null"
+                            @click="!item.enable && $event.preventDefault()">
+                            <!--
+                                封面图片
+                                - src: 拼接本地 images/ 目录 + JSON 中的 cover 路径
+                                - loading="lazy": 原生懒加载，进入视口附近才请求
+                            -->
+                            <img :src="'images/' + item.cover" :alt="item.title" class="cover-img" loading="lazy" />
+                            <!-- 卡片底部：标题 + 发布日期 -->
+                            <div class="card-info">
+                                <div class="title" :class="{ active: item.enable }">{{ item.title }}</div>
+                                <div class="release-date">
+                                    {{
+                                    item.release_date.year
+                                    }}.{{
+                                    String(item.release_date.month).padStart(2, '0')
+                                    }}.{{
+                                    String(item.release_date.day).padStart(2, '0')
+                                    }}
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vue 3 生产版 CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.5.22/vue.global.prod.min.js"></script>
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    /** 列数组：每个元素是该列的游戏条目数组，驱动 v-for 渲染 */
+                    columns: [],
+                    /** 当前列数，由 calcColCount() 动态计算 */
+                    colCount: 6,
+                    /** 所有游戏条目，按发布日期升序排列 */
+                    sortedItems: []
+                };
+            },
+            methods: {
+                /**
+                 * 根据瀑布流容器实际宽度动态计算列数
+                 * 每列目标宽度约 140px（含 gap），最小保证 2 列
+                 * @returns {number} 列数
+                 */
+                calcColCount() {
+                    const el = document.querySelector('.masonry');
+                    if (!el) return 6;
+                    return Math.max(2, Math.floor(el.clientWidth / 140));
+                },
+
+                /**
+                 * 预加载所有封面图的真实像素尺寸
+                 * 在 created() 中调用，渲染前就知道每张图的宽高比
+                 * 结果挂载到每个 item 的 _ratio 字段上
+                 */
+                async preloadImages() {
+                    await Promise.all(this.sortedItems.map(item =>
+                        new Promise(resolve => {
+                            const img = new Image();
+                            img.onload = () => {
+                                // 记录真实宽高比：naturalHeight / naturalWidth
+                                item._ratio = img.naturalHeight / img.naturalWidth;
+                                resolve();
+                            };
+                            img.onerror = () => {
+                                // 图片加载失败时使用 1.4 兜底（接近标准游戏封面比例）
+                                item._ratio = 1.4;
+                                resolve();
+                            };
+                            img.src = 'images/' + item.cover;
+                        })
+                    ));
+                },
+
+                /**
+                 * 估算单个卡片的总高度
+                 * = 图片高度（列宽 × 宽高比）+ 信息区固定高度
+                 * @param {Object} item - 游戏条目（需含 _ratio）
+                 * @param {number} colWidth - 单列像素宽度
+                 * @returns {number} 估算高度（px）
+                 */
+                estimateCardHeight(item, colWidth) {
+                    const imgH = colWidth * (item._ratio || 1.4);
+                    const infoH = 48; // 标题行 + 日期行 + padding 估算
+                    return imgH + infoH;
+                },
+
+                /**
+                 * 通用的"最短列优先"分配算法
+                 * 将 items 依次放入当前累计高度最小的列，使各列总高尽量均衡
+                 *
+                 * @param {Array} items - 待分配的条目数组
+                 * @param {Function} heightFn - (item, colWidth) => 卡片估算高度
+                 * @returns {Array[]} 列数组，每个元素是该列的条目数组
+                 */
+                distributeToColumns(items, heightFn) {
+                    const n = this.colCount;
+                    const cols = Array.from({ length: n }, () => []);
+                    const colHeights = new Array(n).fill(0);
+                    const gap = 10;
+
+                    // 估算单列宽度：总宽减去 (列数-1) 个间隙
+                    const el = document.querySelector('.masonry');
+                    const totalW = el ? el.clientWidth : 1200;
+                    const colWidth = (totalW - (n - 1) * gap) / n;
+
+                    items.forEach(item => {
+                        // 找到当前累计高度最小的列
+                        const shortest = colHeights.indexOf(Math.min(...colHeights));
+                        cols[shortest].push(item);
+                        colHeights[shortest] += heightFn(item, colWidth) + gap;
+                    });
+
+                    return cols;
+                },
+
+                /**
+                 * 首次分配：使用预加载的图片宽高比估算高度
+                 * 在 created() 中调用
+                 */
+                distribute(items) {
+                    return this.distributeToColumns(items, (item, colWidth) =>
+                        this.estimateCardHeight(item, colWidth)
+                    );
+                },
+
+                /**
+                 * 二次校正：从 DOM 测量卡片真实像素高度，重新分配
+                 *
+                 * 为什么需要二次校正？
+                 * - 首次 distribute() 用的是估算高度（宽高比 × 列宽 + 固定 infoH）
+                 * - 实际渲染中，标题换行、字体渲染等会导致真实高度与估算有偏差
+                 * - 二次校正用 getBoundingClientRect() 获取真实高度，重新分配
+                 *
+                 * 仅在首次渲染后调用一次，resize 时不需要（代价太大）
+                 */
+                async redistributeFromDOM() {
+                    // 等待 Vue 将响应式数据更新到 DOM
+                    await this.$nextTick();
+
+                    // 等待所有封面图加载完成（图片未加载时高度为 0）
+                    const imgs = this.$el.querySelectorAll('.cover-img');
+                    await Promise.all([...imgs].map(img => {
+                        if (img.complete) return Promise.resolve();
+                        return new Promise(r => { img.onload = r; img.onerror = r; });
+                    }));
+
+                    // 读取每张卡片的真实 DOM 高度，建立 link → height 索引
+                    const cards = this.$el.querySelectorAll('.masonry-item');
+                    const realHeights = {};
+                    cards.forEach(card => {
+                        const key = card.dataset.key;
+                        if (key) realHeights[key] = card.getBoundingClientRect().height;
+                    });
+
+                    // 用真实高度重新分配
+                    this.columns = this.distributeToColumns(
+                        this.sortedItems,
+                        (item) => realHeights[item.link] || 100
+                    );
+                },
+
+                /**
+                 * 窗口大小变化时重新布局
+                 * 使用估算高度（非 DOM 测量），避免 resize 时频繁触发昂贵的 DOM 读取
+                 */
+                relayout() {
+                    if (this.sortedItems.length) {
+                        this.colCount = this.calcColCount();
+                        this.columns = this.distribute(this.sortedItems);
+                    }
+                }
+            },
+
+            /**
+             * created 生命周期：组件实例创建后、DOM 挂载前执行
+             *
+             * 流程：
+             * 1. fetch JSON → 排序 → preloadImages() → distribute() → 首次渲染
+             * 2. 注册 resize 监听器
+             */
+            async created() {
+                try {
+                    const res = await fetch('/version.json');
+                    const data = await res.json();
+
+                    // 将对象转为数组，按发布日期升序排列
+                    this.sortedItems = Object.values(data).sort((a, b) => {
+                        const da = a.release_date, db = b.release_date;
+                        return (da.year - db.year) || (da.month - db.month) || (da.day - db.day);
+                    });
+
+                    // 预加载所有封面图尺寸，获取真实宽高比
+                    await this.preloadImages();
+
+                    // 计算列数并首次分配
+                    this.colCount = this.calcColCount();
+                    this.columns = this.distribute(this.sortedItems);
+                } catch (err) {
+                    console.error('加载 version.json 失败:', err);
+                }
+
+                // 窗口大小变化时防抖重新布局（200ms 延迟）
+                let timer;
+                window.addEventListener('resize', () => {
+                    clearTimeout(timer);
+                    timer = setTimeout(() => this.relayout(), 200);
+                });
+            },
+
+            /**
+             * mounted 生命周期：DOM 挂载完成后执行
+             * 此时卡片已渲染到页面上，可以测量真实 DOM 高度
+             */
+            async mounted() {
+                await this.redistributeFromDOM();
+            }
+        }).mount('#gallery');
+    </script>
+
+</body>
+
+</html>
