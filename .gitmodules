@@ -1,0 +1,3 @@
+[submodule "sfc"]
+	path = sfc
+	url = git@github.com:mineraltown/sfc.git
